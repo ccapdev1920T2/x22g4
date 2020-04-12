@@ -10,9 +10,9 @@ var CatSchema = new mongoose.Schema({
     age: {
         type: Number
     },
-    image: {
-        data: Buffer,
-        contentType: String
+    imageUrl: {
+        type: String,
+        unique: true
     },
     gender: {
         type: String

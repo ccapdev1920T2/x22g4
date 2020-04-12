@@ -7,9 +7,31 @@ const catProfileController = {
     getCatProfile: function (req, res) {
         var query = {name: req.params.name};
 
-        var projection = "name age image gender shortDescription yourCatDescription pusaThoughts notableQuotes adoptionStatus location";
+        var projection = "name age imageUrl gender shortDescription yourCatDescription pusaThoughts notableQuotes adoptionStatus location";
 
         //TODO: database query and return data
+
+        database.findOne(Cat, query, projection, function(result) {
+            if (result == null) {
+                res.render('404');
+                return;
+            }
+
+            var details = {
+                name: result.name,
+                age: result.age,
+                imageUrl: result.imageUrl,
+                gender: result.gender,
+                shortDescription: result.shortDescription,
+                yourCatDescription: result.yourCatDescription,
+                pusaThoughts: result.pusaThoughts,
+                notableQuotes: result.notableQuotes,
+                adoptionStatus: result.adoptionStatus,
+                location: result.location
+            };
+
+            res.render('cat-profile', details);
+        })
 
     }
 
