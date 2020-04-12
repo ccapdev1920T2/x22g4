@@ -5,14 +5,14 @@ const Cat = require("../models/cat.js");
 const catProfileController = {
 
     getCatProfile: function (req, res) {
+        console.log("getting profile");
         var query = {name: req.params.name};
 
         var projection = "name age imageUrl gender shortDescription yourCatDescription pusaThoughts notableQuotes adoptionStatus location";
 
-        //TODO: database query and return data
-
         database.findOne(Cat, query, projection, function(result) {
             if (result == null) {
+                console.log('no profile returned');
                 res.render('404');
                 return;
             }
