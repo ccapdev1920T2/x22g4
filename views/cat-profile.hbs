@@ -38,46 +38,46 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/7e6ab4004f.js" crossorigin="anonymous"></script>
 
-    <title>{{cat-name}} | Catvas</title>
+    <title>{{name}} | Catvas</title>
 
 </head>
 
 <body>
- {{nav}}
+ {{> nav}}
     
     <!-- Code Here -->
     <div class="container-cat">
         <div class="row">
             <div class="col-md-4">
                 <div class="center-wrapper">
-                    <img src="{{link}}" width="400px", height="400px">
+                    <img src="{{image}}" width="400px", height="400px">
                     <ul class="cat-details">
                         <li id="adoption-status"><i class="fas fa-clipboard-check"></i>
-                            {{adoption-status}}
+                            {{adoptionStatus}}
                         </li>
                         <li id="cat-age"><i class="fas fa-history"></i>
-                            {{cat-age}} years old
+                            {{age}} years old
                         </li>
                         <li id="cat-sex"><i class="fas fa-venus-mars"></i>
-                            {{cat-sex}}
+                            {{gender}}
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="center-wrapper">
-                    <p id="cat-name-profile">MEOW, my name is {{cat-name}}!</p>
-                    <p id="cat-short-description"> {{cat-short-desc}}</p>
+                    <p id="cat-name-profile">MEOW, my name is {{name}}!</p>
+                    <p id="cat-short-description"> {{shortDescription}}</p>
                 </div>
                 <hr class="cat-bar">
                 <p class="profile-mini-header">A brief description of your future cat by your future cat</p>
-                <p id="your-cat">"{{your-cat-desc}}"
+                <p id="your-cat">"{{yourCatDescription}}"
                 </p>
                 <p class="profile-mini-header">DLSU PUSA's thoughts</p>
                 <p id="pusa-thoughts"> 
-                    "{{pusa-thoughts}}" 
+                    "{{pusaThoughts}}" 
                     <br><br>
-                    "{{notable-quotes}}"
+                    "{{notableQuotes}}"
                 </p>
                 <div class="center-wrapper">
                     <button class="btn btn-outline-danger"><i class="fas fa-paw"></i> ADOPT ME</button>
