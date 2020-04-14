@@ -112,6 +112,7 @@ app.get('/cat-feed', function(req, res){
 app.get('/donate', function(req, res){
     res.render('donate', {
         title: 'Donate',
+        donate_active: true,
     })  
 });
 //Donate-Feed
