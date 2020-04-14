@@ -1,19 +1,18 @@
 # DLSU CATVAS
 <img src="https://github.com/ccapdev1920T2/x22g4/blob/master/public/imgs/it.png" align="right"
-     alt="Size Limit logo by Anton Lovchikov" width="120" height="178">
+     alt="Size Limit logo by Anton Lovchikov" width="120" height="160">
 DLSU CATVAS is a website application that provides an online database for DLSU PUSA. This allows users to view cats that are still up for adoption, already adopted, and those who are in the process of being domesticated. It also allows users to make their own accounts to post cats they see within DLSU. These accounts also allows them to meowt (like) photos and comment on posts.
 
 ## Getting Started
 This web application requires internet to properly load BootstrapCDN.
 
-### Installation
+### Prerequisites
 #### Clone
 - Clone this repository to your local computer
 
 #### Setup
 - This project uses Express, Handlebars, and MongoDB so it is recommended to make sure you have Node.JS installed and then conduct the following steps:
-> Navigate to the project folder 
-> Open cmd 
+> Navigate to the project folder and open cmd
 ```shell
 npm init
 ```
