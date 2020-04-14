@@ -29,11 +29,11 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="log-in.html"><i class="fas fa-cat"></i> Login </a>
+                <li class="nav-item {{#if login_active}}active{{/if}}">
+                    <a class="nav-link" href="login"><i class="fas fa-cat"></i> Login </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="sign-up.html"><i class="fas fa-paw"></i> Sign Up</a>
+                <li class="nav-item {{#if signup_active}}active{{/if}}">
+                    <a class="nav-link" href="signup"><i class="fas fa-paw"></i> Sign Up</a>
                 </li>
             </ul>
         </div>

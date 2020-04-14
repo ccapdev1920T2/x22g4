@@ -116,6 +116,21 @@ app.get('/donate', function(req, res){
 });
 //Donate-Feed
 
+//Login and Sinup
+app.get('/login', function(req, res) {
+    res.render('login', {
+        title: 'Login To Catvas',
+        login_active: true,
+    })
+});
+
+app.get('/signup', function(req, res) {
+    res.render('signup', {
+        title: 'Signup To Catvas',
+        signup_active: true,
+    })
+});
+
 
 //Files
 app.get('/sign-up', function(req, res){
