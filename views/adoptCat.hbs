@@ -1,0 +1,20 @@
+<!-- Code Here -->
+<div class="feed-container align-items-center mb-5" style="max-width: 90em;">
+        <h1 style="font-size: 72pt; color: #d34b3b">Adopt a Cat</h1>
+        <h1>Laguna Cats</h1>
+
+        <div class="row mb-3">
+            {{#each lagunaCats}}
+                {{catCard}}
+            {{/each}}
+        </div>
+
+        <h1>Manila Cats</h1>
+
+        <div class="row mb-3">
+            {{#each manila}}
+                {{catCard}}
+            </div>
+            {{/each}}
+        </div>        
+</div>
