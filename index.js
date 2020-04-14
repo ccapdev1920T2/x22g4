@@ -31,17 +31,30 @@ app.engine('hbs', exphbs({
 
 //HBS Init
 app.set('view engine', 'hbs');
+//HBS Init
 
 //Home Route
 app.get('/', function(req, res){
     res.render('index', {
     	title: 'Home',
+        home_active: true,
     })  
 });
 
+app.get('/home(page)?(.html)?', function(req, res) {
+    res.render('index', {
+        title: 'Home',
+        home_active: true,
+    })
+});
+//Home Route
+
+//Feed Route
 app.get('/feed', function(req, res){
     res.render('feed', {
     	title: 'Cats',
+        explore_active: true,
+        adopt_active: true,
 
         manila: [
             {
@@ -62,10 +75,14 @@ app.get('/feed', function(req, res){
         ],
     })  
 });
-//TO DO, DO CATFEED
+//Feed Route
+
+//Cat-Feed
 app.get('/cat-feed', function(req, res){
     res.render('cat-feed', {
     	title: 'Cat Feed',
+        explore_active: true,
+        catfeed_active: true,
 
         post: [
             {
@@ -89,12 +106,16 @@ app.get('/cat-feed', function(req, res){
         ]
     })  
 });
-//DONATE FEED
+//Cat-Feed
+
+//Donate-Feed
 app.get('/donate', function(req, res){
     res.render('donate', {
         title: 'Donate',
     })  
 });
+//Donate-Feed
+
 
 //Files
 app.get('/sign-up', function(req, res){
@@ -114,6 +135,7 @@ app.get('cat/catName', function(req, res){
     var catName = req.params.username;
     res.sendFile('views/cat-profile.html', {root: __dirname});
 });
+//Files
 
 //Show Port
 app.listen(port, function(){
