@@ -29,6 +29,46 @@ app.engine('hbs', exphbs({
 	}
 }));
 
+//Home Route
+app.get('/', function(req, res){
+    res.render('index', {
+        title: 'Home',
+        home_active: true,
+    })  
+});
+
+app.get('/home(page)?(.html)?', function(req, res) {
+    res.render('index', {
+        title: 'Home',
+        home_active: true,
+    })
+});
+
+//Donate-Feed
+app.get('/donate', function(req, res){
+    res.render('donate', {
+        title: 'Donate',
+        donate_active: true,
+    })  
+});
+//Donate-Feed
+
+//Login and Sinup
+app.get('/login', function(req, res) {
+    res.render('login', {
+        title: 'Login To Catvas',
+        login_active: true,
+    })
+});
+
+app.get('/signup', function(req, res) {
+    res.render('signup', {
+        title: 'Signup To Catvas',
+        signup_active: true,
+    })
+});
+//Login and Sinup
+
 app.set('view engine', 'hbs');
 //HBS Init
 
