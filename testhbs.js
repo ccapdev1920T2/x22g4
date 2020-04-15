@@ -13,35 +13,48 @@ app.set('view engine', 'hbs');
 
 //Engine Init
 app.engine('hbs', exphbs({
-	extname: 'hbs',
-	defaultView: 'main',
-	layoutsDir: path.join(__dirname, '/views/layouts'),
-	partialsDir: path.join(__dirname, 'views/partials'),
+    extname: 'hbs',
+    defaultView: 'main',
+    layoutsDir: path.join(__dirname, '/views/layouts'),
+    partialsDir: path.join(__dirname, 'views/partials'),
 
-	//Helpers
-	helpers: {
-		cap: function(text) { return text.toUpperCase(); },
-		em: function(text) {
-			var x = `<em>${text}</em>`;
+    //Helpers
+    helpers: {
+        cap: function(text) { return text.toUpperCase(); },
+        em: function(text) {
+            var x = `<em>${text}</em>`;
 
-			return new handlebars.SafeString(x);
-		}
-	}
+            return new handlebars.SafeString(x);
+        }
+    }
 }));
 
 //HBS Init
 app.set('view engine', 'hbs');
+//HBS Init
 
 //Home Route
 app.get('/', function(req, res){
     res.render('index', {
-    	title: 'Home',
+        title: 'Home',
+        home_active: true,
     })  
 });
 
+app.get('/home(page)?(.html)?', function(req, res) {
+    res.render('index', {
+        title: 'Home',
+        home_active: true,
+    })
+});
+//Home Route
+
+//Feed Route
 app.get('/feed', function(req, res){
     res.render('feed', {
-    	title: 'Cats',
+        title: 'Cats',
+        explore_active: true,
+        adopt_active: true,
 
         manila: [
             {
@@ -62,10 +75,14 @@ app.get('/feed', function(req, res){
         ],
     })  
 });
-//TO DO, DO CATFEED
+//Feed Route
+
+//Cat-Feed
 app.get('/cat-feed', function(req, res){
     res.render('cat-feed', {
-    	title: 'Cat Feed',
+        title: 'Cat Feed',
+        explore_active: true,
+        catfeed_active: true,
 
         post: [
             {
@@ -89,12 +106,32 @@ app.get('/cat-feed', function(req, res){
         ]
     })  
 });
-//DONATE FEED
+//Cat-Feed
+
+//Donate-Feed
 app.get('/donate', function(req, res){
     res.render('donate', {
         title: 'Donate',
+        donate_active: true,
     })  
 });
+//Donate-Feed
+
+//Login and Sinup
+app.get('/login', function(req, res) {
+    res.render('login', {
+        title: 'Login To Catvas',
+        login_active: true,
+    })
+});
+
+app.get('/signup', function(req, res) {
+    res.render('signup', {
+        title: 'Signup To Catvas',
+        signup_active: true,
+    })
+});
+
 
 //Files
 app.get('/sign-up', function(req, res){
@@ -114,6 +151,7 @@ app.get('cat/catName', function(req, res){
     var catName = req.params.username;
     res.sendFile('views/cat-profile.html', {root: __dirname});
 });
+//Files
 
 //Show Port
 app.listen(port, function(){
