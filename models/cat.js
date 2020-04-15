@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+const DEFAULT_DESC = 'No info yet!';
+
 var CatSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -8,16 +10,28 @@ var CatSchema = new mongoose.Schema({
     age: {
         type: Number
     },
-    image: {
-        data: Buffer,
-        contentType: String
+    imageUrl: {
+        type: String,
+        unique: true
     },
     gender: {
         type: String
     },
-    description: {
+    shortDescription: {
         type: String,
-        required: true
+        default: DEFAULT_DESC
+    },
+    yourCatDescription: {
+        type: String,
+        default: DEFAULT_DESC
+    },
+    pusaThoughts: {
+        type: String,
+        default: DEFAULT_DESC
+    },
+    notableQuotes: {
+        type: String,
+        default: DEFAULT_DESC
     },
     adoptionStatus: {
         type: String,

@@ -382,7 +382,9 @@ hr{
 
 #cat-name-profile{
     font-size: 56px;
-    font-weight: 200px;
+    font-weight: bold;
+    color: #d34b3b;
+    font-family: Raleway;
 }
 
 #cat-short-description{
@@ -393,6 +395,7 @@ hr{
 .profile-mini-header{
     font-size: 24px;
     font-weight: bold;
+    color: #d34b3b;
 }
 
 #your-cat{
@@ -403,6 +406,10 @@ hr{
 #pusa-thoughts{
     font-size: 18px;
     text-align: justify;
+}
+
+#notable-quotes{
+    font-style: italic;
 }
 
 .center-wrapper{

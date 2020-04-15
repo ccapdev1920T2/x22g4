@@ -52,6 +52,13 @@ const database = {
         });
     },
 
+    findManyLean: function(model, query, projection, callback) {
+        model.find(query, projection).lean().exec(function(error, result) {
+            if(error) return callback(false);
+            return callback(result);
+        });
+    },
+
     updateOne: function(model, filter, update) {
         model.updateOne(filter, update, function(error, result) {
             if(error) return callback(false);
