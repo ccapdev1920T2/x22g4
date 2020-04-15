@@ -428,3 +428,40 @@ hr{
     display: inline-block;
 }
 
+/* Donate to Catvas */
+#donate-header{
+    color: #d34b3b; 
+    font-size: 80pt;
+}
+
+#donate-subheader{
+    font-size: 40pt;  
+}
+
+.donate-choice-header{
+    color: #d34b3b;
+    font-size: 32px;
+    font-weight: bolder;
+}
+
+.donate-details{
+    font-size: 18px;
+}
+
+#pusa-email{
+    color: #d34b3b;
+}
+
+.pusa-wishlist{
+    font-size: 18px;
+}
+
+.pusa-header{
+    color: #d34b3b;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+ul li{
+    display: block;
+}
