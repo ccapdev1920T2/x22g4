@@ -11,25 +11,33 @@ app.get("/adoptCat", adoptCatController.getCatCards);
 //Home Route
 app.get('/', function(req, res){
     res.render('index', {
-        title: 'Home',
+        title: 'Home | Catvas',
         home_active: true,
     })  
 });
 
 app.get('/home(page)?(.html)?', function(req, res) {
     res.render('index', {
-        title: 'Home',
+        title: 'Home | Catvas',
         home_active: true,
     })
 });
 
-//Donate-Feed
+//FAQ Route
+app.get('/faq', function(req, res){
+    res.render('faq', {
+        title: 'FAQ | Catvas',
+        faq_active: true,
+    })  
+});
+
+//Donate Route
 app.get('/donate', function(req, res){
     res.render('donate', {
-        title: 'Donate',
+        title: 'Donate | Catvas',
         donate_active: true,
     })  
 });
-//Donate-Feed
+
 
 module.exports = app;
