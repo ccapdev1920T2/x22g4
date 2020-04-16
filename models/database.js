@@ -24,6 +24,7 @@ const database = {
 
     insertOne: function(model, doc, callback) {
         model.create(doc, function(error, result) {
+            console.log(error);
             if(error) return callback(false);
             console.log('Added ' + result);
             return callback(true);

@@ -65,12 +65,13 @@ $(document).ready(function(){
             return;
         }
         
+        
         entryForms.submit();
     });
 
     function emailIsCorrect(){
         var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var emailForm = document.getElementById("emailAddress");
+        var emailForm = document.getElementById("email");
     
         if (!regExp.test(emailForm.value)) {
             emailForm.style.backgroundColor = "pink";
@@ -109,8 +110,8 @@ $(document).ready(function(){
     function formsAreComplete() {
         var isComplete = true;
     
-        var userNameForm = document.getElementById("userName");
-        var emailAddressForm = document.getElementById("emailAddress");
+        var userNameForm = document.getElementById("username");
+        var emailAddressForm = document.getElementById("email");
         var passwordForm = document.getElementById("password");
         var confirmPasswordForm = document.getElementById("confirmPassword");
     
