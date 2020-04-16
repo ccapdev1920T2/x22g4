@@ -25,9 +25,9 @@ app.get('/home(page)?(.html)?', function(req, res) {
 
 // Meet the Team Route
 app.get('/team', function(req, res){
-    res.render('devs', {
+    res.render('team', {
         title: 'Meet the Team | Catvas',
-        devs_active: true,
+        team_active: true,
     })  
 });
 
