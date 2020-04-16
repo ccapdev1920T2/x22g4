@@ -98,7 +98,19 @@ h1 {
 }
 
 .big {
-    font-weight: bold; font-size: 56px; font-family: Raleway; font-weight:black; color: #d34b3b;
+    font-weight: bold; 
+    font-size: 56px; 
+    font-family: Raleway; 
+    font-weight:black; 
+    color: #d34b3b;
+}
+
+.big-2{
+    font-weight: bold; 
+    font-size: 48px; 
+    font-family: Raleway; 
+    font-weight:black; 
+    color: #d34b3b;
 }
 
 .text-side {
@@ -465,3 +477,16 @@ hr{
 ul li{
     display: block;
 }
+
+/* FAQ page */
+.faq-answers{
+    color: #54595f; 
+    font-size: 24pt; 
+    line-height: 48px; 
+}
+
+#donate-link{
+    color: #d34b3b;
+}
+
+
