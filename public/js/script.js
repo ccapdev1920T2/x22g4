@@ -49,9 +49,14 @@ $(document).ready(function(){
             alert("Required fields!");
             return;
         }
+
+        if (!usernameIsValid()) {
+            alert("Invalid username!");
+            return;
+        }
         
         if (!passwordIsValid()) {
-            alert("Password should contain at least 8 characters, 1 number, and 1 lowercase and uppercase letter.")
+            alert("Invalid password!");
             return;
         }
 
@@ -69,6 +74,17 @@ $(document).ready(function(){
         entryForms.submit();
     });
 
+    function usernameIsValid() {
+        var regExp = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,16}$/;
+        var usernameForm = document.getElementById("username");
+
+        if (!regExp.test(usernameForm.value)) {
+            usernameForm.style.backgroundColor = "pink";
+            return false;
+        }
+
+        return true;
+    }
     function emailIsCorrect(){
         var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var emailForm = document.getElementById("email");
