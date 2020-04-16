@@ -23,10 +23,10 @@ app.get('/home(page)?(.html)?', function(req, res) {
     })
 });
 
-// Meet the Developers Route
-app.get('/developers', function(req, res){
+// Meet the Team Route
+app.get('/team', function(req, res){
     res.render('devs', {
-        title: 'Meet the Developers | Catvas',
+        title: 'Meet the Team | Catvas',
         devs_active: true,
     })  
 });
