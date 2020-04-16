@@ -11,11 +11,12 @@ var UserSchema = new mongoose.Schema({
         required: true
     },
     description: {
-        type: String
+        type: String,
+        default: "No description yet!"
     },
     avatar: {
-        data: Buffer,
-        contentType: String
+        type: String,
+        default: "/imgs/fat.jpg"
     },
     posts: [{
         type: String,
