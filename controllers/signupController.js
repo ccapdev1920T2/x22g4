@@ -26,6 +26,15 @@ const signupController = {
         database.insertOne(User, user, function(result) {
             res.redirect('/profile/' + username);
         });
+    },
+
+    getCheckUsername: function(req, res) {
+        var username = req.query.username;
+
+        database.findOne(User, {username: username}, 'username', function(result) {
+            res.send(result);
+        });
+
     }
 
 

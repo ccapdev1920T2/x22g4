@@ -28,6 +28,8 @@ app.get('/home(page)?(.html)?', function(req, res) {
 app.get('/signup', signupController.getSignup);
 app.post('/signup', signupController.postSignup);
 
+app.get('/getCheckUsername', signupController.getCheckUsername);
+
 app.get('/profile/:username', userProfileController.getUserProfile);
 
 //Donate-Feed

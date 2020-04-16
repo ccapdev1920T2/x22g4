@@ -42,6 +42,26 @@ $(document).ready(function(){
     // Sign Up Logic
     //=========================================================================================
 
+    $('#username').keyup(function() {
+        var username = $('#username').val();
+        
+
+        $.get('/getCheckUsername', {username: username}, function(result) {
+            if (result.username != username) {
+                $('#username').css('background-color', 'white');
+                $('#usernameHelp').text('Username be within 3-16 characters. No special characters. Periods should not be in a series or at the beginning.');
+                $('#sign-up-btn').prop('disabled', false);
+                return;
+            }
+
+            $('#username').css('background-color', 'pink');
+            $('#usernameHelp').text('Username is already taken!');
+            $('#sign-up-btn').prop('disabled', true);
+
+        })
+
+    })
+
     $("#sign-up-btn").click(function () {
         var entryForms = document.getElementById("signup-forms");
 
@@ -52,6 +72,11 @@ $(document).ready(function(){
 
         if (!usernameIsValid()) {
             alert("Invalid username!");
+            return;
+        }
+
+        if (!usernameIsAvailable()) {
+            alert("username not available");
             return;
         }
         
@@ -73,6 +98,12 @@ $(document).ready(function(){
         
         entryForms.submit();
     });
+
+    function usernameIsAvailable() {
+        var username = $("#username").val();
+        console.log("jfkdlsa;jfklds;jfkl;dsajfkl;sdadjfklsdaj;f" + username)
+        return false;
+    }
 
     function usernameIsValid() {
         var regExp = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,16}$/;
