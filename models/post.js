@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
 var PostSchema = new mongoose.Schema ({
-    username: {
-        type: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     title: {
@@ -12,24 +13,34 @@ var PostSchema = new mongoose.Schema ({
     caption: {
         type: String
     },
-    image: {
-        data: Buffer,
-        contentType: String
+    imageUrl: {
+        type: String,
+        //required: true,
+        default: '/imgs/instadog.jpg'
     },
-    meowts: {
+    numberOfMeowts: {
         type: Number,
-        required: true
+        default: '0'
     },
+    usersWhoMeowted: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }],
     date: {
         type: Date,
-        required: true
+        default: Date.now
     },
     cats: [{
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cat'
     }],
     comments: [{
-        type: String
-    }]
+        type: mongoose.Schema.Types.ObjectId
+    }],
+    numberOfComments: {
+        type: Number,
+        default: '0'
+    }
 });
 
 module.exports = mongoose.model('Post', PostSchema);

@@ -1,18 +1,18 @@
 <div class="card mb-3">
     <div class="row no-gutters">
         <div class="col-md-4">
-            <a href="post.html"><img src="/imgs/instadog.jpg" class="card-img image-feed" alt="..."></a>
+            <a href="/post/{{_id}}"><img src="{{imgUrl}}" class="card-img image-feed" alt="..."></a>
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <a href="post.html"><h2 class="card-title-custom">{{post_title}}</h2></a>
-                <h5>by {{post_author}}</h5>
-                <p class="card-text">{{post_content}} </p>
-                <hr> Liked by <b>{{post_latest_liked}}</b>
+                <a href="/post/{{_id}}"><h2 class="card-title-custom">{{title}}</h2></a>
+                <h5>by {{author}}</h5>
+                <p class="card-text">{{caption}} </p>
+                <hr> Liked by <b>{{usersWhoMeowted}}</b>
                 <hr>
-                <p class="card-text"><b>{{post_user}}</b>{{post_user_comment}}</p>
-                <a href="{{postUrl}}">View Comments 93</a>
-                <p class="card-text"><small class="text-muted">Last updated {{time}} ago</small>
+                <p class="card-text"><b>Test</b>Test</p>
+                <a href="/post/{{_id}}">View Comments {{numberOfComments}}</a>
+                <p class="card-text"><small class="text-muted">Posted {{date}}</small>
                 </p>
                 <div class="text-muted small" style="text-align: right;">
                     <a href="#">Delete</a> <a href="#">Edit</i></a>
