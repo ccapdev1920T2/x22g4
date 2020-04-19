@@ -47,7 +47,7 @@ $(document).ready(function(){
     var passwordIsValid = true;
     var confirmPasswordIsValid = true;
 
-    $("#signup-forms")[0].reset();
+    //$("#signup-forms")[0].reset();
 
     function checkIfFormsAreValid() {
         if (!usernameIsValid || !emailIsValid || !passwordIsValid || !confirmPasswordIsValid) {

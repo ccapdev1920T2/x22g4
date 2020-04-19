@@ -27,15 +27,15 @@ const database = {
             console.log(error);
             if(error) return callback(false);
             console.log('Added ' + result);
-            return callback(true);
+            return callback(result);
         });
     },
 
     insertMany: function(model, docs) {
         model.insertMany(docs, function(error, result) {
-            if(error) return callback(false);
+            if(error) return false;
             console.log('Added ' + result);
-            return callback(true);
+            return true;
         });
     },
 
@@ -62,33 +62,33 @@ const database = {
 
     updateOne: function(model, filter, update) {
         model.updateOne(filter, update, function(error, result) {
-            if(error) return callback(false);
+            if(error) return false;
             console.log('Document modified: ' + result.nModified);
-            return callback(true);
+            return true;
         });
     },
 
     updateMany: function(model, filter, update) {
         model.updateMany(filter, update, function(error, result) {
-            if(error) return callback(false);
+            if(error) return false;
             console.log('Documents modified: ' + result.nModified);
-            return callback(true);
+            return true;
         });
     },
 
     deleteOne: function(model, conditions) {
         model.deleteOne(conditions, function (error, result) {
-            if(error) return callback(false);
+            if(error) return false;
             console.log('Document deleted: ' + result.deletedCount);
-            return callback(true);
+            return true;
         });
     },
 
     deleteMany: function(model, conditions) {
         model.deleteMany(conditions, function (error, result) {
-            if(error) return callback(false);
+            if(error) return false;
             console.log('Document deleted: ' + result.deletedCount);
-            return callback(true);
+            return true;
         });
     }
 

@@ -1,9 +1,8 @@
 var mongoose = require('mongoose');
 
 var PostSchema = new mongoose.Schema ({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+    author: {
+        type: String,
         required: true
     },
     title: {
@@ -15,7 +14,7 @@ var PostSchema = new mongoose.Schema ({
     },
     imageUrl: {
         type: String,
-        //required: true,
+        required: true,
         default: '/imgs/instadog.jpg'
     },
     numberOfMeowts: {
@@ -35,11 +34,18 @@ var PostSchema = new mongoose.Schema ({
         ref: 'Cat'
     }],
     comments: [{
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
     }],
     numberOfComments: {
         type: Number,
         default: '0'
+    },
+    latestComment: {
+        type: String
+    },
+    latestCommentAuthor: {
+        type: String
     }
 });
 
