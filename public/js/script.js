@@ -47,7 +47,12 @@ $(document).ready(function(){
     var passwordIsValid = true;
     var confirmPasswordIsValid = true;
 
-    //$("#signup-forms")[0].reset();
+    try {
+        $("#signup-forms")[0].reset();
+    } catch(err) {
+        //only executes when not in sign up page
+    }
+    
 
     function checkIfFormsAreValid() {
         if (!usernameIsValid || !emailIsValid || !passwordIsValid || !confirmPasswordIsValid) {

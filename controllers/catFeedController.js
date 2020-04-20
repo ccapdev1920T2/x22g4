@@ -7,24 +7,17 @@ const catFeedController = {
     getCatFeed: function(req, res) {
         var details;
 
-       Post.find({}, {comments: {$slice: 1}, usersWhoMeowted: {$slice: 3}})
-       .populate('comments')
-       .populate('usersWhoMeowted')
+       Post.find({})
        .lean()
        .exec(function (err, results) {
 
         for (var i = 0; i<results.length; i++){
-              results[i].latestComment = 'nigger'
               results[i].date = formatDate(results[i].date);
-            }
+            };
             
-        
             res.render('cat-feed', {posts: results});
-
-         }) 
+         });
     }
-
-   
 }
 
 function formatDate(date) {
@@ -56,6 +49,4 @@ function formatDate(date) {
     return fuzzy;
 };
   
- 
-
 module.exports = catFeedController;

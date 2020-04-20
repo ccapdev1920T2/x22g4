@@ -8,10 +8,11 @@ const helper = {
 
     insertComment: function(post, comment, user) {
         database.insertOne(Comment, comment, function(insertedComment){
-
+            
+            // update post and append comment
             database.updateOne(Post, {_id: post._id}, {
-                 $push: {comments: insertedComment._id,
-                 $inc: {numberOfComments: 1}},
+                 $push: {comments: insertedComment._id},
+                 $inc: {numberOfComments: 1},
                  latestComment: insertedComment.text,
                  latestCommentAuthor: insertedComment.author
                 });
