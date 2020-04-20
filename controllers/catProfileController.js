@@ -16,7 +16,7 @@ const catProfileController = {
                 res.render('404');
                 return;
             }
-
+//
             var details = {
                 name: result.name,
                 age: result.age,
