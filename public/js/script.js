@@ -58,7 +58,7 @@ $(document).ready(function(){
         $('#sign-up-btn').prop('disabled', false);
     }
 
-    $('#username').keyup(function() {
+    $('#username').on('change paste keyup', function() {
         var username = $('#username').val();
         var regExp = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,16}$/;
        
@@ -91,7 +91,7 @@ $(document).ready(function(){
 
     })
 
-    $('#email').keyup(function () {
+    $('#email').on('change paste keyup',function () {
         var email = $('#email').val();
 
         var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -110,7 +110,7 @@ $(document).ready(function(){
         checkIfFormsAreValid();
     });
 
-    $('#password').keyup(function () {
+    $('#password').on('change paste keyup',function () {
         var password = $('#password').val();
         var confirmPassword = $('#confirmPassword').val();
 
@@ -144,7 +144,7 @@ $(document).ready(function(){
         checkIfFormsAreValid();
     })
 
-    $('#confirmPassword').keyup(function() {
+    $('#confirmPassword').on('change paste keyup',function() {
         var password = $('#password').val();
         var confirmPassword = $('#confirmPassword').val();
 
