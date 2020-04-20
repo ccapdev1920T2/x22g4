@@ -173,10 +173,6 @@ $(document).ready(function(){
     // Submit Post Logic
     //=========================================================================================
 
-    $("#upload-image-btn").click(function() {
-        $("#file").click();
-    });
-
     $("#submit-submission-btn").click(function() {
     
         var createPostField = document.getElementById("submission");
@@ -197,8 +193,16 @@ $(document).ready(function(){
             return;
         }
 
+
+        var file = document.getElementById("file");
+        if (file.files[0].size >  (1048576 * 5)) {
+            message.innerText = "Image should not be bigger than 5MB";
+            return;
+        }
+
         createPostField.value = "";
         captionField.value = "";
-        $("#file")[0].reset();
+        $("#file").val("");
+        $('#post-forms').submit();
     });
 });
