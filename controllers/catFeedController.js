@@ -2,9 +2,11 @@ const database = require("../models/database.js");
 const Post = require("../models/post.js");
 
 const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const upload = multer({
-    dest: "/path/to/temporary/directory/to/store/uploaded/files"
-    // you might also want to set some limits: https://github.com/expressjs/multer#limits
+    dest: __dirname + "../public",
+    limits: {fileSize: (1048576 * 5), files:1}
   });
 
 const catFeedController = {
@@ -26,6 +28,22 @@ const catFeedController = {
 
     postCatFeed: function(req, res) {
 
+        //create post here
+        console.log("hello")
+
+        upload.single("file", (x, y) => {
+            const tempPath = req.file.path;
+            const targetPath = path.join((__dirname, "./postImgs/test.png"));
+
+            fs.rename(tempPath, targetPath, err => {
+                if (err) return handleError(err, res);
+        
+                res
+                  .status(200)
+                  .contentType("text/plain")
+                  .end("File uploaded!");
+              });
+        })
     }
 }
 

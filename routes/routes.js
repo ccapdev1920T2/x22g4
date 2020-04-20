@@ -51,6 +51,7 @@ app.get('/getCheckUsername', signupController.getCheckUsername);
 app.get('/profile/:username', userProfileController.getUserProfile);
 
 app.get('/catFeed', catFeedController.getCatFeed);
+app.post('catFeed', catFeedController.postCatFeed);
 
 //Donate-Feed
 app.get('/donate', function(req, res){
