@@ -42,127 +42,128 @@ $(document).ready(function(){
     // Sign Up Logic
     //=========================================================================================
 
-    var usernameIsValid = true;
-    var emailIsValid = true;
-    var passwordIsValid = true;
-    var confirmPasswordIsValid = true;
+    try {
+        $("#signup-forms")[0].reset();
+    } catch (err) {}
+    
 
-    $("#signup-forms")[0].reset();
+    $("#sign-up-btn").click(function () {
+        var entryForms = document.getElementById("signup-forms");
 
-    function checkIfFormsAreValid() {
-        if (!usernameIsValid || !emailIsValid || !passwordIsValid || !confirmPasswordIsValid) {
-            $('#sign-up-btn').prop('disabled', true);
+        if (!formsAreComplete()) {
+            $('#signup-error').text('Please fill out required fields')
             return;
         }
 
-        $('#sign-up-btn').prop('disabled', false);
-    }
+        if (!usernameIsValid()) {
+            return;
+        }
+        
+        if (!passwordIsValid()) {
+            return;
+        }
 
-    $('#username').on('change paste keyup', function() {
+        if (!passwordsMatch()) {
+            return;
+        }
+
+        if(!emailIsCorrect()) {
+            return;
+        }
+        
+        entryForms.submit();
+    });
+
+    function usernameIsValid() {
         var username = $('#username').val();
         var regExp = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,16}$/;
        
 
         if (!regExp.test(username)) {
-            $('#username').css('background-color', 'pink');
-            $('#usernameHelp').text('Username be within 3-16 characters. No special characters. Periods should not be in a series or at the beginning.');
-            usernameIsValid = false;
-            checkIfFormsAreValid();
-            return;
+            $('#signup-error').text('Invalid username')
+            return false;
 
         }
 
         $.get('/getCheckUsername', {username: username}, function(result) {
             if (result.username == username) {
-                $('#username').css('background-color', 'pink');
-                $('#usernameHelp').text('Username is already taken!');
-                usernameIsValid = false;
-                checkIfFormsAreValid();
-                return;
+                $('#signup-error').text('Username is already taken!')
+                return false;
             }
 
             
         })
 
-        $('#username').css('background-color', 'white');
-        $('#usernameHelp').text('Username be within 3-16 characters. No special characters. Periods should not be in a series or at the beginning.');
-        usernameIsValid = true;
-        checkIfFormsAreValid();
+        $('#signup-error').text('')
+        return true;
+    }
 
-    })
-
-    $('#email').on('change paste keyup',function () {
-        var email = $('#email').val();
-
+    function emailIsCorrect(){
         var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var emailForm = document.getElementById("email");
     
-        if (!regExp.test(email)) {
-            $('#email').css('background-color', 'pink');
-            $('#emailHelp').text('Invalid email!');
-            emailIsValid = false;
-            checkIfFormsAreValid();
-            return;
+        if (!regExp.test(emailForm.value)) {
+            $('#signup-error').text('Invalid email')
+            return false;
         }
+        
+        $('#signup-error').text('')
+        return true;
+    }
     
-        $('#email').css('background-color', 'white');
-        $('#emailHelp').text('Your email will be kept private.');
-        emailIsValid = true;
-        checkIfFormsAreValid();
-    });
-
-    $('#password').on('change paste keyup',function () {
-        var password = $('#password').val();
-        var confirmPassword = $('#confirmPassword').val();
-
+    function passwordIsValid() {
         var regExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+        var passwordForm = document.getElementById("password");
     
-        if (!regExp.test(password)) {
-            $('#password').css('background-color', 'pink');
-            $('#passwordHelp').text('Password should be at least 8 characters long with 1 number, 1 lowercase and uppercase letter.')
-            passwordIsValid = false;
-            checkIfFormsAreValid();
-            return;
+        if (!regExp.test(passwordForm.value)) {
+            $('#signup-error').text('Invalid password')
+            return false;
         }
-
-        $('#password').css('background-color', 'white');
-        passwordIsValid = true;
-        checkIfFormsAreValid();
-
-        if (password != confirmPassword) {
-            $('#password').css('background-color', 'pink');
-            $('#confirmPassword').css('background-color', 'pink');
-            $('#passwordHelp').text('Password is valid but does not match with confrim password!');
-            confirmPassword = false;
-            checkIfFormsAreValid();
-            return;
+        
+        $('#signup-error').text('')
+        return true;
+    }
+    
+    function passwordsMatch() {
+        var passwordForm = document.getElementById("password");
+        var confirmPasswordForm = document.getElementById("confirmPassword");
+    
+        if (passwordForm.value != confirmPasswordForm.value) {
+            $('#signup-error').text('Passwords do not match!')
+            return false;
         }
+        
+        $('#signup-error').text('')
+        return true;
+    }
+    
+    function formsAreComplete() {
 
-        $('#password').css('background-color', 'white');
-        $('#confirmPassword').css('background-color', 'white');
-        $('#passwordHelp').text('Password should be at least 8 characters long with 1 number, 1 lowercase and uppercase letter.');
-        confirmPassword = true;
-        checkIfFormsAreValid();
-    })
-
-    $('#confirmPassword').on('change paste keyup',function() {
-        var password = $('#password').val();
-        var confirmPassword = $('#confirmPassword').val();
-
-        if (password != confirmPassword) {
-            $('#password').css('background-color', 'pink');
-            $('#confirmPassword').css('background-color', 'pink');
-            $('#passwordHelp').text('Passwords do not match!');
-            confirmPassword = false;
-            checkIfFormsAreValid();
-            return;
+        var isComplete = true;
+    
+        var userNameForm = document.getElementById("username");
+        var emailAddressForm = document.getElementById("email");
+        var passwordForm = document.getElementById("password");
+        var confirmPasswordForm = document.getElementById("confirmPassword");
+    
+        if (userNameForm.value == "") {
+            isComplete = false;
         }
-
-        $('#password').css('background-color', 'white');
-        $('#confirmPassword').css('background-color', 'white');
-        $('#passwordHelp').text('Password should be at least 8 characters long with 1 number, 1 lowercase and uppercase letter.');
-        confirmPassword = true;
-        checkIfFormsAreValid();
-    }) 
+    
+        if(emailAddressForm.value == "") {
+            isComplete = false;
+        }
+    
+        if(passwordForm.value == "") {
+            isComplete = false;
+        }
+    
+        if(confirmPasswordForm.value == "") {
+            isComplete = false;
+        }
+    
+        return isComplete;
+    }
 
     //=========================================================================================
     // Submit Post Logic
