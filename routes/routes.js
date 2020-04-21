@@ -5,6 +5,16 @@ const adoptCatController = require("../controllers/adoptCatController.js");
 const signupController = require("../controllers/signupController.js");
 const userProfileController = require("../controllers/userProfileController.js");
 const catFeedController = require("../controllers/catFeedController.js");
+
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination:  './public/postImgs',
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+}),
+upload = multer({ storage: storage }).single('file');
+
 const app = express();
 
 app.get("/cat/:name", catProfileController.getCatProfile);
@@ -51,7 +61,8 @@ app.get('/getCheckUsername', signupController.getCheckUsername);
 app.get('/profile/:username', userProfileController.getUserProfile);
 
 app.get('/catFeed', catFeedController.getCatFeed);
-app.post('catFeed', catFeedController.postCatFeed);
+
+app.post('/catFeed', upload, catFeedController.postCatFeed);
 
 //Donate-Feed
 app.get('/donate', function(req, res){

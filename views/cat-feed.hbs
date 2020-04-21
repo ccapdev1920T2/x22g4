@@ -4,20 +4,20 @@
         <div class="row">
             <div class="col-9">
 
-                <form id="post-forms" method="POST">
+                <form id="post-forms" method="POST" enctype="multipart/form-data">
                      <!-- Submission Box -->
                     <div class="card submission mb-3">
                                             
                         <div class="row h-100">
                             <div class="col-10">
-                                <textarea class="text-submission" id="submission" name="submission" placeholder="Create Post" style="width: 100%; max-width: 100%;" rows="1"></textarea>
+                                <textarea class="text-submission" id="submission" name="submission" placeholder="Create Post" style="width: 100%; max-width: 100%;" rows="1" required></textarea>
                                 <textarea class="text-submission" id="caption" name="caption" placeholder="Add Caption" style="width: 100%; max-width: 100%;" rows="2"></textarea>
                             </div>
                                 
                             <div class="col-2">
-                                    <input type="file" id="file" name="file" accept="image/*"/>
+                                    <input type="file" id="file" name="file" accept="image/*" required/>
                                     <!--<button type="button" class="btn btn-danger"><i class="fas fa-image" id="upload-image-btn"></i></button> -->
-                                    <button type="button" class="btn btn-danger" id="submit-submission-btn">Submit</button>
+                                    <button type="submit" class="btn btn-danger" id="submit-submission-btn">Submit</button>
                             </div>
                         </div>
                         <div>
@@ -25,9 +25,8 @@
                         </div>
                     </div>
                     <!-- Submission Box -->
-
-
                 </form>
+
                
 
                 <!-- Posts -->

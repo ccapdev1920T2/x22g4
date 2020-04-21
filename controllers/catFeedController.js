@@ -1,13 +1,7 @@
 const database = require("../models/database.js");
 const Post = require("../models/post.js");
-
-const multer = require('multer');
-const path = require('path');
 const fs = require('fs');
-const upload = multer({
-    dest: __dirname + "../public",
-    limits: {fileSize: (1048576 * 5), files:1}
-  });
+const multer = require('multer');
 
 const catFeedController = {
 
@@ -27,23 +21,15 @@ const catFeedController = {
     },
 
     postCatFeed: function(req, res) {
-
-        //create post here
-        console.log("hello")
-
-        upload.single("file", (x, y) => {
-            const tempPath = req.file.path;
-            const targetPath = path.join((__dirname, "./postImgs/test.png"));
-
-            fs.rename(tempPath, targetPath, err => {
-                if (err) return handleError(err, res);
+        console.log(req.file)
+        var originalName = req.file.originalname;
+        var extension = originalName.substring(originalName.lastIndexOf("."))
+        console.log(extension);
+        if (req.file) {
+            fs.renameSync(req.file.path, req.file.destination + '/' + 'placeholder' + extension);
         
-                res
-                  .status(200)
-                  .contentType("text/plain")
-                  .end("File uploaded!");
-              });
-        })
+        }
+    
     }
 }
 

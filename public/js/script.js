@@ -173,7 +173,7 @@ $(document).ready(function(){
     // Submit Post Logic
     //=========================================================================================
 
-    $("#submit-submission-btn").click(function() {
+    /*$("#submit-submission-btn").click(function() {
     
         var createPostField = document.getElementById("submission");
         var captionField = document.getElementById("caption");
@@ -203,6 +203,28 @@ $(document).ready(function(){
         createPostField.value = "";
         captionField.value = "";
         $("#file").val("");
-        $('#post-forms').submit();
-    });
+        var data = $('#post-forms').serialize();
+        $.post('/catFeed', data);
+    }); */
+
+    try {
+        createPostField.value = "";
+        captionField.value = "";
+        $("#file").val("");
+    } catch(err) {
+        //only executes when not in cat feed page
+    }
+
+    $('#post-forms').submit(function(e) {
+        var file = document.getElementById("file");
+        if (file.files[0].size >  (1048576 * 4)) {
+            message.innerText = "Image should not be bigger than 4MB";
+            return false;
+        }        
+
+        createPostField.value = "";
+        captionField.value = "";
+        $("#file").val("");
+    })
+    
 });
