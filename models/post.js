@@ -5,7 +5,7 @@ var PostSchema = new mongoose.Schema ({
         type: String,
         required: true
     },
-    title: {
+    postTitle: {
         type: String,
         required: true
     },
@@ -14,8 +14,6 @@ var PostSchema = new mongoose.Schema ({
     },
     imageUrl: {
         type: String,
-        required: true,
-        default: '/imgs/instadog.jpg'
     },
     numberOfMeowts: {
         type: Number,

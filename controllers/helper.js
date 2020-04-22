@@ -21,6 +21,18 @@ const helper = {
                 console.log(result);
             });
         });
+    },
+
+    newPost(post) {
+        var author = post.author;
+
+        database.insertOne(Post, post, (postResult) => {
+            database.updateOne(User, {username: author}, {
+                $push: {posts: postResult._id}
+            }); 
+        })
+
+
     }
 
 }

@@ -208,9 +208,10 @@ $(document).ready(function(){
     }); */
 
     try {
-        createPostField.value = "";
-        captionField.value = "";
+        $('#postTitle').val("");
+        $('#caption').val("")
         $("#file").val("");
+        $('#submit-submission-btn').prop('disabled', false);
     } catch(err) {
         //only executes when not in cat feed page
     }
@@ -222,9 +223,7 @@ $(document).ready(function(){
             return false;
         }        
 
-        createPostField.value = "";
-        captionField.value = "";
-        $("#file").val("");
+        $('#submit-submission-btn').prop('disabled', true);
     })
     
 });

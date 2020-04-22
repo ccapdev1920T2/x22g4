@@ -7,3 +7,4 @@ database.connect();
 
 database.deleteMany(Post, (flag) => {})
 database.deleteMany(User, (flag) => {})
+database.deleteMany(Comment, (flag) => {})
