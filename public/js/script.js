@@ -112,7 +112,7 @@ $(document).ready(function(){
     }
     
     function passwordIsValid() {
-        var regExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+        var regExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
         var passwordForm = document.getElementById("password");
     
         if (!regExp.test(passwordForm.value)) {
