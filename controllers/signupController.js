@@ -10,7 +10,7 @@ const signupController = {
     },
 
     postSignup: function(req, res) {
-        console.log("post sign up")
+        console.log("post sign up");
         var username = req.body.username;
         var password = req.body.password;
         var email = req.body.email;
@@ -36,8 +36,6 @@ const signupController = {
         });
 
     }
-
-
 }
 
 module.exports = signupController;

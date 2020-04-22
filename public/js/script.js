@@ -5,17 +5,6 @@ $(document).ready(function(){
     // Login Logic
     //=========================================================================================
 
-    $("#login-btn").click(function() {
-        var loginEntryForms = document.getElementById("login-forms");
-
-        if (!loginFormsAreComplete()) {
-            alert("Required fields!");
-            return;
-        }
-
-        loginEntryForms.submit();
-    });
-
     function loginFormsAreComplete() {
         var isComplete = true;
     
@@ -37,6 +26,17 @@ $(document).ready(function(){
     
         return isComplete;
     }
+
+    $("#login-btn").click(function() {
+        var loginEntryForms = document.getElementById("login-forms");
+
+        if (!loginFormsAreComplete()) {
+            alert("Required fields!");
+            return;
+        }
+
+        loginEntryForms.submit();
+    });
 
     //=========================================================================================
     // Sign Up Logic

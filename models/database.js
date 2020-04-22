@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+//Express-Session
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);   
+
 const User = require('./user.js');
 const Cat = require('./cat.js');
 const Post = require('./post.js');
@@ -12,6 +16,12 @@ const options = {
     useUnifiedTopology: true,
     useNewUrlParser: true
 };
+
+//Init Express-Session
+const sessionStore = new MongoStore({
+    mongooseConnection: mongoose.createConnection(url, options),
+    collection: 'sessions'
+});
 
 const database = {
 
