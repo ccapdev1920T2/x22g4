@@ -25,7 +25,7 @@ const loginController = {
               console.log('User and password is correct...redirecting...');
 
               req.session.user = user.username;
-              res.redirect('/profile/' + username);
+              res.redirect('/');
 
               console.log("Successful login of " + user.username);
 

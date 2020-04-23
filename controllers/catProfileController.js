@@ -18,6 +18,10 @@ const catProfileController = {
             }
 //
             var details = {
+                //Session
+                active_session: (req.session.user && req.cookies.user_sid), 
+                active_user: req.session.user,
+
                 name: result.name,
                 age: result.age,
                 imageUrl: result.imageUrl,

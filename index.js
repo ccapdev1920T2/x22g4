@@ -13,7 +13,7 @@ const MongoStore = require('connect-mongo')(session);
 
 //Cookie & Morgan & Sequelize & Body Parser
 const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
+//const morgan = require('morgan');
 const Sequelize = require('sequelize');
 const bodyParser = require('body-parser');
 
@@ -26,7 +26,9 @@ const app = express();
 const port = 3000;
 
 //Dev~ Guys @Justin, @Mich you can turn this off if the cmd is noisy !!
-app.use(morgan('dev')); 
+//app.use(morgan('dev')); 
+
+/*
 
 //Init Session
 app.use(bodyParser.urlencoded({extended: true}));
@@ -55,9 +57,8 @@ var sessionChecker = (req, res, next) => {
 	if(req.session.user && req.cookies.user_sid) {
 		res.render('index', {
 			active_session: true,
-			active_user: req.session.user,
-	})
-
+			active_user: req.session.user
+		})
 	} else {
 		next();
 	}
@@ -66,6 +67,8 @@ var sessionChecker = (req, res, next) => {
 app.get('/', sessionChecker, (req, res) => {
     res.redirect('/login');
 });
+
+*/
 
 //Session
 
