@@ -1,0 +1,51 @@
+<div class="container" style="margin-top: 6em; max-width: 85em;">
+        <div class = "row">
+            <div class = "col-5">
+            <div class="card mb-3" >
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="{{imageUrl}}" class="card-img" alt="...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h2 class="card-title-custom">{{postTitle}}</h2>
+                            <h5>by {{author}}</h5>
+                            <p class="card-text">{{caption}}</p>
+                            <hr> Liked by <b>{{numberOfMeowts}}</b>
+                            <hr>
+                            <p class="card-text"><small class="text-muted">Last updated {{date}}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+            <div class="col">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row h-100">
+                        <div class="col-10">
+
+                            <input class="text-submission" type="text" id="commentSubmission" name="commentSubmission" placeholder="Comment" style="width: 100%;">
+
+                        </div>
+
+                        <div class="col-2">
+                            <button type="button" class="btn btn-danger">Submit</button>
+                        </div>
+                    </div>
+                    <hr style="margin-top: 1em; margin-bottom: 1em;">
+                    {{#each comments}}
+                        {{> commentItem}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+
+ 
