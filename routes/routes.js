@@ -5,6 +5,7 @@ const adoptCatController = require("../controllers/adoptCatController.js");
 const signupController = require("../controllers/signupController.js");
 const userProfileController = require("../controllers/userProfileController.js");
 const catFeedController = require("../controllers/catFeedController.js");
+const postController = require("../controllers/postController.js");
 
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -61,8 +62,9 @@ app.get('/getCheckUsername', signupController.getCheckUsername);
 app.get('/profile/:username', userProfileController.getUserProfile);
 
 app.get('/catFeed', catFeedController.getCatFeed);
-
 app.post('/catFeed', upload, catFeedController.postCatFeed);
+
+app.get('/post/:_id', postController.getPost);
 
 //Donate-Feed
 app.get('/donate', function(req, res){
