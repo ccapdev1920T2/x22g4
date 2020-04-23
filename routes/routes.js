@@ -96,6 +96,12 @@ app.post('/signup', signupController.postSignup);
 app.get('/login', loginController.getLogin);
 app.post('/login', loginController.postLogin);
 
+app.get('/logout', function(req, res) {
+    req.logout;
+    req.session.destroy(function(err) { });
+    res.redirect('/');
+})
+
 //Checkusername
 app.get('/getCheckUsername', signupController.getCheckUsername);
 

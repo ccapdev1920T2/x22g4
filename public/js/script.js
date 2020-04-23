@@ -42,9 +42,16 @@ $(document).ready(function(){
     // Signout Logic
     //=========================================================================================
 
+    /*
+
     $("#signout-btn").click(function() {
-        //Somehow think of this idk how, SO says use AJAX.
+        alert("Signout");
+        req.session.destroy(function(err) {
+
+        })
     });
+
+    */
 
     //=========================================================================================
     // Sign Up Logic
