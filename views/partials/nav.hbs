@@ -30,8 +30,11 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 {{#if active_session}}
-                <li class="nav-item {{#if login_active}}active{{/if}}">
-                    <a class="nav-link" href="/login"><i class="fas fa-cat"></i> Hello {{active_user}} ! </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile/{{active_user}}"><i class="fas fa-cat"></i> {{active_user}} </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home" id="signout-btn"><i class="fas fa-sign-out-alt"></i> Logout </a>
                 </li>
                 {{else}}
                 <li class="nav-item {{#if login_active}}active{{/if}}">

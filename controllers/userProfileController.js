@@ -18,6 +18,10 @@ const userProfileController = {
             }
 
             var details = {
+                //Session
+                active_session: (req.session.user && req.cookies.user_sid), 
+                active_user: req.session.user,
+
                 username: result.username,
                 description: result.description,
                 avatar: result.avatar

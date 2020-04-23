@@ -45,15 +45,6 @@ app.use((req, res, next) => {
     next();
 });
 
-//If active session
-var sessionChecker = (req, res, next) => {
-    if(req.session.user && req.cookies.user_sid) { 
-        res.redirect('/');
-    } else {
-        next();
-    }
-};
-
 app.get('/', function(req, res) {
     res.render('index', {
         active_session: (req.session.user && req.cookies.user_sid),
@@ -111,9 +102,9 @@ app.get('/getCheckUsername', signupController.getCheckUsername);
 app.get('/profile/:username', userProfileController.getUserProfile);
 
 //Donate-Feed
-app.get('/donate', sessionChecker, function(req, res){
+app.get('/donate', function(req, res){
     res.render('donate', {
-        active_session: sessionChecker,
+        active_session: (req.session.user && req.cookies.user_sid),
         active_user: req.session.user,
         donate_active: true,
     })  

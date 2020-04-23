@@ -15,7 +15,10 @@
                 <img src='../imgs/it.png' width="140px">
                 <p id="sign-up-text">Log-In</p>
             </div>
-
+            {{#if login_err}}
+            <br>
+            <p style="color: #d34b3b; font-weight: bold;"> {{message}} </p>
+            {{/if}}
             <form class="entry-forms" id="login-forms" method="post">
                 <div class="form-group">
                     <label for="userName">User Name</label>
