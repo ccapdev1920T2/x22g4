@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="home"><img src="/imgs/it.png" width="50px"> catvas</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,10 +13,10 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-camera"></i> Explore
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul role="menu" id="explore" name="explore" class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item {{#if adopt_active}}active-drop{{/if}}" href="/adoptCat"><i class="fas fa-heart"></i> Adopt a Cat</a>
-                      <a class="dropdown-item {{#if catfeed_active}}active-drop{{/if}}" href="/cat-feed"><i class="fas fa-comments"></i> View Catfeed</a>
-                    </div>
+                      <a class="dropdown-item {{#if catfeed_active}}active-drop{{/if}}" href="/catFeed"><i class="fas fa-comments"></i> View Catfeed</a>
+                    </ul>
                 </li>
                 <li class="nav-item {{#if team_active}}active{{/if}}">
                     <a class="nav-link" href="/team"><i class="fas fa-code"></i> Meet the Team</a>

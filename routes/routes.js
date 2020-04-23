@@ -65,6 +65,7 @@ app.get('/catFeed', catFeedController.getCatFeed);
 app.post('/catFeed', upload, catFeedController.postCatFeed);
 
 app.get('/post/:_id', postController.getPost);
+app.get('/addComment', postController.addComment);
 
 //Donate-Feed
 app.get('/donate', function(req, res){

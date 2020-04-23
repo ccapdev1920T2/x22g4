@@ -8,6 +8,7 @@ const helper = {
 
     insertComment: function(postId, comment) {
         database.insertOne(Comment, comment, function(insertedComment){
+            console.log("ID:" + postId);
             
             // update post and append comment
             database.updateOne(Post, {_id: postId}, {

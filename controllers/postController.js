@@ -22,8 +22,25 @@ const postController = {
 
             result.date = helper.formatDate(result.date)
             res.render('post', result)
+        });
+    },
 
-        })
+    addComment: function(req, res) {
+        //TODO: session username
+        let author = 'default';
+        let text = req.query.text;
+        let postId = req.query.postId;
+
+        let newComment = new Comment({
+            author: author,
+            text: text
+        });
+
+        helper.insertComment(postId, newComment);
+
+        res.render('partials/commentItem.hbs', newComment);
+
+        
     }
 }
 

@@ -1,6 +1,8 @@
 
 $(document).ready(function(){
 
+
+
     //=========================================================================================
     // Login Logic
     //=========================================================================================
@@ -225,5 +227,50 @@ $(document).ready(function(){
 
         $('#submit-submission-btn').prop('disabled', true);
     })
+
+    //=========================================================================================
+    // Comment Post Logic
+    //=========================================================================================
+
+    try{
+        $('#comment').val("");
+        $('#comment').css('background-color', 'white');
+    } catch (error) {
+        //only executes when not in post page
+    }
+
+    $('#comment-submit-btn').click(function() {
+        //TODO: check if logged in
+
+        let text = $('#comment').val();
+        let postId = $('#postId').text();
+
+        if(text.trim() == '') {
+            $('#comment').css('background-color', 'pink');
+            return;
+        }
+
+        $('#comment').css('background-color', 'white');
+        $('#comment').val("");
+
+        $.ajax({
+            type: 'GET',
+            url: '/addComment',
+            data: {postId: postId, text: text},
+            success: function(data) {
+                $('#comments-container').append(data);
+               
+            }
+        })
+
+        /*
+        $.get('/addComment', {postId: postId, text: text}, function(data) {
+            $('#comments-container').append(data);
+        })*/
+
+    })
+   
+
+
     
 });

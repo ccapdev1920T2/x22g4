@@ -43,6 +43,8 @@ const catFeedController = {
 
         helper.newPost(post);
 
+        res.redirect('/post/' + newName);
+
 
         
     }
