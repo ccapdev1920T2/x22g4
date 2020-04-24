@@ -1,6 +1,8 @@
 
 $(document).ready(function(){
 
+
+
     //=========================================================================================
     // Login Logic
     //=========================================================================================
@@ -169,32 +171,60 @@ $(document).ready(function(){
     // Submit Post Logic
     //=========================================================================================
 
-    $("#upload-image-btn").click(function() {
-        $("#file").click();
-    });
+    try {
+        $('#postTitle').val("");
+        $('#caption').val("")
+        $("#file").val("");
+        $('#submit-submission-btn').prop('disabled', false);
+    } catch(err) {
+        //only executes when not in cat feed page
+    }
 
-    $("#submit-submission-btn").click(function() {
+    $('#post-forms').submit(function(e) {
+        var file = document.getElementById("file");
+        if (file.files[0].size >  (1048576 * 4)) {
+            message.innerText = "Image should not be bigger than 4MB";
+            return false;
+        }        
+
+        $('#submit-submission-btn').prop('disabled', true);
+    })
+
+    //=========================================================================================
+    // Comment Post Logic
+    //=========================================================================================
+
+    try{
+        $('#comment').val("");
+        $('#comment').css('background-color', 'white');
+    } catch (error) {
+        //only executes when not in post page
+    }
+
+    $('#comment-submit-btn').click(function() {
+        //TODO: check if logged in
+
+        let text = $('#comment').val();
+        let postId = $('#postId').text();
+
+        if(text.trim() == '') {
+            $('#comment').css('background-color', 'pink');
+            return;
+        }
+
+        $('#comment').css('background-color', 'white');
+        $('#comment').val("");
+
+       
+
+        
+        $.get('/addComment', {postId: postId, text: text}, function(data) {
+            $('#comments-container').append(data);
+        })
+
+    })
+   
+
+
     
-        var createPostField = document.getElementById("submission");
-        var captionField = document.getElementById("caption");
-        var message = document.getElementById("message");
-
-        message.innerText = "";
-        createPostField.style.backgroundColor = "#fafafa";
-
-        if (createPostField.value == "") {
-            message.innerText = "Please enter a post title and select an image to upload.";
-            createPostField.style.backgroundColor = "pink";
-            return;
-        }
-
-        if ($('#file').get(0).files.length === 0) {
-            message.innerText = "Please enter a post title and select an image to upload.";
-            return;
-        }
-
-        createPostField.value = "";
-        captionField.value = "";
-        $("#file")[0].reset();
-    });
 });
