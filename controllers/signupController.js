@@ -1,4 +1,7 @@
+const bcrypt = require('bcrypt');
+
 const database = require("../models/database.js");
+const session = require('express-session');
 
 const User = require("../models/user.js");
 
@@ -16,16 +19,19 @@ const signupController = {
         var email = req.body.email;
         var description = req.body.description;
 
-        var user = {
-            username: username,
-            password: password,
-            email: email,
-            description: description
-        };
+        bcrypt.hash(password, 10, function(err, hash) {
 
-        database.insertOne(User, user, function(result) {
-            res.redirect('/profile/' + username);
-        });
+            var user = {
+                username: username,
+                password: hash,
+                email: email,
+                description: description
+            };
+
+            database.insertOne(User, user, function(result) {
+                res.redirect('/profile/' + username);
+            });
+        })
     },
 
     getCheckUsername: function(req, res) {
