@@ -440,6 +440,10 @@ hr{
     display: inline-block;
 }
 
+.center-wrapper ul li{
+    display: inline-block;
+}
+
 .center-wrapper p{
     display: inline-block;
 }
