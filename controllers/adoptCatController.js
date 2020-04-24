@@ -12,7 +12,11 @@ const adoptCatController = {
 
         database.findManyLean(Cat, LAGUNA_QUERY, null, function(lagunaResult) {
             database.findManyLean(Cat, MANILA_QUERY, null, function(manilaResult) {
-                res.render('adoptCat', {lagunaCats: lagunaResult, manilaCats: manilaResult});
+                res.render('adoptCat', {
+                    lagunaCats: lagunaResult,
+                    manilaCats: manilaResult,
+                    adopt_active: true
+                    });
             });
         });
 

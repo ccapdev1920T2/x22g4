@@ -19,7 +19,7 @@ const catFeedController = {
               results[i].date = helper.formatDate(results[i].date);
             };
             
-            res.render('cat-feed', {posts: results});
+            res.render('cat-feed', {posts: results, catfeed_active: true});
          });
     },
 
