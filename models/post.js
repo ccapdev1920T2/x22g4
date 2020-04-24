@@ -1,35 +1,50 @@
 var mongoose = require('mongoose');
 
 var PostSchema = new mongoose.Schema ({
-    username: {
+    author: {
         type: String,
         required: true
     },
-    title: {
+    postTitle: {
         type: String,
         required: true
     },
     caption: {
         type: String
     },
-    image: {
-        data: Buffer,
-        contentType: String
+    imageUrl: {
+        type: String,
     },
-    meowts: {
+    numberOfMeowts: {
         type: Number,
-        required: true
+        default: '0'
     },
+    usersWhoMeowted: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }],
     date: {
         type: Date,
-        required: true
+        default: Date.now
     },
     cats: [{
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cat'
     }],
     comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+    }],
+    numberOfComments: {
+        type: Number,
+        default: '0'
+    },
+    latestComment: {
         type: String
-    }]
+    },
+    latestCommentAuthor: {
+        type: String
+    }
 });
 
 module.exports = mongoose.model('Post', PostSchema);

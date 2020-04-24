@@ -1,6 +1,8 @@
 
 $(document).ready(function(){
 
+
+
     //=========================================================================================
     // Login Logic
     //=========================================================================================
@@ -169,11 +171,7 @@ $(document).ready(function(){
     // Submit Post Logic
     //=========================================================================================
 
-    $("#upload-image-btn").click(function() {
-        $("#file").click();
-    });
-
-    $("#submit-submission-btn").click(function() {
+    /*$("#submit-submission-btn").click(function() {
     
         var createPostField = document.getElementById("submission");
         var captionField = document.getElementById("caption");
@@ -193,8 +191,74 @@ $(document).ready(function(){
             return;
         }
 
+
+        var file = document.getElementById("file");
+        if (file.files[0].size >  (1048576 * 5)) {
+            message.innerText = "Image should not be bigger than 5MB";
+            return;
+        }
+
         createPostField.value = "";
         captionField.value = "";
-        $("#file")[0].reset();
-    });
+        $("#file").val("");
+        var data = $('#post-forms').serialize();
+        $.post('/catFeed', data);
+    }); */
+
+    try {
+        $('#postTitle').val("");
+        $('#caption').val("")
+        $("#file").val("");
+        $('#submit-submission-btn').prop('disabled', false);
+    } catch(err) {
+        //only executes when not in cat feed page
+    }
+
+    $('#post-forms').submit(function(e) {
+        var file = document.getElementById("file");
+        if (file.files[0].size >  (1048576 * 4)) {
+            message.innerText = "Image should not be bigger than 4MB";
+            return false;
+        }        
+
+        $('#submit-submission-btn').prop('disabled', true);
+    })
+
+    //=========================================================================================
+    // Comment Post Logic
+    //=========================================================================================
+
+    try{
+        $('#comment').val("");
+        $('#comment').css('background-color', 'white');
+    } catch (error) {
+        //only executes when not in post page
+    }
+
+    $('#comment-submit-btn').click(function() {
+        //TODO: check if logged in
+
+        let text = $('#comment').val();
+        let postId = $('#postId').text();
+
+        if(text.trim() == '') {
+            $('#comment').css('background-color', 'pink');
+            return;
+        }
+
+        $('#comment').css('background-color', 'white');
+        $('#comment').val("");
+
+       
+
+        
+        $.get('/addComment', {postId: postId, text: text}, function(data) {
+            $('#comments-container').append(data);
+        })
+
+    })
+   
+
+
+    
 });

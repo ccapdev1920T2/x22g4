@@ -1,32 +1,38 @@
+    <script>document.catfeed_active = true</script>
+    <script>explore_active = true</script>
     <div class="feed-container align-items-center" style="max-width: 90em;">
         <h1 style="font-size: 72pt; color: #d34b3b">Cat Feed</h1>
         
         <div class="row">
             <div class="col-9">
 
-                <!-- Submission Box -->
-                <div class="card submission mb-3">
-                                        
-                    <div class="row h-100">
-                        <div class="col-10">
-                            <textarea class="text-submission" id="submission" name="submission" placeholder="Create Post" style="width: 100%; max-width: 100%;" rows="1"></textarea>
-                            <textarea class="text-submission" id="caption" name="caption" placeholder="Add Caption" style="width: 100%; max-width: 100%;" rows="2"></textarea>
+                <form id="post-forms" method="POST" enctype="multipart/form-data">
+                     <!-- Submission Box -->
+                    <div class="card submission mb-3">
+                                            
+                        <div class="row h-100">
+                            <div class="col-10">
+                                <textarea class="text-submission" id="postTitle" name="postTitle" placeholder="Create Post" style="width: 100%; max-width: 100%;" rows="1" required></textarea>
+                                <textarea class="text-submission" id="caption" name="caption" placeholder="Add Caption" style="width: 100%; max-width: 100%;" rows="2"></textarea>
+                            </div>
+                                
+                            <div class="col-2">
+                                    <input type="file" id="file" name="file" accept="image/*" required/>
+                                    <!--<button type="button" class="btn btn-danger"><i class="fas fa-image" id="upload-image-btn"></i></button> -->
+                                    <button type="submit" class="btn btn-danger" id="submit-submission-btn">Submit</button>
+                            </div>
                         </div>
-                            
-                        <div class="col-2">
-                                <input type="file" id="file" style="display:none;" />
-                                <button type="button" class="btn btn-danger"><i class="fas fa-image" id="upload-image-btn"></i></button>
-                                <button type="button" class="btn btn-danger" id="submit-submission-btn">Submit</button>
+                        <div>
+                            <p id="message" class="message"></p>
                         </div>
                     </div>
-                    <div>
-                        <p id="message" class="message"></p>
-                    </div>
-                </div>
-                <!-- Submission Box -->
+                    <!-- Submission Box -->
+                </form>
+
+               
 
                 <!-- Posts -->
-                {{#each post}}
+                {{#each posts}}
                     {{> postItem}}
                 {{/each}}
                 <!-- Posts -->
