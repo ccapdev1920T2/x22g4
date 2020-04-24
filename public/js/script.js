@@ -253,20 +253,12 @@ $(document).ready(function(){
         $('#comment').css('background-color', 'white');
         $('#comment').val("");
 
-        $.ajax({
-            type: 'GET',
-            url: '/addComment',
-            data: {postId: postId, text: text},
-            success: function(data) {
-                $('#comments-container').append(data);
-               
-            }
-        })
+       
 
-        /*
+        
         $.get('/addComment', {postId: postId, text: text}, function(data) {
             $('#comments-container').append(data);
-        })*/
+        })
 
     })
    
