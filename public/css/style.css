@@ -8,6 +8,11 @@ p {
     text-align: justify;
 }
 
+.like {
+  cursor: pointer;
+  user-select: none;
+}
+
 .divider {
     width: 20px;
 }

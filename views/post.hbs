@@ -11,10 +11,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-body">
-                            <h2 class="card-title-custom">{{postTitle}}</h2>
+                            <h2 class="card-title-custom" style="margin-bottom: 0%; padding-bottom:0; ">{{postTitle}}</h2>
+                            <a href="#" id="edit-title-btn">Edit Title</a>
                             <h5>by {{author}}</h5>
                             <p class="card-text">{{caption}}</p>
-                            <hr> Liked by <b>{{numberOfMeowts}}</b>
+                            <a href="#" id="edit-post-btn">Edit Caption</a>
+                            <hr>
+                            <div class="d-flex" style="align-items: center;">
+                                <button id="like-btn" type="button" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> </button>
+                                <span style="padding-left: 10px;">
+                                Liked by <b>{{numberOfMeowts}}</b>
+                                </span>
+                            </div>
                             <hr>
                             <p class="card-text"><small class="text-muted">Last updated {{date}}</small></p>
                         </div>
