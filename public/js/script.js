@@ -171,40 +171,6 @@ $(document).ready(function(){
     // Submit Post Logic
     //=========================================================================================
 
-    /*$("#submit-submission-btn").click(function() {
-    
-        var createPostField = document.getElementById("submission");
-        var captionField = document.getElementById("caption");
-        var message = document.getElementById("message");
-
-        message.innerText = "";
-        createPostField.style.backgroundColor = "#fafafa";
-
-        if (createPostField.value == "") {
-            message.innerText = "Please enter a post title and select an image to upload.";
-            createPostField.style.backgroundColor = "pink";
-            return;
-        }
-
-        if ($('#file').get(0).files.length === 0) {
-            message.innerText = "Please enter a post title and select an image to upload.";
-            return;
-        }
-
-
-        var file = document.getElementById("file");
-        if (file.files[0].size >  (1048576 * 5)) {
-            message.innerText = "Image should not be bigger than 5MB";
-            return;
-        }
-
-        createPostField.value = "";
-        captionField.value = "";
-        $("#file").val("");
-        var data = $('#post-forms').serialize();
-        $.post('/catFeed', data);
-    }); */
-
     try {
         $('#postTitle').val("");
         $('#caption').val("")
