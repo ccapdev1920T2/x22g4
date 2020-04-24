@@ -3,6 +3,8 @@ const User = require('./models/user.js');
 const Cat = require('./models/cat.js');
 
 database.connect();
+database.deleteMany(Cat, (param) => {})
+database.deleteMany(User, (param) => {})
 
 var user2 = new User({
     username: 'default',
