@@ -29,6 +29,7 @@ const signupController = {
             };
 
             database.insertOne(User, user, function(result) {
+                req.session.user = user.username;
                 res.redirect('/profile/' + username);
             });
         })

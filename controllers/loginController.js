@@ -35,19 +35,6 @@ const loginController = {
               }
             });
           }
-            /*
-            if (user && user.password === password){
-              console.log('User and password is correct...redirecting...');
-
-              req.session.user = user.username;
-              res.redirect('/');
-
-              console.log("Successful login of " + user.username);
-
-            } else {
-              console.log("Credentials wrong...");
-            }
-            */         
         });
     }
 }
