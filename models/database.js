@@ -4,7 +4,6 @@ const User = require('./user.js');
 const Cat = require('./cat.js');
 const Post = require('./post.js');
 const Comment = require('./comment.js');
-const Godparent = require('./godparent.js');
 
 const url = 'mongodb://localhost:27017/catvas';
 
