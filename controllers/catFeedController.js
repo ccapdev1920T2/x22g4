@@ -13,14 +13,60 @@ const catFeedController = {
        Post.find({})
        .lean()
        .exec(function (err, results) {
+           //query for the past 7 days
+           let dateQuery = new Date();
+           dateQuery.setDate(dateQuery.getDate() - 7);
 
-        //convert date to relative format
-        for (var i = 0; i<results.length; i++){
-              results[i].date = helper.formatDate(results[i].date);
-            };
+            //get featured post of the week
+            Post.findOne({date:{"$gte":dateQuery}})
+            .sort('-numberOfMeowts')
+            .lean()
+            .exec((err, featuredResults) => {
+                let featuredPostDetails = {
+                    _id: null,
+                    imageUrl: null,
+                    author: null,
+                    postTitle: null,
+                    caption: null,
+                    display_featured: false
+                };
+
+                if (featuredResults != null) {
+                    if (featuredResults.numberOfMeowts > 0) {
+                        featuredPostDetails = {
+                            _id: featuredResults._id,
+                            imageUrl: featuredResults.imageUrl,
+                            author: featuredResults.author,
+                            postTitle: featuredResults.postTitle,
+                            caption: featuredResults.caption,
+                            display_featured: true
+                        };
+                    };
+                };
+
+                //convert posts to relative format
+                for (var i = 0; i<results.length; i++){
+                    results[i].date = helper.formatDate(results[i].date);
+                };
+
             
-            res.render('cat-feed', {posts: results, catfeed_active: true});
-         });
+                res.render('cat-feed', { posts: results, catfeed_active: true,
+
+                    //featured post
+                    _id: featuredPostDetails._id,
+                    imageUrl: featuredPostDetails.imageUrl,
+                    author: featuredPostDetails.author,
+                    postTitle: featuredPostDetails.postTitle,
+                    caption: featuredPostDetails.caption,
+                    display_featured: featuredPostDetails.display_featured
+                });
+            });
+
+    
+        })
+        
+
+        
     },
 
     postCatFeed: function(req, res) {

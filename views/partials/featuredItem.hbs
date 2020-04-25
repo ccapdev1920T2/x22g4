@@ -1,8 +1,8 @@
 <div class="card mb-3">
-    <img src="/imgs/goldi.jpg" class="card-img-top" alt="...">
+    <a href="/post/{{_id}}"><img src="{{imageUrl}}" class="card-img-top" alt="..."></a>
     <div class="card-body">
-        <h5 class="card-title-custom">{{featured_title}}</h5>
-        <p class="card-text">{{featured_content}}</p>
-        <p class="card-text"><small class="text-muted">Posted by {{featured_author}}</small></p>
+        <a href="/post/{{_id}}"><h5 class="card-title-custom">{{postTitle}}</h5></a>
+        <p class="card-text">{{caption}}</p>
+        <p class="card-text"><small class="text-muted">Posted by {{author}}</small></p>
     </div>
 </div>

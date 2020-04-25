@@ -34,6 +34,32 @@ const helper = {
         })
     },
 
+    getFeaturedPost: function() {
+        Post.findOne(/*{date: {'$lte':new Date(),'$gte':new Date(Date()-7)}}*/)
+        .sort('-numberOfMeowts')
+        .lean()
+        .exec((err, results) => {
+            
+            if (results == null) {
+                return;
+            }
+            if (results.numberOfMeowts == 0) {
+                return;
+            }
+
+            let featuredPost = {
+                _id: results._id,
+                postTitle: results.postTitle,
+                caption: results.caption,
+                imageUrl: results.imageUrl,
+                author: results.author
+            }
+
+    
+        })
+        
+    },
+
     formatDate: function(date) {
         var delta = Math.round((+new Date - date) / 1000);
     

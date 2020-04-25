@@ -39,14 +39,11 @@
 
             </div>
 
-            <div class="col-3">
+            <div class="col-3">  
 
-                <!-- Featured Posts -->
-                {{#each featured_post}}
-                    {{> featuredItem}}
-                {{/each}}
-                <!-- Featured Posts -->
-
+                {{#if display_featured}}
+                    {{> featuredItem _id=_id imageUrl=imageUrl author=author postTitle=postTitle caption=caption}}
+                {{/if}}
             </div>
         </div>
     </div>
