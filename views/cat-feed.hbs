@@ -1,49 +1,45 @@
-    <script>document.catfeed_active = true</script>
-    <script>explore_active = true</script>
-    <div class="feed-container align-items-center" style="max-width: 90em;">
-        <h1 style="font-size: 72pt; color: #d34b3b">Cat Feed</h1>
-        
-        <div class="row">
-            <div class="col-9">
+<script>
+    document.catfeed_active = true
+</script>
+<script>
+    explore_active = true
+</script>
+<div class="feed-container align-items-center" style="max-width: 90em;">
+    <h1 style="font-size: 72pt; color: #d34b3b">Cat Feed</h1>
 
-                <form id="post-forms" method="POST" enctype="multipart/form-data">
-                     <!-- Submission Box -->
-                    <div class="card submission mb-3">
-                                            
-                        <div class="row h-100">
-                            <div class="col-10">
-                                <textarea class="text-submission" id="postTitle" name="postTitle" placeholder="Create Post" style="width: 100%; max-width: 100%;" rows="1" required></textarea>
-                                <textarea class="text-submission" id="caption" name="caption" placeholder="Add Caption" style="width: 100%; max-width: 100%;" rows="2"></textarea>
-                            </div>
-                                
-                            <div class="col-2">
-                                    <input type="file" id="file" name="file" accept="image/*" required/>
-                                    <!--<button type="button" class="btn btn-danger"><i class="fas fa-image" id="upload-image-btn"></i></button> -->
-                                    <button type="submit" class="btn btn-danger" id="submit-submission-btn">Submit</button>
-                            </div>
+    <div class="row">
+        <div class="col-9">
+
+            <form id="post-forms" method="POST" enctype="multipart/form-data">
+                <!-- Submission Box -->
+                <div class="card submission mb-3">
+                    <div class="row h-100">
+                        <div class="col-10">
+                            <textarea class="text-submission" id="postTitle" name="postTitle" placeholder="Create Post" style="width: 100%; max-width: 100%;" rows="1" required></textarea>
+                            <textarea class="text-submission" id="caption" name="caption" placeholder="Add Caption" style="width: 100%; max-width: 100%;" rows="2"></textarea>
                         </div>
-                        <div>
-                            <p id="message" class="message"></p>
+
+                        <div class="col-2">
+                            <input type="file" id="file" name="file" accept="image/*" required/>
+                            <!--<button type="button" class="btn btn-danger"><i class="fas fa-image" id="upload-image-btn"></i></button> -->
+                            <button type="submit" class="btn btn-danger" id="submit-submission-btn">Submit</button>
                         </div>
                     </div>
-                    <!-- Submission Box -->
-                </form>
+                    <div>
+                        <p id="message" class="message"></p>
+                    </div>
+                </div>
+                <!-- Submission Box -->
+            </form>
 
-               
+            <!-- Posts -->
+            {{#each posts}} {{> postItem}} {{/each}}
+            <!-- Posts -->
 
-                <!-- Posts -->
-                {{#each posts}}
-                    {{> postItem}}
-                {{/each}}
-                <!-- Posts -->
+        </div>
 
-            </div>
-
-            <div class="col-3">  
-
-                {{#if display_featured}}
-                    {{> featuredItem _id=_id imageUrl=imageUrl author=author postTitle=postTitle caption=caption}}
-                {{/if}}
-            </div>
+        <div class="col-3">
+            {{#if display_featured}} {{> featuredItem _id=_id imageUrl=imageUrl author=author postTitle=postTitle caption=caption}} {{/if}}
         </div>
     </div>
+</div>

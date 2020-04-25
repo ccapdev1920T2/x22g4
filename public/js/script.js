@@ -225,10 +225,57 @@ $(document).ready(function(){
         $.get('/addComment', {postId: postId, text: text}, function(data) {
             $('#comments-container').append(data);
         })
-
     })
-   
 
+    //=========================================================================================
+    // Edit Post Logic
+    //=========================================================================================
 
-    
+    $('#edit-post-btn').click(function() {
+        $('#edit-post-btn').replaceWith(
+            "<div id='edit-prompt'> " +
+            "<textarea class='text-submission' id='postTitle' name='postTitle' placeholder='Edit Title' style='width: 100%; max-width: 100%;' rows='1' required></textarea>" +
+            "<textarea class='text-submission' id='caption' name='caption' placeholder='Edit Caption' style='width: 100%; max-width: 100%;' rows='2'></textarea>" +
+            "<button type='button' class='btn btn-danger' name='edit-post-submit' id='edit-post-submit'>Save</button>" + 
+            "</div>"
+        )
+
+        load_js();
+    })
+
+    $('#edit-post-submit').click(function() {
+
+        console.log('update database post here.'); //cockandballs
+
+        $('#edit-prompt').replaceWith(
+            "<button type='button' class='btn btn-danger' name='edit-post-btn' id='edit-post-btn'>Edit Post</button>"
+        )
+
+        load_js();
+    })
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

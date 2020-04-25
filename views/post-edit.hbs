@@ -1,8 +1,10 @@
-<script> document.title = "{{postTitle}} | Catvas"  </script>
+<script>
+    document.title = "{{postTitle}} | Catvas"
+</script>
 <div class="container" style="margin-top: 6em; max-width: 85em;">
-        <div class = "row">
-            <div class = "col-5">
-            <div class="card mb-3" >
+    <div class="row">
+        <div class="col-5">
+            <div class="card mb-3">
                 <div class="row">
                     <div class="col-md-12">
                         <img src="{{imageUrl}}" class="card-img" alt="...">
@@ -13,8 +15,23 @@
                         <div class="card-body">
                             <h2 class="card-title-custom" style="margin-bottom: 0%; padding-bottom:0; ">{{postTitle}}</h2>
                             <h5>by {{author}}</h5>
-                            <p class="card-text" style="margin-bottom: 0.2em;">{{caption}}</p>
-                                <button type="button" class="btn btn-danger" name="edit-post-btn" id="edit-post-btn">Edit Post</button> 
+                                <div class="card submission mb-3">                   
+                                    <div class="row h-100">
+                                        <div class="col-10">
+                                            <textarea class="text-submission" id="postTitle" name="postTitle" placeholder="Create Post" style="width: 100%; max-width: 100%;" rows="1" required></textarea>
+                                            <textarea class="text-submission" id="caption" name="caption" placeholder="Add Caption" style="width: 100%; max-width: 100%;" rows="2"></textarea>
+                                        </div>
+                                            
+                                        <div class="col-2">
+                                                <input type="file" id="file" name="file" accept="image/*" required/>
+                                                <!--<button type="button" class="btn btn-danger"><i class="fas fa-image" id="upload-image-btn"></i></button> -->
+                                                <button type="submit" class="btn btn-danger" id="submit-submission-btn">Submit</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p id="message" class="message"></p>
+                                    </div>
+                                </div>
                             <hr>
                             <div class="d-flex" style="align-items: center;">
                                 <button id="like-btn" type="button" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> </button>
@@ -28,14 +45,14 @@
                     </div>
                 </div>
             </div>
-            </div>
-            
-            <div class="col">
+        </div>
+
+        <div class="col">
             <div class="card">
                 <div class="card-body">
 
                     <div class="row h-100">
-                        
+
                         <div class="col-10">
                             <input class="text-submission" type="text" id="comment" name="comment" placeholder="Comment" style="width: 100%;">
                         </div>
@@ -43,25 +60,17 @@
                             <button type="button" class="btn btn-danger" id="comment-submit-btn" name="comment-submit-btn">Submit</button>
                         </div>
                         <div>
-                            
+
                         </div>
-                        
+
                     </div>
                     <hr style="margin-top: 1em; margin-bottom: 1em;">
                     <div id="comments-container">
-                        {{#each comments}}
-                            {{> commentItem}}
-                        {{/each}}
+                        {{#each comments}} {{> commentItem}} {{/each}}
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-        </div>
     </div>
-<!--Id of post for comment insertion-->
-
-<p id="postId" name="postId" style="display: none;">{{_id}}</p>
-    
-
- 
+</div>
