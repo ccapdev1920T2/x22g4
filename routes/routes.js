@@ -68,7 +68,8 @@ app.get('/post/:_id', postController.getPost);
 app.get('/addComment', postController.addComment);
 app.get('/openEdit', postController.openEdit);
 app.get('/saveEdit', postController.saveEdit);
-
+app.get('/likePost', postController.likePost);
+app.get('/unlikePost', postController.unlikePost);
 //Donate-Feed
 app.get('/donate', function(req, res){
     res.render('donate', {

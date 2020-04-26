@@ -7,7 +7,7 @@ database.connect();
 //    $inc: {numberOfMeowts: 5}
 //});
 
-database.updateMany(User, {}, {posts: []}) 
+//database.updateMany(User, {}, {posts: []}) 
 database.findMany(User, {}, {}, (result) => {
     console.log(result)
 })

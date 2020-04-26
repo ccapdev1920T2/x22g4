@@ -20,7 +20,11 @@
                             {{/if}}
                             <hr>
                             <div class="d-flex" style="align-items: center;">
+                            {{#if userLiked}}
+                                <button id='unlike-btn' type='button' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>
+                            {{else}}
                                 <button id="like-btn" type="button" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> </button>
+                            {{/if}}
                                 <span style="padding-left: 10px;">
                                 Meowted by <b>{{numberOfMeowts}}</b>
                                 </span>
@@ -65,6 +69,6 @@
 <!--Id of post for comment insertion-->
 
 <p id="postId" name="postId" style="display: none;">{{_id}}</p>
-    
+<p id="numberOfMeowts" name="numberOfMeowts" style="display: none;">{{numberOfMeowts}}</p>
 
  

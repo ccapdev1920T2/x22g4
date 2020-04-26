@@ -42,6 +42,27 @@ const helper = {
         })
     },
 
+    likePost: function(postId, username) {
+        database.updateOne(Post, {_id: postId}, {$inc: {numberOfMeowts: 1}}, (flag) => {
+            
+        })
+        database.updateOne(User, {username: username}, {$addToSet: {meowtedPosts: postId}}, (userFlag) => {
+            console.log(userFlag)
+        })
+    },
+
+    unlikePost: function(postId, username) {
+        database.updateOne(Post, {_id: postId}, {$inc: {numberOfMeowts: -1}}, (flag) => {
+            
+        })
+        database.updateOne(User, {username: username}, {$pull: {meowtedPosts: postId}}, (userFlag) => {
+            console.log(userFlag)
+        })
+    },
+
+    
+
+
     getFeaturedPost: function() {
         Post.findOne(/*{date: {'$lte':new Date(),'$gte':new Date(Date()-7)}}*/)
         .sort('-numberOfMeowts')

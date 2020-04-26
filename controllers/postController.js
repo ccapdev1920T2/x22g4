@@ -20,23 +20,36 @@ const postController = {
                 return;
             }
 
-            //check whether post is owned by user
-            let userOwnsPost = true;
+            //find if user owns post
+            database.findOne(User, {username: 'default'}, 'posts meowtedPosts', (userResult) => {
+                let userOwnsPost = false;
+                let userLiked = false;
+                if (userResult != null) {
+                    userOwnsPost = userResult.posts.includes(result._id);
+                    userLiked = userResult.meowtedPosts.includes(result._id);
+                    console.log(userLiked)
+                };
+                
+                result.date = helper.formatDate(result.date)
 
-            result.date = helper.formatDate(result.date)
+                var details = {
+                    _id: result._id,
+                    postTitle: result.postTitle,
+                    caption: result.caption,
+                    imageUrl: result.imageUrl,
+                    date: result.date,
+                    numberOfMeowts: result.numberOfMeowts,
+                    author: result.author,
+                    comments: result.comments,
+                    userOwnsPost: userOwnsPost,
+                    userLiked: userLiked
+                }
 
-            var details = {
-                _id: result._id,
-                postTitle: result.postTitle,
-                caption: result.caption,
-                imageUrl: result.imageUrl,
-                date: result.date,
-                numberOfMeowts: result.numberOfMeowts,
-                author: result.author,
-                comments: result.comments,
-                userOwnsPost: userOwnsPost
-            }
-            res.render('post', details)
+                console.log(result.numberOfMeowts)
+                res.render('post', details)
+            })
+
+            
         });
     },
 
@@ -66,8 +79,21 @@ const postController = {
     },
 
     saveEdit: function(req, res) {
-        console.log('test')
         helper.updatePost(req.query.postId, req.query.postTitle, req.query.caption);
+    },
+
+    likePost: function(req, res) {
+        let username = req.query.username;
+        let postId = req.query.postId;
+
+        helper.likePost(postId, username)
+    },
+
+    unlikePost: function(req, res) {
+        let username = req.query.username;
+        let postId = req.query.postId;
+
+        helper.unlikePost(postId, username);
     }
 }
 

@@ -262,17 +262,55 @@ $(document).ready(function(){
     //=========================================================================================
 
     $('.card-body').on('click', '#like-btn', function() {
+        //not sure if sessions is on server or client side but i'll just put checkers on both sides just in case
+        let username = 'default';
+        let postId = $('#postId').text();
 
+        $('#numberOfMeowts').text(parseInt($('#numberOfMeowts').text()) + 1)
+        
+        $.get('/likePost', {username: username, postId: postId}, (data) => {});
+        
         $('#like-btn').replaceWith(
             "<button id='unlike-btn' type='button' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>"
-        )
+        );
+
+        let numberOfMeowts = $('#numberOfMeowts').text();
+
+        $('.card-body span').html('Meowted by <b>' + numberOfMeowts + '</b>');
+
+        setTimeout(
+            function() 
+            {
+              //do something special
+            }, 5000);
+
     })
 
     $('.card-body').on('click', '#unlike-btn', function() {
 
+        //not sure if sessions is on server or client side but i'll just put checkers on both sides just in case
+        let username = 'default';
+        let postId = $('#postId').text();
+
+        $('#numberOfMeowts').text(parseInt($('#numberOfMeowts').text()) - 1)
+
+        $.get('/unlikePost', {username: username, postId: postId}, (data) => {});
+
+
         $('#unlike-btn').replaceWith(
             "<button id='like-btn' type='button' class='btn btn-outline-danger'> <i class='fas fa-heart'></i> </button>"
-        )
+        );
+
+        let numberOfMeowts = $('#numberOfMeowts').text();
+
+        $('.card-body span').html('Meowted by <b>' + numberOfMeowts + '</b>');
+
+        setTimeout(
+            function() 
+            {
+              //do something special
+            }, 5000);
+
     })
 });
 
