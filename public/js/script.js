@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     //=========================================================================================
     // Meowt Logic
@@ -231,27 +232,38 @@ $(document).ready(function(){
     // Edit Post Logic
     //=========================================================================================
 
-    $('#edit-post-btn').click(function() {
-        $('#edit-post-btn').replaceWith(
-            "<div id='edit-prompt'> " +
-            "<textarea class='text-submission' id='postTitle' name='postTitle' placeholder='Edit Title' style='width: 100%; max-width: 100%;' rows='1' required></textarea>" +
-            "<textarea class='text-submission' id='caption' name='caption' placeholder='Edit Caption' style='width: 100%; max-width: 100%;' rows='2'></textarea>" +
-            "<button type='button' class='btn btn-danger' name='edit-post-submit' id='edit-post-submit'>Save</button>" + 
-            "</div>"
-        )
+    $('.card-body').on('click', '#edit-post-btn', function() {
+        let postTitle = $('#postTitle').text();
+        let caption = $('#caption').text();
+        $.get('/openEdit', {postTitle: postTitle, caption: caption}, (data) => {
+            $(this).replaceWith(data)
+        })
 
-        load_js();
+        
     })
 
     $('#edit-post-submit').click(function() {
+        let postId = $('#postId').text();
+        let postTitle = $('#postTitleEditForm').val();
+        let caption = $('#captionEditForm').val();
+
+        if (postTitle.trim() == '') {
+            return;
+        }
 
         console.log('update database post here.'); //cockandballs
 
+        $.get('/saveEdit', {postId: postId, postTitle: postTitle, caption: caption}, (data) => {
+            
+        })
+
         $('#edit-prompt').replaceWith(
             "<button type='button' class='btn btn-danger' name='edit-post-btn' id='edit-post-btn'>Edit Post</button>"
-        )
+        );
 
-        load_js();
+        $('#postTitle').text(postTitle);
+        $('#caption').text(caption);
+        $('#date small').text('Last updated just then')
     })
 });
 

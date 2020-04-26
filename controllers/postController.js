@@ -20,8 +20,23 @@ const postController = {
                 return;
             }
 
+            //check whether post is owned by user
+            let userOwnsPost = true;
+
             result.date = helper.formatDate(result.date)
-            res.render('post', result)
+
+            var details = {
+                _id: result._id,
+                postTitle: result.postTitle,
+                caption: result.caption,
+                imageUrl: result.imageUrl,
+                date: result.date,
+                numberOfMeowts: result.numberOfMeowts,
+                author: result.author,
+                comments: result.comments,
+                userOwnsPost: userOwnsPost
+            }
+            res.render('post', details)
         });
     },
 
@@ -39,8 +54,20 @@ const postController = {
         helper.insertComment(postId, newComment);
 
         res.render('partials/commentItem.hbs', newComment);
+    },
 
-        
+    openEdit: function(req, res) {
+        let details = {
+            postTitle: req.query.postTitle,
+            caption: req.query.caption
+        };
+
+        res.render('partials/editPost.hbs', details)
+    },
+
+    saveEdit: function(req, res) {
+        console.log('test')
+        helper.updatePost(req.query.postId, req.query.postTitle, req.query.caption);
     }
 }
 

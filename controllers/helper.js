@@ -34,6 +34,14 @@ const helper = {
         })
     },
 
+    updatePost: function(postId, newTitle, newCaption) {
+        let date = Date.now();
+        
+        database.updateOne(Post, {_id: postId}, {postTitle: newTitle, caption: newCaption, date: date}, (flag) => {
+        
+        })
+    },
+
     getFeaturedPost: function() {
         Post.findOne(/*{date: {'$lte':new Date(),'$gte':new Date(Date()-7)}}*/)
         .sort('-numberOfMeowts')
