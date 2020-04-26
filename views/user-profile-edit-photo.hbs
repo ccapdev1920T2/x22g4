@@ -2,9 +2,9 @@
 <div class="container-cat">
     <div class="row">
         <div class="col-md-4">
-            <img src="{{avatar}}" width="400px">
+            <input type="file" id="file" name="file" accept="image/*" required/>
             <br>
-             <button type="button" class="btn btn-danger" name="edit-picture" id="edit-picture">Edit Photo</button>
+            <button type="submit" class="btn btn-danger" id="submit-submission-btn">Submit</button>
         </div>
         <div class="col-md-8 background-red">
             <p class="center" id="cat-name-profile">HEY, I am {{username}}!</p>

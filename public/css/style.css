@@ -457,6 +457,11 @@ hr{
     display: inline-block;
 }
 
+/* User Profile */
+#edit-picture{
+    margin-top: 8px;
+}
+
 /* Donate to Catvas */
 #donate-header{
     color: #d34b3b; 
