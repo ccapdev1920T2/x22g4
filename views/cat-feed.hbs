@@ -6,7 +6,6 @@
 </script>
 <div class="feed-container align-items-center" style="max-width: 90em;">
     <h1 style="font-size: 72pt; color: #d34b3b">Cat Feed</h1>
-
     <div class="row">
         <div class="col-9">
 
@@ -22,7 +21,7 @@
                         <div class="col-2">
                             <input type="file" id="file" name="file" accept="image/*" required/>
                             <!--<button type="button" class="btn btn-danger"><i class="fas fa-image" id="upload-image-btn"></i></button> -->
-                            <button type="submit" class="btn btn-danger" id="submit-submission-btn">Submit</button>
+                            <button type="submit" class="btn btn-danger mt-3" id="submit-submission-btn">Submit</button>
                         </div>
                     </div>
                     <div>
@@ -32,6 +31,17 @@
                 <!-- Submission Box -->
             </form>
 
+            <div class="dropdown mb-3">
+              <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort by
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Date</a>
+                <a class="dropdown-item" href="#">Highest Rated</a>
+              </div>
+            </div>
+
+            <hr><br>
             <!-- Posts -->
             {{#each posts}} {{> postItem}} {{/each}}
             <!-- Posts -->
