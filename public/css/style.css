@@ -475,7 +475,7 @@ hr{
 }
 
 .donate-details{
-    font-size: 18px;
+    font-size: 16px;
 }
 
 #pusa-email{
@@ -483,7 +483,7 @@ hr{
 }
 
 .pusa-wishlist{
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .pusa-header{
@@ -499,8 +499,8 @@ ul li{
 /* FAQ page */
 .faq-answers{
     color: #54595f; 
-    font-size: 24pt; 
-    line-height: 48px; 
+    font-size: 16pt; 
+    line-height: 32px; 
 }
 
 #donate-link{
