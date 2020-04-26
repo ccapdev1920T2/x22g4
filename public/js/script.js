@@ -1,12 +1,5 @@
 
 $(document).ready(function(){
-    //=========================================================================================
-    // Meowt Logic
-    //=========================================================================================
-
-    $('#like-btn').click(function() {
-        console.log('liked');
-    });
 
     //=========================================================================================
     // Login Logic
@@ -238,8 +231,6 @@ $(document).ready(function(){
         $.get('/openEdit', {postTitle: postTitle, caption: caption}, (data) => {
             $(this).replaceWith(data)
         })
-
-        
     })
 
     $('#edit-post-submit').click(function() {
@@ -251,7 +242,7 @@ $(document).ready(function(){
             return;
         }
 
-        console.log('update database post here.'); //cockandballs
+        console.log('update database post here.'); 
 
         $.get('/saveEdit', {postId: postId, postTitle: postTitle, caption: caption}, (data) => {
             
@@ -264,6 +255,24 @@ $(document).ready(function(){
         $('#postTitle').text(postTitle);
         $('#caption').text(caption);
         $('#date small').text('Last updated just then')
+    })
+
+    //=========================================================================================
+    // Meowt Logic
+    //=========================================================================================
+
+    $('.card-body').on('click', '#like-btn', function() {
+
+        $('#like-btn').replaceWith(
+            "<button id='unlike-btn' type='button' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>"
+        )
+    })
+
+    $('.card-body').on('click', '#unlike-btn', function() {
+
+        $('#unlike-btn').replaceWith(
+            "<button id='like-btn' type='button' class='btn btn-outline-danger'> <i class='fas fa-heart'></i> </button>"
+        )
     })
 });
 
