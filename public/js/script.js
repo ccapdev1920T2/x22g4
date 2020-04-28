@@ -278,13 +278,7 @@ $(document).ready(function(){
 
         $('.card-body span').html('Meowted by <b>' + numberOfMeowts + '</b>');
 
-        setTimeout(
-            function() 
-            {
-              //do something special
-            }, 5000);
-
-    })
+    }) 
 
     $('.card-body').on('click', '#unlike-btn', function() {
 
@@ -305,16 +299,33 @@ $(document).ready(function(){
 
         $('.card-body span').html('Meowted by <b>' + numberOfMeowts + '</b>');
 
-        setTimeout(
-            function() 
-            {
-              //do something special
-            }, 5000);
-
     })
+
+    $('#delete-post-btn').click( function() {
+        //to simulate session login
+        let username = 'default';
+        let postId = $('#postId').text();
+
+        $.ajax({
+            url: '/deletePost',
+            type: 'PUT',
+            data: {postId: postId, username: username},
+            success: function(data) {
+                
+            }
+
+          });
+          window.location.replace("/catFeed");
+    }) 
 });
 
 
+//============================================================================================
+// Meowt Logic
+//=========================================================================================
+
+
+    
 
 
 

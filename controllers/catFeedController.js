@@ -85,7 +85,7 @@ const catFeedController = {
     
         var newName = post._id;
         var fileName = renameImage(req, newName);
-        post.imageUrl = '/postImgs/' + fileName;
+        post.imageUrl = fileName;
 
         helper.newPost(post);
 

@@ -2,6 +2,7 @@ const database = require('../models/database.js');
 const Post = require('../models/post.js');
 const User = require('../models/user.js');
 const Comment = require('../models/comment.js');
+const fs = require('fs');
 
 
 const helper = {
@@ -58,6 +59,23 @@ const helper = {
         database.updateOne(User, {username: username}, {$pull: {meowtedPosts: postId}}, (userFlag) => {
             console.log(userFlag)
         })
+    },
+
+    deletePost: function(postId, username) {
+        database.findOne(Post, {_id: postId}, 'imageUrl', (postResult) => {
+            fs.unlink('./public/postImgs/' + postResult.imageUrl, (callback) => {});
+
+            database.deleteOne(Post, {_id: postId});
+        })
+        
+        
+        database.deleteMany(Comment, {parentPostId: postId});
+
+        database.updateOne(User, {username: username}, {$pull: {posts: postId, meowtedPosts: postId}}, (flag) =>{});
+
+        database.updateMany(User, {}, {$pull: {meowtedPosts: postId}}, (flag) => {});
+
+        
     },
 
     

@@ -70,6 +70,8 @@ app.get('/openEdit', postController.openEdit);
 app.get('/saveEdit', postController.saveEdit);
 app.get('/likePost', postController.likePost);
 app.get('/unlikePost', postController.unlikePost);
+app.put('/deletePost', postController.deletePost);
+
 //Donate-Feed
 app.get('/donate', function(req, res){
     res.render('donate', {

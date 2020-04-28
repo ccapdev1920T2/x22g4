@@ -7,7 +7,6 @@ const User = require('../models/user.js');
 const postController = {
     
     getPost: function(req, res) {
-        console.log('getting post...');
         var query = {_id: req.params._id};
 
         Post.findOne(query)
@@ -27,7 +26,6 @@ const postController = {
                 if (userResult != null) {
                     userOwnsPost = userResult.posts.includes(result._id);
                     userLiked = userResult.meowtedPosts.includes(result._id);
-                    console.log(userLiked)
                 };
                 
                 result.date = helper.formatDate(result.date)
@@ -45,7 +43,6 @@ const postController = {
                     userLiked: userLiked
                 }
 
-                console.log(result.numberOfMeowts)
                 res.render('post', details)
             })
 
@@ -60,6 +57,7 @@ const postController = {
         let postId = req.query.postId;
 
         let newComment = new Comment({
+            parentPostId: postId,
             author: author,
             text: text
         });
@@ -94,6 +92,14 @@ const postController = {
         let postId = req.query.postId;
 
         helper.unlikePost(postId, username);
+    },
+
+    deletePost: function(req, res) {
+        let username = req.body.username;
+        let postId = req.body.postId; 
+
+        helper.deletePost(postId, username);
+      
     }
 }
 
