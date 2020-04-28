@@ -8,6 +8,23 @@ const fs = require('fs');
 const helper = {
 
     updateAvatar: function(username, avatar) {
+        let extension = avatar.substring(avatar.lastIndexOf("."));
+        let filename = avatar.split('.').slice(0, -1).join('.');
+        switch (extension) {
+            case '.jpg':
+                fs.unlink('./public/avatars/' + filename + '.png', (fds) => {});
+                fs.unlink('./public/avatars/' + filename + '.jpeg', (fds) => {});
+                break;
+            case '.png': 
+                fs.unlink('./public/avatars/' + filename + '.jpg', (fds) => {});
+                fs.unlink('./public/avatars/' + filename + '.jpeg', (fds) => {});
+                break;
+            case '.jpeg':
+                fs.unlink('./public/avatars/' + filename + '.png', (fds) => {});
+                fs.unlink('./public/avatars/' + filename + '.jpg', (fds) => {});
+                break;
+        }
+        
         database.updateOne(User, {username: username}, {avatar: avatar});
     },
 

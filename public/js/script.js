@@ -301,6 +301,10 @@ $(document).ready(function(){
 
     })
 
+    //=========================================================================================
+    // Delte Post Logic
+    //=========================================================================================
+
     $('#delete-post-btn').click( function() {
         //to simulate session login
         let username = 'default';
@@ -315,12 +319,10 @@ $(document).ready(function(){
             }
 
           });
-          window.location.replace("/catFeed");
-    }) 
 
-    //============================================================================================
-    // Edit profile
-    //============================================================================================
+          //should link to new "POST DELETED"
+          window.location.replace("/404");
+    }) 
 
     $('.col-md-8').on('click', "#edit-description", () => {
         let description = $('#your-desc').text();
@@ -329,6 +331,10 @@ $(document).ready(function(){
             $('#edit-description').replaceWith(data);
         })
     })
+
+    //=========================================================================================
+    // Edit Profile Logic
+    //=========================================================================================
 
     $('#edit-description-submit').click(() => {
         let description = $('#descriptionEditForm').val();
@@ -351,12 +357,11 @@ $(document).ready(function(){
     })
 
     $('#change-avatar').click(() => {
-        alert('test')
         $('#change-avatar').replaceWith(
             "<div id='edit-avatar' class='col-md-4'>" +
-                "<form id='edit-avatar-form' name='edit-avatar-form' enctype='multipart/form-data'>" +
-                    "<input type='file' id='edit-avatar-file' name='edit-avatar-file' accept='image/*'/>" +
-                    "<button type='button' class='btn btn-danger' id='submit-avatar-btn'>Submit</button>" +
+                "<form id='edit-avatar-form' name='edit-avatar-form' method='POST' enctype='multipart/form-data'>" +
+                    "<input type='file' id='edit-avatar-file' name='edit-avatar-file' accept='image/*' required/>" +
+                    "<button type='submit' class='btn btn-danger' id='submit-avatar-btn'>Submit</button>" +
                     "<p id='avatarError' name='avatarError'></p>" +
                     "<br>" + "<br>" +
                 "</form>" +    
@@ -364,43 +369,19 @@ $(document).ready(function(){
         );
     });
 
-    $('.col-md-4').on('click', '#submit-avatar-btn', function(e) {
+    $('#divAvatar').on('submit', '#edit-avatar-form', function(e) {
         var file = document.getElementById("edit-avatar-file");
-
-        if (file.files.length == 0) {
-            $('#edit-avatar').replaceWith(
-                "<br>" +
-                "<br>" +
-                <button type='button' class='btn btn-danger' name='change-avatar' id='change-avatar'>Change Avatar</button>
-            );
-            return;
-        }
         if (file.files[0].size >  (1048576 * 2)) {
-            $('#avatarError').text("Image should not be bigger than 2MB");
+            $('#avatarError').text("Image should not be bigger than 2MB")
             return false;
-        }
-
-
-        var fd = new FormData($("#edit-avatar-form").get(0));    
-        let username = $('#username').text();
-        $.ajax({
-            url: "/profile/" + username,
-            data: fd,
-            dataType: 'json',
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            success: function (dataR) {
-            }
-        });
-             
-        //$('#submit-avatar-btn').prop('disabled', true);
-    })
+        }        
+    
+        $('#submit-avatar-btn').prop('disabled', true);
+        })
+    
 
 
 });
-
-
 
 
 
