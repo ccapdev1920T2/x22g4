@@ -66,6 +66,9 @@ app.post('/signup', signupController.postSignup);
 app.get('/getCheckUsername', signupController.getCheckUsername);
 
 app.get('/profile/:username', userProfileController.getUserProfile);
+app.get('/editProfileDescription', userProfileController.editProfileDescription);
+app.put('/submitEditProfileDescription', userProfileController.submitEditProfileDescription);
+
 
 app.get('/catFeed', catFeedController.getCatFeed);
 app.post('/catFeed', upload, catFeedController.postCatFeed);

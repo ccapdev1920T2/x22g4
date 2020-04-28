@@ -317,12 +317,42 @@ $(document).ready(function(){
           });
           window.location.replace("/catFeed");
     }) 
+
+    $('.col-md-8').on('click', "#edit-description", () => {
+        let description = $('#your-desc').text();
+        
+        $.get('/editProfileDescription', {description: description}, (data) => {
+            $('#edit-description').replaceWith(data);
+        })
+    })
+
+    $('#edit-description-submit').click(() => {
+        let description = $('#descriptionEditForm').val();
+
+        //login simulation
+        let username = 'default';
+
+        $.ajax({
+            url: '/submitEditProfileDescription',
+            type: 'PUT',
+            data: {description: description, username: username},
+            success: function(data) {}
+          });
+
+        $('#edit-description-forms').replaceWith(
+            "<button type='button' class='btn btn-danger' name='edit-description' id='edit-description'>Edit Description</button>"
+        )
+
+        $('#your-desc').text(description);
+          
+    })
 });
 
 
 //============================================================================================
-// Meowt Logic
-//=========================================================================================
+// Edit profile
+//============================================================================================
+
 
 
     

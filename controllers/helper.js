@@ -7,6 +7,10 @@ const fs = require('fs');
 
 const helper = {
 
+    updateDescription: function (username, description) {
+        database.updateOne(User, {username: username}, {description: description});
+      },
+
     insertComment: function(postId, comment) {
         database.insertOne(Comment, comment, function(insertedComment){
             console.log("ID:" + postId);
@@ -19,9 +23,6 @@ const helper = {
                  latestCommentAuthor: insertedComment.author
                 });
 
-            database.findMany(Post, {}, {}, (result) => {
-                console.log(result);
-            });
         });
     },
 
@@ -75,7 +76,6 @@ const helper = {
 
         database.updateMany(User, {}, {$pull: {meowtedPosts: postId}}, (flag) => {});
 
-        
     },
 
     
