@@ -49,6 +49,21 @@ const userProfileController = {
         let username = 'default';
 
         helper.updateDescription(username, description);
+    },
+
+    submitAvatar: function(req, res) {
+        
+        if (!(req.file)) {
+            console.log('did not get image.');
+            return;
+        }
+
+        const username = req.params.username;
+
+        var newName = username;
+        var avatar = helper.renameImage(req, newName);
+        
+        helper.updateAvatar(username, avatar);
     }
 
 }

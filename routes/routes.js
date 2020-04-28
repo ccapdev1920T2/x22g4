@@ -16,6 +16,15 @@ var storage = multer.diskStorage({
 }),
 upload = multer({ storage: storage }).single('file');
 
+var avatarStorage = multer.diskStorage({
+    destination:  './public/avatars',
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+}),
+avatarUpload = multer({ storage: avatarStorage }).single('edit-avatar-file');
+
+
 const app = express();
 
 app.get("/cat/:name", catProfileController.getCatProfile);
@@ -66,6 +75,7 @@ app.post('/signup', signupController.postSignup);
 app.get('/getCheckUsername', signupController.getCheckUsername);
 
 app.get('/profile/:username', userProfileController.getUserProfile);
+app.post('/profile/:username', avatarUpload, userProfileController.submitAvatar);
 app.get('/editProfileDescription', userProfileController.editProfileDescription);
 app.put('/submitEditProfileDescription', userProfileController.submitEditProfileDescription);
 

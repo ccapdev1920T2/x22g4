@@ -1,9 +1,11 @@
 <script> document.title = "{{username}} | Catvas"  </script>
 <div class="container-cat">
     <div class="row">
-        <div class="col-md-4">
-            <input type="file" id="file" name="file" accept="image/*" required/>
-            <br>
+        <div id=-edit-avatar- class='col-md-4'>
+            <form id='edit-avatar-form' name='edit-avatar-form' method='POST' enctype='multipart/form-data'>
+                <input type='file' id='edit-avatar-file' name='edit-avatar-file' accept='image/*'/>
+                <button type='submit' class='btn btn-danger' id='submit-avatar-btn'>Submit</button>
+            </form>    
         </div>
         <div class="col-md-8 background-red">
             <p class="center" id="cat-name-profile">HEY, I am {{username}}!</p>

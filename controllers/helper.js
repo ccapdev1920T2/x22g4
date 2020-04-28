@@ -7,6 +7,19 @@ const fs = require('fs');
 
 const helper = {
 
+    updateAvatar: function(username, avatar) {
+        database.updateOne(User, {username: username}, {avatar: avatar});
+    },
+
+    renameImage: function(req, newName) {
+        var originalName = req.file.originalname;
+        var extension = originalName.substring(originalName.lastIndexOf("."));
+        const newUrl = req.file.destination + '/' + newName + extension; 
+        
+        fs.renameSync(req.file.path, newUrl);
+        return newName + extension;
+    },
+
     updateDescription: function (username, description) {
         database.updateOne(User, {username: username}, {description: description});
       },
