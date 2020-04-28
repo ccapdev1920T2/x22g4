@@ -458,7 +458,11 @@ hr{
 }
 
 /* User Profile */
-#edit-picture{
+#edit-profile{
+    margin-top: 8px;
+}
+
+#submit-submission-btn{
     margin-top: 8px;
 }
 

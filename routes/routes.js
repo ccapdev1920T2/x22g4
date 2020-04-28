@@ -53,6 +53,12 @@ app.get('/faq', function(req, res){
     })  
 });
 
+app.get('/editdesc', function(req, res){
+    res.render('edit-desc', {
+        title: 'Edit | Catvas',
+    })  
+});
+
 
 app.get('/signup', signupController.getSignup);
 app.post('/signup', signupController.postSignup);
