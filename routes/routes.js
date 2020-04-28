@@ -53,8 +53,8 @@ app.get('/faq', function(req, res){
     })  
 });
 
-app.get('/edit', function(req, res){
-    res.render('user-profile-edit', {
+app.get('/editdesc', function(req, res){
+    res.render('edit-desc', {
         title: 'Edit | Catvas',
     })  
 });
