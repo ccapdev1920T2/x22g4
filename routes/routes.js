@@ -80,7 +80,8 @@ app.get('/editProfileDescription', userProfileController.editProfileDescription)
 app.put('/submitEditProfileDescription', userProfileController.submitEditProfileDescription);
 
 
-app.get('/catFeed', catFeedController.getCatFeed);
+app.get('/catFeed/top', catFeedController.getCatFeedTop);
+app.get('/catFeed', catFeedController.getCatFeedRecent);
 app.post('/catFeed', upload, catFeedController.postCatFeed);
 
 app.get('/post/:_id', postController.getPost);

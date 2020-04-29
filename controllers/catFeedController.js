@@ -7,67 +7,16 @@ const multer = require('multer');
 
 const catFeedController = {
 
-    getCatFeed: function(req, res) {
-        var details;
+    getCatFeedTop: function(req, res) {
+        let sort = {numberOfMeowts: -1};
 
-       Post.find({})
-       .sort({date: -1})
-       .lean()
-       .exec(function (err, results) {
-           //query for the past 7 days
-           let dateQuery = new Date();
-           dateQuery.setDate(dateQuery.getDate() - 7);
+        getCatFeed(req, res, sort);
+    },
 
-            //get featured post of the week
-            Post.findOne({date:{"$gte":dateQuery}})
-            .sort('-numberOfMeowts')
-            .lean()
-            .exec((err, featuredResults) => {
-                let featuredPostDetails = {
-                    _id: null,
-                    imageUrl: null,
-                    author: null,
-                    postTitle: null,
-                    caption: null,
-                    display_featured: false
-                };
+    getCatFeedRecent: function(req, res) {
+        let sort = {date: -1};
 
-                if (featuredResults != null) {
-                    if (featuredResults.numberOfMeowts > 0) {
-                        featuredPostDetails = {
-                            _id: featuredResults._id,
-                            imageUrl: featuredResults.imageUrl,
-                            author: featuredResults.author,
-                            postTitle: featuredResults.postTitle,
-                            caption: featuredResults.caption,
-                            display_featured: true
-                        };
-                    };
-                };
-
-                //convert posts to relative format
-                for (var i = 0; i<results.length; i++){
-                    results[i].date = helper.formatDate(results[i].date);
-                };
-
-            
-                res.render('cat-feed', { posts: results, catfeed_active: true,
-
-                    //featured post
-                    _id: featuredPostDetails._id,
-                    imageUrl: featuredPostDetails.imageUrl,
-                    author: featuredPostDetails.author,
-                    postTitle: featuredPostDetails.postTitle,
-                    caption: featuredPostDetails.caption,
-                    display_featured: featuredPostDetails.display_featured
-                });
-            });
-
-    
-        })
-        
-
-        
+        getCatFeed(req, res, sort)
     },
 
     postCatFeed: function(req, res) {
@@ -93,7 +42,68 @@ const catFeedController = {
 }
 
 
+function getCatFeed(req, res, sort) {
+    var details;
 
+   Post.find({})
+   .sort(sort)
+   .lean()
+   .exec(function (err, results) {
+       //query for the past 7 days
+       let dateQuery = new Date();
+       dateQuery.setDate(dateQuery.getDate() - 7);
+
+        //get featured post of the week
+        Post.findOne({date:{"$gte":dateQuery}})
+        .sort('-numberOfMeowts')
+        .lean()
+        .exec((err, featuredResults) => {
+            let featuredPostDetails = {
+                _id: null,
+                imageUrl: null,
+                author: null,
+                postTitle: null,
+                caption: null,
+                display_featured: false
+            };
+
+            if (featuredResults != null) {
+                if (featuredResults.numberOfMeowts > 0) {
+                    featuredPostDetails = {
+                        _id: featuredResults._id,
+                        imageUrl: featuredResults.imageUrl,
+                        author: featuredResults.author,
+                        postTitle: featuredResults.postTitle,
+                        caption: featuredResults.caption,
+                        display_featured: true
+                    };
+                };
+            };
+
+            //convert posts to relative format
+            for (var i = 0; i<results.length; i++){
+                results[i].date = helper.formatDate(results[i].date);
+            };
+
+        
+            res.render('cat-feed', { posts: results, catfeed_active: true,
+
+                //featured post
+                _id: featuredPostDetails._id,
+                imageUrl: featuredPostDetails.imageUrl,
+                author: featuredPostDetails.author,
+                postTitle: featuredPostDetails.postTitle,
+                caption: featuredPostDetails.caption,
+                display_featured: featuredPostDetails.display_featured
+            });
+        });
+
+
+    })
+    
+
+    
+}
 
   
 module.exports = catFeedController;
