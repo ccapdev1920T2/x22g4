@@ -368,15 +368,18 @@ $(document).ready(function(){
         $.ajax({
             url: '/submitEditProfileDescription',
             type: 'PUT',
-            data: {description: description, username: username},
-            success: function(data) {}
-          });
+            data: {description: description, username: username}
+          }).done((a) => {
+            $('#edit-description-forms').replaceWith(
+                "<button type='button' class='btn btn-danger' name='edit-description' id='edit-description'>Edit Description</button>"
+            );
 
-        $('#edit-description-forms').replaceWith(
-            "<button type='button' class='btn btn-danger' name='edit-description' id='edit-description'>Edit Description</button>"
-        )
+            $('#your-desc').text(description);
+          })
 
-        $('#your-desc').text(description);
+       
+
+        
     })
 
     $('#change-avatar').click(() => {

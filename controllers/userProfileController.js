@@ -48,7 +48,7 @@ const userProfileController = {
         //login simulation
         let username = 'default';
 
-        helper.updateDescription(username, description);
+        helper.updateDescription(username, description, res);
     },
 
     submitAvatar: function(req, res) {

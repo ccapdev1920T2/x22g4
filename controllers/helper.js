@@ -40,8 +40,11 @@ const helper = {
         return newName + extension;
     },
 
-    updateDescription: function (username, description) {
-        database.updateOne(User, {username: username}, {description: description});
+    updateDescription: function (username, description, res) {
+        User.updateOne({username: username}, {description: description})
+        .then((a) => {
+            res.send(true);
+        })
       },
 
     insertComment: function(postId, comment, res) {
