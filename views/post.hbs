@@ -10,7 +10,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card-body">
+                        <div id="postPageCard" class="card-body">
                             <h2 id="postTitle" name="postTitle" class="card-title-custom" style="margin-bottom: 0%; padding-bottom:0; ">{{postTitle}}</h2>
                             <h5>by {{author}}</h5>
                             <p id="caption" name="caption" class="card-text" style="margin-bottom: 0.2em;">{{caption}}</p>
@@ -25,7 +25,7 @@
                             {{else}}
                                 <button id="like-btn" type="button" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> </button>
                             {{/if}}
-                                <span style="padding-left: 10px;">
+                                <span id="meowtedInfo" style="padding-left: 10px;">
                                 Meowted by <b>{{numberOfMeowts}}</b>
                                 </span>
                             </div>

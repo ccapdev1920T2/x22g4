@@ -81,17 +81,29 @@ const postController = {
     },
 
     likePost: function(req, res) {
-        let username = req.query.username;
-        let postId = req.query.postId;
+        let username = req.body.username;
+        let postId = req.body.postId;
 
-        helper.likePost(postId, username)
+        Post.updateOne({_id: postId}, {$inc: {numberOfMeowts: 1}})
+        .then((a) => {
+            User.updateOne({username: username}, {$addToSet: {meowtedPosts: postId}})
+            .then((b) => {
+                res.send(true);
+            })
+        })  
     },
 
     unlikePost: function(req, res) {
-        let username = req.query.username;
-        let postId = req.query.postId;
+        let username = req.body.username;
+        let postId = req.body.postId;
 
-        helper.unlikePost(postId, username);
+        Post.updateOne({_id: postId}, {$inc: {numberOfMeowts: -1}})
+        .then((a) => {
+        User.updateOne({username: username}, {$pull: {meowtedPosts: postId}})
+        .then((b) => {
+            res.send(true);
+        })
+    })
     },
 
     deletePost: function(req, res) {

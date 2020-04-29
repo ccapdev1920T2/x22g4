@@ -267,38 +267,54 @@ $(document).ready(function(){
         let postId = $('#postId').text();
 
         $('#numberOfMeowts').text(parseInt($('#numberOfMeowts').text()) + 1)
-        
-        $.get('/likePost', {username: username, postId: postId}, (data) => {});
-        
+
         $('#like-btn').replaceWith(
             "<button id='unlike-btn' type='button' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>"
         );
+
+        $('#unlike-btn').prop('disabled', true);
 
         let numberOfMeowts = $('#numberOfMeowts').text();
 
         $('.card-body span').html('Meowted by <b>' + numberOfMeowts + '</b>');
 
+        $.ajax({
+            url: "/likePost",
+            type: "PUT",
+            data: {username: username, postId: postId}
+          }).done((e) => {
+            $('#unlike-btn').prop('disabled', false);
+          }).fail((e) => {
+              
+          })
+        
     }) 
 
     $('.card-body').on('click', '#unlike-btn', function() {
-
         //not sure if sessions is on server or client side but i'll just put checkers on both sides just in case
         let username = 'default';
         let postId = $('#postId').text();
 
         $('#numberOfMeowts').text(parseInt($('#numberOfMeowts').text()) - 1)
 
-        $.get('/unlikePost', {username: username, postId: postId}, (data) => {});
-
-
         $('#unlike-btn').replaceWith(
             "<button id='like-btn' type='button' class='btn btn-outline-danger'> <i class='fas fa-heart'></i> </button>"
         );
+        $('#like-btn').prop('disabled', true);
 
         let numberOfMeowts = $('#numberOfMeowts').text();
 
         $('.card-body span').html('Meowted by <b>' + numberOfMeowts + '</b>');
 
+        $.ajax({
+            url: "/unlikePost",
+            type: "PUT",
+            data: {username: username, postId: postId}
+          }).done((e) => {
+            $('#like-btn').prop('disabled', false);
+          }).fail((e) => {
+              
+          }) 
     })
 
     //=========================================================================================
