@@ -16,6 +16,15 @@ var storage = multer.diskStorage({
 }),
 upload = multer({ storage: storage }).single('file');
 
+var avatarStorage = multer.diskStorage({
+    destination:  './public/avatars',
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+}),
+avatarUpload = multer({ storage: avatarStorage }).single('edit-avatar-file');
+
+
 const app = express();
 
 app.get("/cat/:name", catProfileController.getCatProfile);
@@ -53,6 +62,12 @@ app.get('/faq', function(req, res){
     })  
 });
 
+app.get('/editdesc', function(req, res){
+    res.render('edit-desc', {
+        title: 'Edit | Catvas',
+    })  
+});
+
 
 app.get('/signup', signupController.getSignup);
 app.post('/signup', signupController.postSignup);
@@ -60,12 +75,21 @@ app.post('/signup', signupController.postSignup);
 app.get('/getCheckUsername', signupController.getCheckUsername);
 
 app.get('/profile/:username', userProfileController.getUserProfile);
+app.put('/profile/:username', avatarUpload, userProfileController.submitAvatar);
+app.get('/editProfileDescription', userProfileController.editProfileDescription);
+app.put('/submitEditProfileDescription', userProfileController.submitEditProfileDescription);
+
 
 app.get('/catFeed', catFeedController.getCatFeed);
 app.post('/catFeed', upload, catFeedController.postCatFeed);
 
 app.get('/post/:_id', postController.getPost);
-app.get('/addComment', postController.addComment);
+app.put('/addComment', postController.addComment);
+app.get('/openEdit', postController.openEdit);
+app.put('/saveEdit', postController.saveEdit);
+app.put('/likePost', postController.likePost);
+app.put('/unlikePost', postController.unlikePost);
+app.put('/deletePost', postController.deletePost);
 
 //Donate-Feed
 app.get('/donate', function(req, res){

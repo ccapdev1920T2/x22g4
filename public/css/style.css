@@ -376,7 +376,7 @@ hr{
 /* More Catfeed CSS */
 
 #caption:focus {
-    height: 200px;
+    height: 125px;
 }
 
 .message {
@@ -456,6 +456,15 @@ hr{
 
 .center-wrapper button{
     display: inline-block;
+}
+
+/* User Profile */
+#edit-profile{
+    margin-top: 8px;
+}
+
+#submit-submission-btn{
+    margin-top: 8px;
 }
 
 /* Donate to Catvas */

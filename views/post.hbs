@@ -5,26 +5,32 @@
             <div class="card mb-3" >
                 <div class="row">
                     <div class="col-md-12">
-                        <img src="{{imageUrl}}" class="card-img" alt="...">
+                        <img src="/postImgs/{{imageUrl}}" class="card-img" alt="...">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card-body">
-                            <h2 class="card-title-custom" style="margin-bottom: 0%; padding-bottom:0; ">{{postTitle}}</h2>
-                            <a href="#" id="edit-title-btn">Edit Title</a>
+                        <div id="postPageCard" class="card-body">
+                            <h2 id="postTitle" name="postTitle" class="card-title-custom" style="margin-bottom: 0%; padding-bottom:0; ">{{postTitle}}</h2>
                             <h5>by {{author}}</h5>
-                            <p class="card-text">{{caption}}</p>
-                            <a href="#" id="edit-post-btn">Edit Caption</a>
+                            <p id="caption" name="caption" class="card-text" style="margin-bottom: 0.2em;">{{caption}}</p>
+                            {{#if userOwnsPost}}
+                                <button type="button" class="btn btn-danger" name="edit-post-btn" id="edit-post-btn">Edit Post</button> 
+                                <button type="button" class="btn btn-outline-danger" name="delete-post-btn" id="delete-post-btn" style="float: right;">Delete Post</button> 
+                            {{/if}}
                             <hr>
                             <div class="d-flex" style="align-items: center;">
+                            {{#if userLiked}}
+                                <button id='unlike-btn' type='button' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>
+                            {{else}}
                                 <button id="like-btn" type="button" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> </button>
-                                <span style="padding-left: 10px;">
-                                Liked by <b>{{numberOfMeowts}}</b>
+                            {{/if}}
+                                <span id="meowtedInfo" style="padding-left: 10px;">
+                                Meowted by <b>{{numberOfMeowts}}</b>
                                 </span>
                             </div>
                             <hr>
-                            <p class="card-text"><small class="text-muted">Last updated {{date}}</small></p>
+                            <p id="date" class="card-text"><small class="text-muted">Last updated {{date}}</small></p>
                         </div>
                     </div>
                 </div>
@@ -63,6 +69,6 @@
 <!--Id of post for comment insertion-->
 
 <p id="postId" name="postId" style="display: none;">{{_id}}</p>
-    
+<p id="numberOfMeowts" name="numberOfMeowts" style="display: none;">{{numberOfMeowts}}</p>
 
  

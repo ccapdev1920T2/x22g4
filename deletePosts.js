@@ -1,6 +1,7 @@
 const database = require('./models/database.js');
 const Post = require('./models/post.js');
 const Comment = require('./models/comment.js');
+const User = require('./models/user.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -20,3 +21,4 @@ database.connect();
 
 database.deleteMany(Post, (flag) => {})
 database.deleteMany(Comment, (flag) => {})
+database.updateMany(User, {}, {posts: [], meowtedPosts: []})
