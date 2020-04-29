@@ -32,6 +32,17 @@
                 <!-- Submission Box -->
             </form>
 
+            <div class="dropdown mb-3">
+              <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort by
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Date</a>
+                <a class="dropdown-item" href="#">Highest Rated</a>
+              </div>
+            </div>
+
+            <hr><br>
             <!-- Posts -->
             {{#each posts}} {{> postItem}} {{/each}}
             <!-- Posts -->
