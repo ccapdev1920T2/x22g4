@@ -66,11 +66,12 @@ const helper = {
         })
     },
 
-    updatePost: function(postId, newTitle, newCaption) {
+    updatePost: function(postId, newTitle, newCaption, res) {
         let date = Date.now();
-        
-        database.updateOne(Post, {_id: postId}, {postTitle: newTitle, caption: newCaption, date: date}, (flag) => {
-        
+
+        Post.updateOne({_id: postId}, {postTitle: newTitle, caption: newCaption, date: date})
+        .then((a) => {
+            res.send(true);
         })
     },
 

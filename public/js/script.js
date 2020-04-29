@@ -242,19 +242,25 @@ $(document).ready(function(){
             return;
         }
 
-        console.log('update database post here.'); 
-
-        $.get('/saveEdit', {postId: postId, postTitle: postTitle, caption: caption}, (data) => {
-            
-        })
-
         $('#edit-prompt').replaceWith(
             "<button type='button' class='btn btn-danger' name='edit-post-btn' id='edit-post-btn'>Edit Post</button>"
         );
 
-        $('#postTitle').text(postTitle);
-        $('#caption').text(caption);
-        $('#date small').text('Last updated just then')
+        $.ajax({
+            url: "/saveEdit",
+            type: "PUT",
+            data: {postId: postId, postTitle: postTitle, caption: caption}
+          }).done((e) => {
+            $('#postTitle').text(postTitle);
+            $('#caption').text(caption);
+            $('#date small').text('Last updated just then')
+          }).fail((e) => {
+            
+          })
+
+        
+
+        
     })
 
     //=========================================================================================

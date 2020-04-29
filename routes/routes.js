@@ -86,7 +86,7 @@ app.post('/catFeed', upload, catFeedController.postCatFeed);
 app.get('/post/:_id', postController.getPost);
 app.get('/addComment', postController.addComment);
 app.get('/openEdit', postController.openEdit);
-app.get('/saveEdit', postController.saveEdit);
+app.put('/saveEdit', postController.saveEdit);
 app.put('/likePost', postController.likePost);
 app.put('/unlikePost', postController.unlikePost);
 app.put('/deletePost', postController.deletePost);

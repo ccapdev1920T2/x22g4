@@ -77,7 +77,7 @@ const postController = {
     },
 
     saveEdit: function(req, res) {
-        helper.updatePost(req.query.postId, req.query.postTitle, req.query.caption);
+        helper.updatePost(req.body.postId, req.body.postTitle, req.body.caption, res);
     },
 
     likePost: function(req, res) {
