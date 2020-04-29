@@ -37,9 +37,6 @@ var CatSchema = new mongoose.Schema({
         type: String,
         required: true 
     },
-    godParents: [{
-        type: String
-    }],
     location: {
         type: String,
         required: true

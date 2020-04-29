@@ -16,7 +16,7 @@ var UserSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: "/imgs/fat.jpg"
+        default: "default-user.png"
     },
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -25,10 +25,6 @@ var UserSchema = new mongoose.Schema({
     meowtedPosts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
-    }],
-    favoriteCats: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cat'
     }]
 });
 

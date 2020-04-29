@@ -21,7 +21,6 @@ const userProfileController = {
             }
 
             let userOwnsProfile = (username === result.username);
-            console.log(userOwnsProfile)
 
             var details = {
                 username: result.username,
