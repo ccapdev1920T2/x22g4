@@ -6,6 +6,7 @@ const signupController = require("../controllers/signupController.js");
 const userProfileController = require("../controllers/userProfileController.js");
 const catFeedController = require("../controllers/catFeedController.js");
 const postController = require("../controllers/postController.js");
+const loginController = require("../controllers/loginController.js");
 
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -68,6 +69,7 @@ app.get('/editdesc', function(req, res){
     })  
 });
 
+app.get('/login', loginController.getLogin);
 
 app.get('/signup', signupController.getSignup);
 app.post('/signup', signupController.postSignup);
