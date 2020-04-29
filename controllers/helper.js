@@ -57,13 +57,16 @@ const helper = {
         });
     },
 
-    newPost: function(post) {
+    newPost: function(post, res) {
         var author = post.author;
 
         database.insertOne(Post, post, (postResult) => {
-            database.updateOne(User, {username: author}, {
+            User.updateOne({username: author}, {
                 $push: {posts: postResult._id}
-            }); 
+            })
+            .then((a) => {
+                res.redirect('/post/' + post._id);
+            })
         })
     },
 

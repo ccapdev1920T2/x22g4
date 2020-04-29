@@ -87,12 +87,7 @@ const catFeedController = {
         var fileName = helper.renameImage(req, newName);
         post.imageUrl = fileName;
 
-        helper.newPost(post);
-
-        res.redirect('/post/' + newName);
-
-
-        
+        helper.newPost(post, res);
     }
 }
 
