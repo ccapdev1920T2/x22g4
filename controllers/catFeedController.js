@@ -84,26 +84,14 @@ const catFeedController = {
         });
     
         var newName = post._id;
-        var fileName = renameImage(req, newName);
-        post.imageUrl = '/postImgs/' + fileName;
+        var fileName = helper.renameImage(req, newName);
+        post.imageUrl = fileName;
 
-        helper.newPost(post);
-
-        res.redirect('/post/' + newName);
-
-
-        
+        helper.newPost(post, res);
     }
 }
 
-function renameImage(req, newName) {
-    var originalName = req.file.originalname;
-    var extension = originalName.substring(originalName.lastIndexOf("."));
-    const newUrl = req.file.destination + '/' + newName + extension; 
-    
-    fs.renameSync(req.file.path, newUrl);
-    return newName + extension;
-}
+
 
 
   

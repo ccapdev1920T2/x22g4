@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 
 var CommentSchema = new mongoose.Schema ({
+    parentPostId: {
+        type: String,
+        required: true
+    },
     author: {
         type: String,
         required: true

@@ -7,7 +7,6 @@ const User = require('../models/user.js');
 const postController = {
     
     getPost: function(req, res) {
-        console.log('getting post...');
         var query = {_id: req.params._id};
 
         Post.findOne(query)
@@ -20,40 +19,50 @@ const postController = {
                 return;
             }
 
-            //check whether post is owned by user
-            let userOwnsPost = true;
+            //find if user owns post
+            database.findOne(User, {username: 'default'}, 'posts meowtedPosts', (userResult) => {
+                let userOwnsPost = false;
+                let userLiked = false;
+                if (userResult != null) {
+                    userOwnsPost = userResult.posts.includes(result._id);
+                    userLiked = userResult.meowtedPosts.includes(result._id);
+                };
+                
+                result.date = helper.formatDate(result.date)
 
-            result.date = helper.formatDate(result.date)
+                var details = {
+                    _id: result._id,
+                    postTitle: result.postTitle,
+                    caption: result.caption,
+                    imageUrl: result.imageUrl,
+                    date: result.date,
+                    numberOfMeowts: result.numberOfMeowts,
+                    author: result.author,
+                    comments: result.comments,
+                    userOwnsPost: userOwnsPost,
+                    userLiked: userLiked
+                }
 
-            var details = {
-                _id: result._id,
-                postTitle: result.postTitle,
-                caption: result.caption,
-                imageUrl: result.imageUrl,
-                date: result.date,
-                numberOfMeowts: result.numberOfMeowts,
-                author: result.author,
-                comments: result.comments,
-                userOwnsPost: userOwnsPost
-            }
-            res.render('post', details)
+                res.render('post', details)
+            })
+
+            
         });
     },
 
     addComment: function(req, res) {
         //TODO: session username
-        let author = 'default';
-        let text = req.query.text;
-        let postId = req.query.postId;
+        let author = req.body.username;
+        let text = req.body.text;
+        let postId = req.body.postId;
 
         let newComment = new Comment({
+            parentPostId: postId,
             author: author,
             text: text
         });
 
-        helper.insertComment(postId, newComment);
-
-        res.render('partials/commentItem.hbs', newComment);
+        helper.insertComment(postId, newComment, res);
     },
 
     openEdit: function(req, res) {
@@ -66,9 +75,32 @@ const postController = {
     },
 
     saveEdit: function(req, res) {
-        console.log('test')
-        helper.updatePost(req.query.postId, req.query.postTitle, req.query.caption);
+        helper.updatePost(req.body.postId, req.body.postTitle, req.body.caption, res);
+    },
+
+    likePost: function(req, res) {
+        let username = req.body.username;
+        let postId = req.body.postId;
+
+        helper.likePost(postId, username, res);
+    },
+
+    unlikePost: function(req, res) {
+        let username = req.body.username;
+        let postId = req.body.postId;
+
+        helper.unlikePost(postId, username, res);
+    },
+
+    deletePost: function(req, res) {
+        let username = req.body.username;
+        let postId = req.body.postId; 
+
+        helper.deletePost(postId, username, res);
+      
     }
 }
 
 module.exports = postController;
+
+

@@ -1,18 +1,24 @@
 <script> document.title = "{{username}} | Catvas"  </script>
 <div class="container-cat">
     <div class="row">
-        <div class="col-md-4">
-            <img src="{{avatar}}" width="400px">
-            <br>
-            <a href="#" id="edit-picture">Edit Picture</a>
+        <div id='divAvatar' class="col-md-4">
+            <img src="/avatars/{{avatar}}" width="400px">
+            {{#if userOwnsProfile}}
+                <br>
+                <br>
+                <button type="button" class="btn btn-danger" name="change-avatar" id="change-avatar">Change Avatar</button>
+            {{/if}}
         </div>
-        <div class="col-md-8 background-red">
+        <div id="userInfo" class="col-md-8 background-red">
             <p class="center" id="cat-name-profile">HEY, I am {{username}}!</p>
             <hr>
             <p class="profile-mini-header center"><i class="fas fa-address-card"></i> About Me</p>
-            <p id="your-desc">{{description}}
-            </p>
-            <a href="#" id="edit-description">Edit Description</a>
+            <p id="your-desc" name="your-desc">{{description}}</p>
+            {{#if userOwnsProfile}}
+                <button type="button" class="btn btn-danger" name="edit-description" id="edit-description">Edit Description</button>
+            {{/if}}
         </div>
     </div>
 </div>
+
+<p id="username" name="username" style="display: none;">{{username}}</p>
