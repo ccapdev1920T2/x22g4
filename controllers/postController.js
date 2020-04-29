@@ -84,35 +84,25 @@ const postController = {
         let username = req.body.username;
         let postId = req.body.postId;
 
-        Post.updateOne({_id: postId}, {$inc: {numberOfMeowts: 1}})
-        .then((a) => {
-            User.updateOne({username: username}, {$addToSet: {meowtedPosts: postId}})
-            .then((b) => {
-                res.send(true);
-            })
-        })  
+        helper.likePost(postId, username, res);
     },
 
     unlikePost: function(req, res) {
         let username = req.body.username;
         let postId = req.body.postId;
 
-        Post.updateOne({_id: postId}, {$inc: {numberOfMeowts: -1}})
-        .then((a) => {
-        User.updateOne({username: username}, {$pull: {meowtedPosts: postId}})
-        .then((b) => {
-            res.send(true);
-        })
-    })
+        helper.unlikePost(postId, username, res);
     },
 
     deletePost: function(req, res) {
         let username = req.body.username;
         let postId = req.body.postId; 
 
-        helper.deletePost(postId, username);
+        helper.deletePost(postId, username, res);
       
     }
 }
 
 module.exports = postController;
+
+

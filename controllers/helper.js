@@ -74,32 +74,37 @@ const helper = {
         })
     },
 
-    likePost: function(postId, username) {
-        database.updateOne(Post, {_id: postId}, {$inc: {numberOfMeowts: 1}}, (flag) => {
-            
-        })
-        database.updateOne(User, {username: username}, {$addToSet: {meowtedPosts: postId}}, (userFlag) => {
-            console.log(userFlag)
-        })
+    likePost: function(postId, username, res) {
+        Post.updateOne({_id: postId}, {$inc: {numberOfMeowts: 1}})
+        .then((a) => {
+            User.updateOne({username: username}, {$addToSet: {meowtedPosts: postId}})
+            .then((b) => {
+                res.send(true);
+            })
+        })  
     },
 
-    unlikePost: function(postId, username) {
-        database.updateOne(Post, {_id: postId}, {$inc: {numberOfMeowts: -1}}, (flag) => {
-            
-        })
-        database.updateOne(User, {username: username}, {$pull: {meowtedPosts: postId}}, (userFlag) => {
-            console.log(userFlag)
-        })
+    unlikePost: function(postId, username, res) {
+        Post.updateOne({ _id: postId }, { $inc: { numberOfMeowts: -1 } })
+        .then((a) => {
+            User.updateOne({ username: username }, { $pull: { meowtedPosts: postId } })
+                .then((b) => {
+                    res.send(true);
+                });
+        });
     },
 
-    deletePost: function(postId, username) {
-        database.findOne(Post, {_id: postId}, 'imageUrl', (postResult) => {
+    deletePost: function(postId, username, res) {
+        Post.findOne({_id: postId}, 'imageUrl')
+        .exec((err, postResult) => {
             fs.unlink('./public/postImgs/' + postResult.imageUrl, (callback) => {});
 
-            database.deleteOne(Post, {_id: postId});
+            Post.deleteOne({_id: postId})
+            .then((a) => {
+                res.send(true);
+            })
         })
-        
-        
+
         database.deleteMany(Comment, {parentPostId: postId});
 
         database.updateOne(User, {username: username}, {$pull: {posts: postId, meowtedPosts: postId}}, (flag) =>{});

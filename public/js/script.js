@@ -329,15 +329,13 @@ $(document).ready(function(){
         $.ajax({
             url: '/deletePost',
             type: 'PUT',
-            data: {postId: postId, username: username},
-            success: function(data) {
-                
-            }
+            data: {postId: postId, username: username}
+          }).done((e) => {
+            window.location.replace("/catFeed");
+          }).fail((e) => {
 
-          });
-
-          //should link to new "POST DELETED"
-          window.location.replace("/404");
+          })
+          
     }) 
 
     $('.col-md-8').on('click', "#edit-description", () => {
