@@ -201,7 +201,7 @@ $(document).ready(function(){
 
     $('#comment-submit-btn').click(function() {
         //TODO: check if logged in
-
+        let username = 'default';
         let text = $('#comment').val();
         let postId = $('#postId').text();
 
@@ -213,12 +213,15 @@ $(document).ready(function(){
         $('#comment').css('background-color', 'white');
         $('#comment').val("");
 
-       
-
-        
-        $.get('/addComment', {postId: postId, text: text}, function(data) {
+        $.ajax({
+            url: "/addComment",
+            type: "PUT",
+            data: {username: username, postId: postId, text: text}
+          }).done((data) => {
             $('#comments-container').append(data);
-        })
+          }).fail((e) => {
+            
+          })
     })
 
     //=========================================================================================

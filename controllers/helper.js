@@ -41,18 +41,19 @@ const helper = {
         database.updateOne(User, {username: username}, {description: description});
       },
 
-    insertComment: function(postId, comment) {
+    insertComment: function(postId, comment, res) {
         database.insertOne(Comment, comment, function(insertedComment){
             console.log("ID:" + postId);
             
-            // update post and append comment
-            database.updateOne(Post, {_id: postId}, {
-                 $push: {comments: insertedComment._id},
-                 $inc: {numberOfComments: 1},
-                 latestComment: insertedComment.text,
-                 latestCommentAuthor: insertedComment.author
-                });
-
+            Post.updateOne({_id: postId}, {
+                $push: {comments: insertedComment._id},
+                $inc: {numberOfComments: 1},
+                latestComment: insertedComment.text,
+                latestCommentAuthor: insertedComment.author
+               })
+               .then((a) => {
+                res.render('partials/commentItem.hbs', comment);
+               }) 
         });
     },
 

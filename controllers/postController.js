@@ -52,9 +52,9 @@ const postController = {
 
     addComment: function(req, res) {
         //TODO: session username
-        let author = 'default';
-        let text = req.query.text;
-        let postId = req.query.postId;
+        let author = req.body.username;
+        let text = req.body.text;
+        let postId = req.body.postId;
 
         let newComment = new Comment({
             parentPostId: postId,
@@ -62,9 +62,7 @@ const postController = {
             text: text
         });
 
-        helper.insertComment(postId, newComment);
-
-        res.render('partials/commentItem.hbs', newComment);
+        helper.insertComment(postId, newComment, res);
     },
 
     openEdit: function(req, res) {
