@@ -11,6 +11,7 @@ const catFeedController = {
         var details;
 
        Post.find({})
+       .sort({date: -1})
        .lean()
        .exec(function (err, results) {
            //query for the past 7 days
