@@ -382,7 +382,7 @@ $(document).ready(function(){
     $('#change-avatar').click(() => {
         $('#change-avatar').replaceWith(
             "<div id='edit-avatar' class='col-md-4'>" +
-                "<form id='edit-avatar-form' name='edit-avatar-form' method='POST' enctype='multipart/form-data'>" +
+                "<form id='edit-avatar-form' name='edit-avatar-form' enctype='multipart/form-data'>" +
                     "<input type='file' id='edit-avatar-file' name='edit-avatar-file' accept='image/*' required/>" +
                     "<button type='submit' class='btn btn-danger' id='submit-avatar-btn'>Submit</button>" +
                     "<p id='avatarError' name='avatarError'></p>" +
@@ -393,6 +393,10 @@ $(document).ready(function(){
     });
 
     $('#divAvatar').on('submit', '#edit-avatar-form', function(e) {
+        e.preventDefault();
+
+        let username = 'default';
+
         var file = document.getElementById("edit-avatar-file");
         if (file.files[0].size >  (1048576 * 2)) {
             $('#avatarError').text("Image should not be bigger than 2MB")
@@ -400,7 +404,26 @@ $(document).ready(function(){
         }        
     
         $('#submit-avatar-btn').prop('disabled', true);
+
+        var formData = new FormData(this);
+        $.ajax({
+            url: '/profile/' + username,
+            type: 'PUT',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done((data) => {
+            location.reload();
+        }).fail((error) => {
+
         })
+    })
+
+        
+
+
     
 
 

@@ -63,9 +63,7 @@ const userProfileController = {
         var newName = username;
         var avatar = helper.renameImage(req, newName);
         
-        helper.updateAvatar(username, avatar);
-
-        res.redirect('/profile/' + username);
+        helper.updateAvatar(username, avatar, res);
     }
 
 }

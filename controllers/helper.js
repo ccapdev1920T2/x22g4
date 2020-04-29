@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const helper = {
 
-    updateAvatar: function(username, avatar) {
+    updateAvatar: function(username, avatar, res) {
         let extension = avatar.substring(avatar.lastIndexOf("."));
         let filename = avatar.split('.').slice(0, -1).join('.');
         switch (extension) {
@@ -25,7 +25,10 @@ const helper = {
                 break;
         }
         
-        database.updateOne(User, {username: username}, {avatar: avatar});
+        User.updateOne({username: username}, {avatar: avatar})
+        .then((a) => {
+            res.send(true)
+        })
     },
 
     renameImage: function(req, newName) {

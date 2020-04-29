@@ -75,7 +75,7 @@ app.post('/signup', signupController.postSignup);
 app.get('/getCheckUsername', signupController.getCheckUsername);
 
 app.get('/profile/:username', userProfileController.getUserProfile);
-app.post('/profile/:username', avatarUpload, userProfileController.submitAvatar);
+app.put('/profile/:username', avatarUpload, userProfileController.submitAvatar);
 app.get('/editProfileDescription', userProfileController.editProfileDescription);
 app.put('/submitEditProfileDescription', userProfileController.submitEditProfileDescription);
 
