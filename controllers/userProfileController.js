@@ -44,7 +44,7 @@ const userProfileController = {
     submitEditProfileDescription: function(req, res) {
         let description = req.body.description;
     
-        //login simulation
+        //login simulatin
         let username = 'default';
 
         helper.updateDescription(username, description, res);
