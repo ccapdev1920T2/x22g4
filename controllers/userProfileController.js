@@ -23,6 +23,12 @@ const userProfileController = {
             let userOwnsProfile = (username === result.username);
 
             var details = {
+                //Session
+                active_session: (req.session.user && req.cookies.user_sid), 
+                active_user: req.session.user,
+                current_user: (req.session.user == req.params.username),
+                //Session
+
                 username: result.username,
                 description: result.description,
                 avatar: result.avatar,
