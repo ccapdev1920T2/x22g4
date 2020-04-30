@@ -4,7 +4,7 @@
             <div class="red-sign-up">
                 <h1 id="hello-friend"><b>Hewwo, meow!</b></h1>
                 <p>Don't have an account?</p>
-                <a href="/signup">
+                <a href="sign-up.html">
                     <button type="button" class="btn btn-danger"><b>SIGN-UP</b></button>
                 </a>
             </div>
@@ -15,17 +15,22 @@
                 <img src='../imgs/it.png' width="140px">
                 <p id="sign-up-text">Log-In</p>
             </div>
-            <form class="entry-forms" id="login-forms">
+            {{#if login_err}}
+            <br>
+            <p style="color: #d34b3b; font-weight: bold;"> {{message}} </p>
+            {{/if}}
+            <form class="entry-forms" id="login-forms" method="post">
                 <div class="form-group">
                     <label for="userName">User Name</label>
-                    <input type="userName" class="form-control" id="login-username" placeholder="Enter User Name">
+                    <input type="text" name="username" id="login-username" class="form-control" placeholder="Enter User Name">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="login-password" placeholder="Enter Password">
+                    <input type="password" name="password" id="login-password" class="form-control" placeholder="Enter Password">
                 </div>
                 <button id="login-btn" type="button" class="btn btn-outline-danger"><b>S U B M I T</b></button>
             </form>
+
         </div>
     </div>
 </div>

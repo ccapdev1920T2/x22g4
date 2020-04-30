@@ -10,16 +10,28 @@ const adoptCatController = {
         var lagunaResult;
         var manilaResult;
 
-        database.findManyLean(Cat, LAGUNA_QUERY, null, function(lagunaResult) {
-            database.findManyLean(Cat, MANILA_QUERY, null, function(manilaResult) {
-                res.render('adoptCat', {
-                    lagunaCats: lagunaResult,
-                    manilaCats: manilaResult,
-                    adopt_active: true
-                    });
+        if(!(req.session.user && req.cookies.user_sid)) {
+            res.redirect('/login');
+            /*
+            res.render('login', {
+                login_err: true,
+                message: 'Please Login to Access Catvas Features.'
             });
-        });
+            */
+        } else {
+            database.findManyLean(Cat, LAGUNA_QUERY, null, function(lagunaResult) {
+                database.findManyLean(Cat, MANILA_QUERY, null, function(manilaResult) {
+                    res.render('adoptCat', {
+                        lagunaCats: lagunaResult, 
+                        manilaCats: manilaResult, 
 
+                        //Session
+                        active_session: (req.session.user && req.cookies.user_sid), 
+                        active_user: req.session.user
+                    });
+                });
+            });
+        }
     }
 }
 

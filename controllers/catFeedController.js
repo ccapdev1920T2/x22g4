@@ -25,7 +25,7 @@ const catFeedController = {
             return;
         }
 
-        const defaultUser = "default";
+        const defaultUser = req.session.user; //JACOB THIS IS WHAT YOU CHANGED
 
         var post = new Post({
             author: defaultUser,
@@ -85,17 +85,32 @@ function getCatFeed(req, res, sort) {
                 results[i].date = helper.formatDate(results[i].date);
             };
 
-        
-            res.render('cat-feed', { posts: results, catfeed_active: true,
+            if(!(req.session.user && req.cookies.user_sid)) {
+                res.redirect('/login');
+                /*
+                res.render('login', {
+                    login_err: true,
+                    message: 'Please Login to Access Catvas Features.'
+                });
+                */
+            } else {
+                res.render('cat-feed', { posts: results, catfeed_active: true,
 
-                //featured post
-                _id: featuredPostDetails._id,
-                imageUrl: featuredPostDetails.imageUrl,
-                author: featuredPostDetails.author,
-                postTitle: featuredPostDetails.postTitle,
-                caption: featuredPostDetails.caption,
-                display_featured: featuredPostDetails.display_featured
-            });
+                    //Session
+                    active_session: (req.session.user && req.cookies.user_sid), 
+                    active_user: req.session.user,
+                    current_user: (req.session.user == req.params.username),
+                    //Session
+
+                    //featured post
+                    _id: featuredPostDetails._id,
+                    imageUrl: featuredPostDetails.imageUrl,
+                    author: featuredPostDetails.author,
+                    postTitle: featuredPostDetails.postTitle,
+                    caption: featuredPostDetails.caption,
+                    display_featured: featuredPostDetails.display_featured
+                });
+            }
         });
 
 

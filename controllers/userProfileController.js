@@ -11,7 +11,7 @@ const userProfileController = {
         var projection = "username description avatar";
 
         //login simulation
-        var username = 'default';
+        var username = req.session.user;
 
         database.findOne(User, query, projection, function(result) {
             if (result == null) {

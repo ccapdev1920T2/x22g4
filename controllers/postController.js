@@ -20,9 +20,20 @@ const postController = {
             }
 
             //find if user owns post
-            database.findOne(User, {username: 'default'}, 'posts meowtedPosts', (userResult) => {
+            database.findOne(User, {username: req.session.user}, 'posts meowtedPosts', (userResult) => {
+
                 let userOwnsPost = false;
+
+                /*
+                if(req.session.user == username) {
+                    var userOwnsPost = true;
+                } else {
+                    var userOwnsPost = false;
+                }
+                */
+
                 let userLiked = false;
+
                 if (userResult != null) {
                     userOwnsPost = userResult.posts.includes(result._id);
                     userLiked = userResult.meowtedPosts.includes(result._id);
@@ -31,6 +42,13 @@ const postController = {
                 result.date = helper.formatDate(result.date)
 
                 var details = {
+
+                    //Session
+                    active_session: (req.session.user && req.cookies.user_sid), 
+                    active_user: req.session.user,
+                    current_user: (req.session.user == req.params.username),
+                    //Session
+
                     _id: result._id,
                     postTitle: result.postTitle,
                     caption: result.caption,
@@ -52,7 +70,7 @@ const postController = {
 
     addComment: function(req, res) {
         //TODO: session username
-        let author = req.body.username;
+        let author = req.session.user;
         let text = req.body.text;
         let postId = req.body.postId;
 
@@ -79,21 +97,21 @@ const postController = {
     },
 
     likePost: function(req, res) {
-        let username = req.body.username;
+        let username = req.session.user;
         let postId = req.body.postId;
 
         helper.likePost(postId, username, res);
     },
 
     unlikePost: function(req, res) {
-        let username = req.body.username;
+        let username = req.session.user;
         let postId = req.body.postId;
 
         helper.unlikePost(postId, username, res);
     },
 
     deletePost: function(req, res) {
-        let username = req.body.username;
+        let username = req.session.user;
         let postId = req.body.postId; 
 
         helper.deletePost(postId, username, res);
