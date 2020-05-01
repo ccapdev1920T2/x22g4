@@ -18,9 +18,11 @@ const postController = {
                 res.render('404');
                 return;
             }
-
+            
+            //simulate login
+            let username = 'default';
             //find if user owns post
-            database.findOne(User, {username: 'default'}, 'posts meowtedPosts', (userResult) => {
+            database.findOne(User, {username: username}, 'posts meowtedPosts', (userResult) => {
                 let userOwnsPost = false;
                 let userLiked = false;
                 let comments = new Array();
@@ -33,8 +35,9 @@ const postController = {
                 result.date = helper.formatDate(result.date)
 
                 for (let i = 0; i < result.comments.length; i++) {
-                    let userOwnsComment = result.comments[i].author == 'default';
+                    let userOwnsComment = result.comments[i].author == username;
                     let comment = {
+                        _id: result.comments[i]._id,
                         author: result.comments[i].author,
                         text: result.comments[i].text,
                         userOwnsComment: userOwnsComment
@@ -78,7 +81,9 @@ const postController = {
     },
 
     deleteComment: function(req, res) {
-        
+        let _id = req.body._id;
+
+        helper.deleteComment(_id, res);
     },
 
     openEdit: function(req, res) {

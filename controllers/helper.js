@@ -58,9 +58,23 @@ const helper = {
                 latestCommentAuthor: insertedComment.author
                })
                .then((a) => {
-                res.render('partials/commentItem.hbs', comment);
+                let details = {
+                    _id: comment._id,
+                    author: comment.author,
+                    text: comment.text, 
+                    userOwnsComment: true
+                };
+
+                res.render('partials/commentItem.hbs', details);
                }) 
         });
+    },
+
+    deleteComment(commentId, res) {
+        Comment.deleteOne({_id: commentId})
+        .then((data) => {
+            res.send(true);
+        })
     },
 
     newPost: function(post, res) {
