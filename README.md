@@ -24,11 +24,19 @@ npm install express --save
 npm install hbs --save
 npm install mongodb --save
 ```
-
-## Running the Tests
+> Add cat profiles and simulate log-in throught a default user
+```shell
+node addDefaults.js
+```
+> NOTE: This code is for deleting posts all at once!
+```shell
+node deletePosts.js
+```
 
 ## Built With
 * Bootstrap - Open-source CSS framework
+* NodeJS - Open-source, cross-platform, JS runtime environment
+* MongoDB - Cross-platform database program 
 
 ## Team
 * **Jacob Darvin** 
