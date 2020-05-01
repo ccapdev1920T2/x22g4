@@ -23,12 +23,24 @@ const postController = {
             database.findOne(User, {username: 'default'}, 'posts meowtedPosts', (userResult) => {
                 let userOwnsPost = false;
                 let userLiked = false;
+                let comments = new Array();
+
                 if (userResult != null) {
                     userOwnsPost = userResult.posts.includes(result._id);
                     userLiked = userResult.meowtedPosts.includes(result._id);
                 };
                 
                 result.date = helper.formatDate(result.date)
+
+                for (let i = 0; i < result.comments.length; i++) {
+                    let userOwnsComment = result.comments[i].author == 'default';
+                    let comment = {
+                        author: result.comments[i].author,
+                        text: result.comments[i].text,
+                        userOwnsComment: userOwnsComment
+                    }
+                    comments.push(comment);
+                }
 
                 var details = {
                     _id: result._id,
@@ -38,7 +50,7 @@ const postController = {
                     date: result.date,
                     numberOfMeowts: result.numberOfMeowts,
                     author: result.author,
-                    comments: result.comments,
+                    comments: comments,
                     userOwnsPost: userOwnsPost,
                     userLiked: userLiked
                 }
@@ -63,6 +75,10 @@ const postController = {
         });
 
         helper.insertComment(postId, newComment, res);
+    },
+
+    deleteComment: function(req, res) {
+        
     },
 
     openEdit: function(req, res) {

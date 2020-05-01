@@ -1,10 +1,13 @@
-<div class="d-flex">
+<div id="commentItem" name="commentItem" class="d-flex">
     <div class="mr-auto p-2">
         <p class="card-text">
             <a href="/profile/{{author}}" style="color:black"><b>{{author}}</b></a> {{text}}
         </p>
     </div>
+    {{#if userOwnsComment}}
     <div class="p-2">
-        <button class="btn btn-outline-danger">Delete</button>
+        <button id="delete-comment-btn" name="delete-comment-btn" class="btn btn-outline-danger">Delete</button>
     </div>
+    <p id="commentId" name="commentId" style="display: none;">{{_id}}</p>
+    {{/if}}
 </div>
