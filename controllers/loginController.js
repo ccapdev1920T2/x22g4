@@ -4,7 +4,7 @@ const User = require("../models/user.js");
 const loginController = {
 
     getLogin: function(req, res) {
-        res.render('login', {login_active: true});
+        res.render('login', {login_active: true, title: 'Login | Catvas'});
     }
     
 

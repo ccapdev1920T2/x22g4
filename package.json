@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git", 
+    "type": "git",
     "url": "git+https://github.com/Darvvvin/ccapdev.git"
-  }, 
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
