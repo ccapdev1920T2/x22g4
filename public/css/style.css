@@ -118,6 +118,14 @@ h1 {
     color: #d34b3b;
 }
 
+.big-3{
+    font-weight: bold; 
+    font-size: 32px; 
+    font-family: Raleway; 
+    font-weight:black; 
+    color: #d34b3b;
+}
+
 .margin-top-6{
     margin-top: 6em;
 }
@@ -514,5 +522,7 @@ ul li{
 #donate-link{
     color: #d34b3b;
 }
+
+/*Cat Feed*/
 
 

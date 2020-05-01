@@ -4,7 +4,7 @@
 <script>
     explore_active = true
 </script>
-<div class="feed-container align-items-center" style="max-width: 90em;">
+<div class="container feed-container align-items-center" style="max-width: 90em;">
     <h1 style="font-size: 72pt; color: #d34b3b">Cat Feed</h1>
     <div class="row">
         <div class="col-9">
@@ -13,7 +13,7 @@
                 <!-- Submission Box -->
                 <div class="card submission mb-3">
                     <div class="row h-100">
-                        <div class="col-10">
+                        <div class="col-8">
                             <textarea class="text-submission" id="postTitle" name="postTitle" placeholder="Create Post" style="width: 100%; max-width: 100%;" rows="1" required></textarea>
                             <textarea class="text-submission" id="caption" name="caption" placeholder="Add Caption" style="width: 100%; max-width: 100%;" rows="2"></textarea>
                         </div>
@@ -49,6 +49,7 @@
         </div>
 
         <div class="col-3">
+            <h2 class="big-3">Top Post of the Week</p>
             {{#if display_featured}} {{> featuredItem _id=_id imageUrl=imageUrl author=author postTitle=postTitle caption=caption}} {{/if}}
         </div>
     </div>
