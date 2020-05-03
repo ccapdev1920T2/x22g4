@@ -84,7 +84,13 @@ const postController = {
             text: text
         });
 
-        helper.insertComment(postId, newComment, res);
+        helper.insertComment(postId, newComment, req, res);
+    },
+
+    deleteComment: function(req, res) {
+        let _id = req.body._id;
+
+        helper.deleteComment(_id, res);
     },
 
     openEdit: function(req, res) {

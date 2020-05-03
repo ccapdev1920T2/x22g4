@@ -47,7 +47,7 @@ const helper = {
         })
       },
 
-    insertComment: function(postId, comment, res) {
+    insertComment: function(postId, comment, req, res) {
         database.insertOne(Comment, comment, function(insertedComment){
             console.log("ID:" + postId);
             
@@ -58,7 +58,20 @@ const helper = {
                 latestCommentAuthor: insertedComment.author
                })
                .then((a) => {
-                res.render('partials/commentItem.hbs', comment);
+                let details = {
+                    _id: comment._id,
+                    author: comment.author,
+                    text: comment.text, 
+                    userOwnsComment: true,
+
+                    //Session
+                    active_session: (req.session.user && req.cookies.user_sid), 
+                    active_user: req.session.user,
+                    current_user: (req.session.user == req.params.username),
+                    //Session
+
+                };
+                res.render('partials/commentItem.hbs', details);
                }) 
         });
     },

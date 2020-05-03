@@ -12,7 +12,7 @@
                     <div class="col-md-12">
                         <div id="postPageCard" class="card-body">
                             <h2 id="postTitle" name="postTitle" class="card-title-custom" style="margin-bottom: 0%; padding-bottom:0; ">{{postTitle}}</h2>
-                            <h5>by {{author}}</h5>
+                            <a href="/profile/{{author}}"><h5 style="color: black;">by {{author}}</h5></a>
                             <p id="caption" name="caption" class="card-text" style="margin-bottom: 0.2em;">{{caption}}</p>
                             {{#if userOwnsPost}}
                                 <button type="button" class="btn btn-danger" name="edit-post-btn" id="edit-post-btn">Edit Post</button> 
