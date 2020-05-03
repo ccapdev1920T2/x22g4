@@ -63,6 +63,13 @@ const helper = {
         });
     },
 
+    deleteComment(commentId, res) {
+        Comment.deleteOne({_id: commentId})
+        .then((data) => {
+            res.send(true);
+        })
+    },
+
     newPost: function(post, res) {
         var author = post.author;
 

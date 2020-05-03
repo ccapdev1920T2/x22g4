@@ -225,6 +225,27 @@ $(document).ready(function(){
     })
 
     //=========================================================================================
+    // Delete Comment Logic
+    //=========================================================================================
+
+    $('#comments-container').on('click', '#delete-comment-btn', function() {
+        var $t = $(this);
+        var _id = $(this).parent().find('p:nth-child(2)').text();
+
+        $(this).prop('disabled', true);
+        $.ajax({
+            url: "/deleteComment",
+            type: "PUT",
+            data: {_id: _id}
+        }).done((data) => {
+            $t.parent().parent().remove();
+        }).fail((e) => {
+
+        })
+
+    })
+
+    //=========================================================================================
     // Edit Post Logic
     //=========================================================================================
 

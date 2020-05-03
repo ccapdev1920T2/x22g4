@@ -20,26 +20,30 @@ const postController = {
             }
 
             //find if user owns post
-            database.findOne(User, {username: req.session.user}, 'posts meowtedPosts', (userResult) => {
+            let username = req.session.user;
+            database.findOne(User, {username: username}, 'posts meowtedPosts', (userResult) => {
 
                 let userOwnsPost = false;
-
-                /*
-                if(req.session.user == username) {
-                    var userOwnsPost = true;
-                } else {
-                    var userOwnsPost = false;
-                }
-                */
-
                 let userLiked = false;
-
+                let comments = new Array();
+        
                 if (userResult != null) {
                     userOwnsPost = userResult.posts.includes(result._id);
                     userLiked = userResult.meowtedPosts.includes(result._id);
                 };
                 
-                result.date = helper.formatDate(result.date)
+                result.date = helper.formatDate(result.date);
+
+                for (let i = 0; i < result.comments.length; i++) {
+                    let userOwnsComment = result.comments[i].author == username;
+                    let comment = {
+                        _id: result.comments[i]._id,
+                        author: result.comments[i].author,
+                        text: result.comments[i].text,
+                        userOwnsComment: userOwnsComment
+                    }
+                    comments.push(comment);
+                }
 
                 var details = {
 
@@ -56,7 +60,7 @@ const postController = {
                     date: result.date,
                     numberOfMeowts: result.numberOfMeowts,
                     author: result.author,
-                    comments: result.comments,
+                    comments: comments,
                     userOwnsPost: userOwnsPost,
                     userLiked: userLiked
                 }
