@@ -28,10 +28,6 @@ var PostSchema = new mongoose.Schema ({
         type: Date,
         default: Date.now
     },
-    cats: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cat'
-    }],
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
