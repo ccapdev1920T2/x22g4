@@ -122,12 +122,14 @@ const helper = {
     deletePost: function(postId, username, res) {
         Post.findOne({_id: postId}, 'imageUrl')
         .exec((err, postResult) => {
-            fs.unlink('./public/postImgs/' + postResult.imageUrl, (callback) => {});
+            fs.unlink('./public/postImgs/' + postResult.imageUrl, (callback) => {
+                Post.deleteOne({_id: postId})
+                .then((a) => {
+                    res.redirect(true);
+                })
+            });
 
-            Post.deleteOne({_id: postId})
-            .then((a) => {
-                res.send(true);
-            })
+           
         })
 
         database.deleteMany(Comment, {parentPostId: postId});
