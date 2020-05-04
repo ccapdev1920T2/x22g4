@@ -81,10 +81,28 @@ const helper = {
         });
     },
 
-    deleteComment(commentId, res) {
+    deleteComment(commentId, postId, res) {
         Comment.deleteOne({_id: commentId})
         .then((data) => {
-            res.send(true);
+            Post.updateOne({_id: postId}, {$inc: {numberOfComments: -1}, $pull: {comments: commentId}})
+            .then((data) => {
+                Post.findOne({_id: postId})
+                .populate('comments')
+                .exec((err, postResult) => {
+                    let latestComment = '';
+                    let latestCommentAuthor = '';
+
+                    if (postResult.comments !== undefined && postResult.comments.length > 0) {
+                        latestComment = postResult.comments[postResult.comments.length - 1].text;
+                        latestCommentAuthor = postResult.comments[postResult.comments.length - 1].author;
+                    }
+                    
+                    Post.updateOne({_id: postId}, {latestComment: latestComment, latestCommentAuthor: latestCommentAuthor})
+                    .then((data) => {
+                        res.send(true);
+                    })
+                })
+            })
         })
     },
 

@@ -6,9 +6,7 @@ const fs = require('fs')
 database.connect();
 
 
-database.findOne(User, {username: 'tester'}, {}, (data) => {
-    console.log(data);
-})
+
 //database.updateOne(Post, {_id: '5ea4392d8c4d733014dab255'}, {
 //    $inc: {numberOfMeowts: 5}
 //});
@@ -21,8 +19,8 @@ database.findOne(User, {username: 'tester'}, {}, (data) => {
 
 database.findMany(Comment, {}, {}, (result) => {
     console.log(result)
-})
+}) */
 
-database.findMany(Post, {}, {}, (result) => {
+database.findMany(Comment, {}, {}, (result) => {
     console.log(result)
-})*/
+})
