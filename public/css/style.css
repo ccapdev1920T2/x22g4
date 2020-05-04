@@ -104,7 +104,7 @@ h1 {
 
 .big {
     font-weight: bold; 
-    font-size: 56px; 
+    font-size: 40pt; 
     font-family: Raleway; 
     font-weight:black; 
     color: #d34b3b;
@@ -112,7 +112,7 @@ h1 {
 
 .big-2{
     font-weight: bold; 
-    font-size: 48px; 
+    font-size: 32pt; 
     font-family: Raleway; 
     font-weight:black; 
     color: #d34b3b;
@@ -470,7 +470,7 @@ hr{
 /* Donate to Catvas */
 #donate-header{
     color: #d34b3b; 
-    font-size: 80pt;
+    font-size: 56pt;
 }
 
 #donate-subheader{
@@ -479,12 +479,14 @@ hr{
 
 .donate-choice-header{
     color: #d34b3b;
-    font-size: 32px;
+    font-size: 24pt;
     font-weight: bolder;
 }
 
 .donate-details{
-    font-size: 16px;
+    font-size: 16pt !important;
+    line-height: 32px;
+    color: #54595f;
 }
 
 #pusa-email{
@@ -492,12 +494,13 @@ hr{
 }
 
 .pusa-wishlist{
-    font-size: 16px;
+    font-size: 16pt;
+    color: #54595f;
 }
 
 .pusa-header{
     color: #d34b3b;
-    font-weight: bold;
+    font-weight: bolder;
     font-size: 24px;
 }
 
@@ -516,4 +519,7 @@ ul li{
     color: #d34b3b;
 }
 
+.card-text{
+    color: #54595f !important; 
+}
 
