@@ -230,13 +230,14 @@ $(document).ready(function(){
 
     $('#comments-container').on('click', '#delete-comment-btn', function() {
         var $t = $(this);
-        var _id = $(this).parent().find('p:nth-child(2)').text();
+        var commentId = $(this).parent().find('p:nth-child(2)').text();
+        let postId = $('#postId').text();
 
         $(this).prop('disabled', true);
         $.ajax({
             url: "/deleteComment",
             type: "PUT",
-            data: {_id: _id}
+            data: {commentId: commentId, postId: postId}
         }).done((data) => {
             $t.parent().parent().remove();
         }).fail((e) => {

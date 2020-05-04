@@ -81,9 +81,10 @@ const postController = {
     },
 
     deleteComment: function(req, res) {
-        let _id = req.body._id;
+        let commentId = req.body.commentId;
+        let postId = req.body.postId;
 
-        helper.deleteComment(_id, res);
+        helper.deleteComment(commentId, postId, res);
     },
 
     openEdit: function(req, res) {

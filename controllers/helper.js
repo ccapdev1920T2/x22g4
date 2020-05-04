@@ -70,10 +70,24 @@ const helper = {
         });
     },
 
-    deleteComment(commentId, res) {
+    deleteComment(commentId, postId, res) {
         Comment.deleteOne({_id: commentId})
         .then((data) => {
-            res.send(true);
+            Post.updateOne({_id: postId}, {$inc: {numberOfComments: -1}, $pull: {comments: commentId}})
+            .then((data) => {
+                Post.findOne({_id: postId})
+                .populate('comments')
+                .exec((err, postResult) => {
+                    let latestComment = postResult.comments[postResult.comments.length - 1].text;
+                    let latestCommentAuthor = postResult.comments[postResult.comments.length - 1].author;
+                    console.log(latestComment);
+                    console.log(latestCommentAuthor);
+                    Post.updateOne({_id: postId}, {latestComment: latestComment, latestCommentAuthor: latestCommentAuthor})
+                    .then((data) => {
+                        res.send(true);
+                    })
+                })
+            })
         })
     },
 
