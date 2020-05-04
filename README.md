@@ -16,13 +16,7 @@ This web application requires internet to properly load BootstrapCDN.
 - This project uses Express, Handlebars, and MongoDB so it is recommended to make sure you have Node.JS installed and then conduct the following steps:
 > Navigate to the project folder and open cmd
 ```shell
-npm init
-```
-> Use defaults
-```shell
-npm install express --save
-npm install hbs --save
-npm install mongodb --save
+npm install
 ```
 > Add cat profiles and simulate log-in throught a default user
 ```shell
