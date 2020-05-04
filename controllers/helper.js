@@ -78,10 +78,14 @@ const helper = {
                 Post.findOne({_id: postId})
                 .populate('comments')
                 .exec((err, postResult) => {
-                    let latestComment = postResult.comments[postResult.comments.length - 1].text;
-                    let latestCommentAuthor = postResult.comments[postResult.comments.length - 1].author;
-                    console.log(latestComment);
-                    console.log(latestCommentAuthor);
+                    let latestComment = '';
+                    let latestCommentAuthor = '';
+
+                    if (postResult.comments !== undefined && postResult.comments.length > 0) {
+                        latestComment = postResult.comments[postResult.comments.length - 1].text;
+                        latestCommentAuthor = postResult.comments[postResult.comments.length - 1].author;
+                    }
+                    
                     Post.updateOne({_id: postId}, {latestComment: latestComment, latestCommentAuthor: latestCommentAuthor})
                     .then((data) => {
                         res.send(true);
