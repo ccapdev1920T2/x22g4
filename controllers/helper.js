@@ -2,31 +2,36 @@ const database = require('../models/database.js');
 const Post = require('../models/post.js');
 const User = require('../models/user.js');
 const Comment = require('../models/comment.js');
+const sanitize = require('mongo-sanitize');
 const fs = require('fs');
 
 
 const helper = {
 
+    sanitize: function (query) {
+        return sanitize(query);
+      },
+
     updateAvatar: function(username, avatar, res) {
         let extension = avatar.substring(avatar.lastIndexOf("."));
         let filename = avatar.split('.').slice(0, -1).join('.');
-        switch (extension) {
-            case '.jpg':
-                fs.unlink('./public/avatars/' + filename + '.png', (fds) => {});
-                fs.unlink('./public/avatars/' + filename + '.jpeg', (fds) => {});
-                break;
-            case '.png': 
-                fs.unlink('./public/avatars/' + filename + '.jpg', (fds) => {});
-                fs.unlink('./public/avatars/' + filename + '.jpeg', (fds) => {});
-                break;
-            case '.jpeg':
-                fs.unlink('./public/avatars/' + filename + '.png', (fds) => {});
-                fs.unlink('./public/avatars/' + filename + '.jpg', (fds) => {});
-                break;
-        }
-        
         User.updateOne({username: username}, {avatar: avatar})
         .then((a) => {
+            switch (extension) {
+                case '.jpg':
+                    fs.unlink('./public/avatars/' + filename + '.png', (fds) => {});
+                    fs.unlink('./public/avatars/' + filename + '.jpeg', (fds) => {});
+                    break;
+                case '.png': 
+                    fs.unlink('./public/avatars/' + filename + '.jpg', (fds) => {});
+                    fs.unlink('./public/avatars/' + filename + '.jpeg', (fds) => {});
+                    break;
+                case '.jpeg':
+                    fs.unlink('./public/avatars/' + filename + '.png', (fds) => {});
+                    fs.unlink('./public/avatars/' + filename + '.jpg', (fds) => {});
+                    break;
+            }
+
             res.send(true)
         })
     },
@@ -128,12 +133,14 @@ const helper = {
     deletePost: function(postId, username, res) {
         Post.findOne({_id: postId}, 'imageUrl')
         .exec((err, postResult) => {
-            fs.unlink('./public/postImgs/' + postResult.imageUrl, (callback) => {});
+            fs.unlink('./public/postImgs/' + postResult.imageUrl, (callback) => {
+                Post.deleteOne({_id: postId})
+                .then((a) => {
+                    res.redirect(true);
+                })
+            });
 
-            Post.deleteOne({_id: postId})
-            .then((a) => {
-                res.send(true);
-            })
+           
         })
 
         database.deleteMany(Comment, {parentPostId: postId});

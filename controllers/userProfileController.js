@@ -5,8 +5,7 @@ const User = require("../models/user.js");
 const userProfileController = {
 
     getUserProfile: function(req, res) {
-        console.log("fetching user " + req.params.username + "..." );
-        var query = {username: req.params.username};
+        var query = {username: helper.sanitize(req.params.username)};
 
         var projection = "username description avatar";
 
@@ -40,18 +39,22 @@ const userProfileController = {
     },
 
     editProfileDescription: function(req, res) {
-        let description = req.query.description;
+        let description = helper.sanitize(req.query.description);
         let details = {
-            description: description
+            description: description,
+            //Session
+            active_session: (req.session.user && req.cookies.user_sid), 
+            active_user: req.session.user,
+            current_user: (req.session.user == req.params.username),
+            //Session
         }
         res.render('partials/edit-desc.hbs', details);
     },
 
     submitEditProfileDescription: function(req, res) {
-        let description = req.body.description;
+        let description = helper.sanitize(req.body.description);
     
-        //login simulation
-        let username = 'default';
+        let username = req.session.user;
 
         helper.updateDescription(username, description, res);
     },
@@ -63,11 +66,11 @@ const userProfileController = {
             return;
         }
 
-        const username = req.params.username;
+        const username = req.session.user;
 
         var newName = username;
         var avatar = helper.renameImage(req, newName);
-        
+
         helper.updateAvatar(username, avatar, res);
     }
 

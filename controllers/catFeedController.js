@@ -25,12 +25,14 @@ const catFeedController = {
             return;
         }
 
-        const defaultUser = req.session.user; //JACOB THIS IS WHAT YOU CHANGED
-
+        const defaultUser = req.session.user; 
+        const postTitle = helper.sanitize(req.body.postTitle);
+        const caption = helper.sanitize(req.body.caption);
+    
         var post = new Post({
             author: defaultUser,
-            postTitle: req.body.postTitle,
-            caption: req.body.caption
+            postTitle: postTitle,
+            caption: caption
         });
     
         var newName = post._id;

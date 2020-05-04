@@ -7,9 +7,13 @@ const User = require('../models/user.js');
 const postController = {
     
     getPost: function(req, res) {
-        var query = {_id: req.params._id};
+        if(!(req.session.user && req.cookies.user_sid)) {
+            res.redirect('/login');
+            return;
+        }
+        let _id = helper.sanitize(req.params._id);
 
-        Post.findOne(query)
+        Post.findOne({_id: _id})
         .populate('comments')
         .lean()
         .exec((err, result) => {
@@ -74,9 +78,9 @@ const postController = {
 
     addComment: function(req, res) {
         //TODO: session username
-        let author = req.session.user;
-        let text = req.body.text;
-        let postId = req.body.postId;
+        let author = helper.sanitize(req.session.user);
+        let text = helper.sanitize(req.body.text);
+        let postId = helper.sanitize(req.body.postId);
 
         let newComment = new Comment({
             parentPostId: postId,
@@ -88,41 +92,52 @@ const postController = {
     },
 
     deleteComment: function(req, res) {
-        let _id = req.body._id;
+        let _id = helper.sanitize(req.body._id);
 
         helper.deleteComment(_id, res);
     },
 
     openEdit: function(req, res) {
+        let postTitle = helper.sanitize(req.query.postTitle);
+        let caption = helper.sanitize(req.query.caption);
         let details = {
-            postTitle: req.query.postTitle,
-            caption: req.query.caption
+            postTitle: postTitle,
+            caption: caption,
+            //Session
+            active_session: (req.session.user && req.cookies.user_sid), 
+            active_user: req.session.user,
+            current_user: (req.session.user == req.params.username),
+            //Session
         };
 
         res.render('partials/editPost.hbs', details)
     },
 
     saveEdit: function(req, res) {
-        helper.updatePost(req.body.postId, req.body.postTitle, req.body.caption, res);
+        let postId = helper.sanitize(req.body.postId);
+        let postTitle = helper.sanitize(req.body.postTitle);
+        let caption = helper.sanitize(req.body.caption);
+
+        helper.updatePost(postId, postTitle, caption, res);
     },
 
     likePost: function(req, res) {
-        let username = req.session.user;
-        let postId = req.body.postId;
+        let username = helper.sanitize(req.session.user);
+        let postId = helper.sanitize(req.body.postId);
 
         helper.likePost(postId, username, res);
     },
 
     unlikePost: function(req, res) {
-        let username = req.session.user;
-        let postId = req.body.postId;
+        let username = helper.sanitize(req.session.user);
+        let postId = helper.sanitize(req.body.postId);
 
         helper.unlikePost(postId, username, res);
     },
 
     deletePost: function(req, res) {
-        let username = req.session.user;
-        let postId = req.body.postId; 
+        let username = helper.sanitize(req.session.user);
+        let postId = helper.sanitize(req.body.postId); 
 
         helper.deletePost(postId, username, res);
       

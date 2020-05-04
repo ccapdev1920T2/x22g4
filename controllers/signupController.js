@@ -2,24 +2,22 @@ const bcrypt = require('bcrypt');
 
 const database = require("../models/database.js");
 const session = require('express-session');
-
+const helper = require('./helper.js');
 const User = require("../models/user.js");
 
 const signupController = {
 
     getSignup: function(req, res) {
-        console.log('fetching singup page...');
         res.render('signup', {
             signup_active: true,
         });
     },
 
     postSignup: function(req, res) {
-        console.log("post sign up");
-        var username = req.body.username;
-        var password = req.body.password;
-        var email = req.body.email;
-        var description = req.body.description;
+        var username = helper.sanitize(req.body.username);
+        var password = helper.sanitize(req.body.password);
+        var email = helper.sanitize(req.body.email);
+        var description = helper.sanitize(req.body.description);
 
         bcrypt.hash(password, 10, function(err, hash) {
 
@@ -38,7 +36,7 @@ const signupController = {
     },
 
     getCheckUsername: function(req, res) {
-        var username = req.query.username;
+        var username = helper.sanitize(req.query.username);
 
         database.findOne(User, {username: username}, 'username', function(result) {
             res.send(result);

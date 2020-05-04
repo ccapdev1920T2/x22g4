@@ -6,8 +6,9 @@ const fs = require('fs')
 database.connect();
 
 
-fs.unlink('./public/avatars/undefined.jpg', (fds) => {})
-
+database.findOne(User, {username: 'tester'}, {}, (data) => {
+    console.log(data);
+})
 //database.updateOne(Post, {_id: '5ea4392d8c4d733014dab255'}, {
 //    $inc: {numberOfMeowts: 5}
 //});

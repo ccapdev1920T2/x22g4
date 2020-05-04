@@ -1,16 +1,16 @@
 const database = require("../models/database.js");
-
+const helper = require('./helper.js');
 const Cat = require("../models/cat.js");
 
 const catProfileController = {
 
     getCatProfile: function (req, res) {
         console.log("getting profile");
-        var query = {name: req.params.name};
+        let name = helper.sanitize(req.params.name);
 
         var projection = "name age imageUrl gender shortDescription yourCatDescription pusaThoughts notableQuotes adoptionStatus location";
 
-        database.findOne(Cat, query, projection, function(result) {
+        database.findOne(Cat, {name: name}, projection, function(result) {
             if (result == null) {
                 console.log('no profile returned');
                 res.render('404');

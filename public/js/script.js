@@ -6,21 +6,35 @@ $(document).ready(function(){
     //=========================================================================================
 
     $("#login-btn").click(function() {
-        var loginEntryForms = document.getElementById("login-forms");
+        let username = $('#username').val();
+        let password = $('#password').val();
 
         if (!loginFormsAreComplete()) {
             alert("Required fields!");
             return;
         }
 
-        loginEntryForms.submit();
+        $.ajax({
+            url: '/login',
+            method: 'POST',
+            data: {username: username, password: password}
+        }).done((data) => {
+            if (data) {
+                window.location.replace('/')
+            } else {
+                $('#login-error').text('Incorrect username or password!');
+            }
+            
+        }).fail((e) => {
+            
+        })
     });
 
     function loginFormsAreComplete() {
         var isComplete = true;
     
-        var loginUserNameForm = document.getElementById("login-username");
-        var loginPasswordForm = document.getElementById("login-password");
+        var loginUserNameForm = document.getElementById("username");
+        var loginPasswordForm = document.getElementById("password");
         
         loginUserNameForm.style.backgroundColor = "white";
         loginPasswordForm.style.backgroundColor = "white";
