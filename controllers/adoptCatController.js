@@ -27,7 +27,10 @@ const adoptCatController = {
 
                         //Session
                         active_session: (req.session.user && req.cookies.user_sid), 
-                        active_user: req.session.user
+                        active_user: req.session.user,
+
+                        //NAV
+                        adopt_active: true,
                     });
                 });
             });

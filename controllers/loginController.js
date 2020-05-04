@@ -11,7 +11,9 @@ const loginController = {
 
     getLogin: function(req, res) {
         console.log('fetching login page...');
-        res.render('login');
+        res.render('login', {
+          login_active: true,
+        });
     },
 
     postLogin: function(req, res) {

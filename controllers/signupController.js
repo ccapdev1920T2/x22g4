@@ -9,7 +9,9 @@ const signupController = {
 
     getSignup: function(req, res) {
         console.log('fetching singup page...');
-        res.render('signup');
+        res.render('signup', {
+            signup_active: true,
+        });
     },
 
     postSignup: function(req, res) {
