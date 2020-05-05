@@ -152,8 +152,8 @@ app.get('/addComment', postController.addComment);
 app.put('/deleteComment', postController.deleteComment);
 app.get('/openEdit', postController.openEdit);
 app.put('/saveEdit', postController.saveEdit);
-app.put('/likePost', postController.likePost);
-app.put('/unlikePost', postController.unlikePost);
+app.get('/likePost', postController.likePost);
+app.get('/unlikePost', postController.unlikePost);
 app.put('/deletePost', postController.deletePost);
 
 //Donate-Feed

@@ -82,7 +82,7 @@ const postController = {
         let postId = helper.sanitize(req.query.commentPostId);
         let js = (req.query.js != null);
         
-        
+
         let newComment = new Comment({
             parentPostId: postId,
             author: author,
@@ -125,16 +125,22 @@ const postController = {
 
     likePost: function(req, res) {
         let username = helper.sanitize(req.session.user);
-        let postId = helper.sanitize(req.body.postId);
+        let postId = helper.sanitize(req.query.meowtPostId);
+        let js = (req.query.js != null);
 
-        helper.likePost(postId, username, res);
+        console.log("like: " + postId);
+
+        helper.likePost(postId, username, res, js);
     },
 
     unlikePost: function(req, res) {
         let username = helper.sanitize(req.session.user);
-        let postId = helper.sanitize(req.body.postId);
+        let postId = helper.sanitize(req.query.meowtPostId);
+        let js = (req.query.js != null);
 
-        helper.unlikePost(postId, username, res);
+        console.log("like: " + postId);
+
+        helper.unlikePost(postId, username, res, js);
     },
 
     deletePost: function(req, res) {

@@ -164,7 +164,7 @@ $(document).ready(function(){
     }
 
     $('#post-forms').submit(function(e) {
-        e.preventDefault();
+
         var file = document.getElementById("file");
         if (file.files[0].size >  (1048576 * 4)) {
             message.innerText = "Image should not be bigger than 4MB";
@@ -271,15 +271,16 @@ $(document).ready(function(){
     // Meowt Logic
     //=========================================================================================
 
-    $('.card-body').on('click', '#like-btn', function() {
-        //not sure if sessions is on server or client side but i'll just put checkers on both sides just in case
-        let username = 'default';
-        let postId = $('#postId').text();
+    $('.card-body').on('click', '#like-btn',function(e) {
+        e.preventDefault();
+        let meowtPostId = $('#postId').text();
 
         $('#numberOfMeowts').text(parseInt($('#numberOfMeowts').text()) + 1)
 
-        $('#like-btn').replaceWith(
-            "<button id='unlike-btn' type='button' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>"
+        $('#likeForm').replaceWith(
+            "<form id='unlikeForm' name='unlikeForm' method='GET' action='/unlikePost'>" +
+                "<button id='unlike-btn' type='submit' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>" +
+            "</form>"
         );
 
         $('#unlike-btn').prop('disabled', true);
@@ -290,8 +291,8 @@ $(document).ready(function(){
 
         $.ajax({
             url: "/likePost",
-            type: "PUT",
-            data: {username: username, postId: postId}
+            type: "GET",
+            data: {meowtPostId: meowtPostId, js: true}
           }).done((e) => {
             $('#unlike-btn').prop('disabled', false);
           }).fail((e) => {
@@ -300,15 +301,18 @@ $(document).ready(function(){
         
     }) 
 
-    $('.card-body').on('click', '#unlike-btn', function() {
+    $('.card-body').on('click', '#unlike-btn', function(e) {
+        e.preventDefault();
         //not sure if sessions is on server or client side but i'll just put checkers on both sides just in case
         let username = 'default';
-        let postId = $('#postId').text();
+        let meowtPostId = $('#postId').text();
 
         $('#numberOfMeowts').text(parseInt($('#numberOfMeowts').text()) - 1)
 
-        $('#unlike-btn').replaceWith(
-            "<button id='like-btn' type='button' class='btn btn-outline-danger'> <i class='fas fa-heart'></i> </button>"
+        $('#unlikeForm').replaceWith(
+            "<form id='likeForm' name='likeForm' method='GET' action='/likePost'>" +
+                "<button id='like-btn' type='submit' class='btn btn-outline-danger'> <i class='fas fa-heart'></i> </button>" +
+            "</form>"
         );
         $('#like-btn').prop('disabled', true);
 
@@ -318,8 +322,8 @@ $(document).ready(function(){
 
         $.ajax({
             url: "/unlikePost",
-            type: "PUT",
-            data: {username: username, postId: postId}
+            type: "GET",
+            data: {meowtPostId: meowtPostId, js: true}
           }).done((e) => {
             $('#like-btn').prop('disabled', false);
           }).fail((e) => {

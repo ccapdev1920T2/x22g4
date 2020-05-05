@@ -133,22 +133,31 @@ const helper = {
         })
     },
 
-    likePost: function(postId, username, res) {
+    likePost: function(postId, username, res, js) {
         Post.updateOne({_id: postId}, {$inc: {numberOfMeowts: 1}})
         .then((a) => {
             User.updateOne({username: username}, {$addToSet: {meowtedPosts: postId}})
             .then((b) => {
-                res.send(true);
+                if (js) {
+                    res.send(true);
+                } else {
+                    res.redirect('/post/' + postId);
+                }
+                
             })
         })  
     },
 
-    unlikePost: function(postId, username, res) {
+    unlikePost: function(postId, username, res, js) {
         Post.updateOne({ _id: postId }, { $inc: { numberOfMeowts: -1 } })
         .then((a) => {
             User.updateOne({ username: username }, { $pull: { meowtedPosts: postId } })
                 .then((b) => {
-                    res.send(true);
+                    if (js) {
+                        res.send(true);
+                    } else {
+                        res.redirect('/post/' + postId);
+                    }
                 });
         });
     },

@@ -19,12 +19,21 @@
                                 <button type="button" class="btn btn-outline-danger" name="delete-post-btn" id="delete-post-btn" style="float: right;">Delete Post</button> 
                             {{/if}}
                             <hr>
-                            <div class="d-flex" style="align-items: center;">
-                            {{#if userLiked}}
-                                <button id='unlike-btn' type='button' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>
-                            {{else}}
-                                <button id="like-btn" type="button" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> </button>
-                            {{/if}}
+                            <div id="likingForms" class="d-flex" style="align-items: center;">
+                                
+                                    {{#if userLiked}}
+                                        <form id="unlikeForm" name="unlikeForm" method="GET" action="/unlikePost">
+                                            <button id='unlike-btn' type='submit' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>
+                                            <textarea id="meowtPostId" name="meowtPostId" readonly="readonly" style="display: none;">{{_id}}</textarea>
+                                        </form>
+                                    {{else}}
+                                        <form id="likeForm" name="likeForm" method="GET" action="/likePost">
+                                            <button id="like-btn" type="submit" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> </button>
+                                            <textarea id="meowtPostId" name="meowtPostId" readonly="readonly" style="display: none;">{{_id}}</textarea>
+                                        </form>
+                                    {{/if}}
+                                     
+                                
                                 <span id="meowtedInfo" style="padding-left: 10px;">
                                 Meowted by <b>{{numberOfMeowts}}</b>
                                 </span>
