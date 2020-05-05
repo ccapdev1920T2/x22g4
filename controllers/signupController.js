@@ -5,6 +5,8 @@ const session = require('express-session');
 const helper = require('./helper.js');
 const User = require("../models/user.js");
 
+const { validationResult } = require('express-validator');
+
 const signupController = {
 
     getSignup: function(req, res) {
@@ -14,6 +16,19 @@ const signupController = {
     },
 
     postSignup: function(req, res) {
+        let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            errors = errors.errors;
+
+            res.render('signup', {
+                signup_active: true,
+                signupErrorMessage: errors[0].msg
+            });
+
+            return;
+        }
+
         var username = helper.sanitize(req.body.username);
         var password = helper.sanitize(req.body.password);
         var email = helper.sanitize(req.body.email);

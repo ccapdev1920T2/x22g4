@@ -19,6 +19,8 @@ const userProfileController = require("../controllers/userProfileController.js")
 const catFeedController = require("../controllers/catFeedController.js");
 const postController = require("../controllers/postController.js");
 
+const signupValidator = require("../validators/signupValidator.js");
+
 //Multer image processing
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -122,7 +124,7 @@ app.get('/logout', function(req, res) {
 
 //Signup Route
 app.get('/signup', signupController.getSignup);
-app.post('/signup', signupController.postSignup);
+app.post('/signup', signupValidator.signupValidation(), signupController.postSignup);
 
 app.get('/getCheckUsername', signupController.getCheckUsername);
 

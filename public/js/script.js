@@ -6,8 +6,8 @@ $(document).ready(function(){
     //=========================================================================================
 
     $("#login-btn").click(function() {
-        let username = $('#username').val();
-        let password = $('#password').val();
+        let username = $('#loginUsername').val();
+        let password = $('#loginPassword').val();
 
         if (!loginFormsAreComplete()) {
             alert("Required fields!");
@@ -33,8 +33,8 @@ $(document).ready(function(){
     function loginFormsAreComplete() {
         var isComplete = true;
     
-        var loginUserNameForm = document.getElementById("username");
-        var loginPasswordForm = document.getElementById("password");
+        var loginUserNameForm = document.getElementById("loginUsername");
+        var loginPasswordForm = document.getElementById("loginPassword");
         
         loginUserNameForm.style.backgroundColor = "white";
         loginPasswordForm.style.backgroundColor = "white";
@@ -60,14 +60,8 @@ $(document).ready(function(){
         $("#signup-forms")[0].reset();
     } catch (err) {}
     
-
-    $("#sign-up-btn").click(function () {
-        var entryForms = document.getElementById("signup-forms");
-
-        if (!formsAreComplete()) {
-            $('#signup-error').text('Please fill out required fields')
-            return;
-        }
+    $('#sign-up-btn').submit((e) => {
+        e.preventDefault();
 
         if (!usernameIsValid()) {
             return;
@@ -86,7 +80,8 @@ $(document).ready(function(){
         }
         
         entryForms.submit();
-    });
+
+    })
 
     function usernameIsValid() {
         var username = $('#username').val();
