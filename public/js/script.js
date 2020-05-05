@@ -333,15 +333,14 @@ $(document).ready(function(){
     // Delte Post Logic
     //=========================================================================================
 
-    $('#delete-post-btn').click( function() {
-        //to simulate session login
-        let username = 'default';
-        let postId = $('#postId').text();
+    $('#delete-post-btn').click( function(e) {
+        e.preventDefault();
+        let deletePostId = $('#postId').text();
 
         $.ajax({
             url: '/deletePost',
-            type: 'PUT',
-            data: {postId: postId, username: username}
+            type: 'POST',
+            data: {deletePostId: deletePostId, js: true}
           }).done((e) => {
             window.location.replace("/catFeed");
           }).fail((e) => {

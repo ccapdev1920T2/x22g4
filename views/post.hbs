@@ -16,7 +16,10 @@
                             <p id="caption" name="caption" class="card-text" style="margin-bottom: 0.2em;">{{caption}}</p>
                             {{#if userOwnsPost}}
                                 <button type="button" class="btn btn-danger" name="edit-post-btn" id="edit-post-btn">Edit Post</button> 
-                                <button type="button" class="btn btn-outline-danger" name="delete-post-btn" id="delete-post-btn" style="float: right;">Delete Post</button> 
+                                <form id="deletePostForm" name="deletePostForm" method="POST" action="/deletePost">
+                                    <button type="submit" class="btn btn-outline-danger" name="delete-post-btn" id="delete-post-btn" style="float: right;">Delete Post</button>
+                                    <textarea id="deletePostId" name="deletePostId" readonly="readonly" style="display: none;">{{_id}}</textarea> 
+                                </form>
                             {{/if}}
                             <hr>
                             <div id="likingForms" class="d-flex" style="align-items: center;">

@@ -167,13 +167,18 @@ const helper = {
         });
     },
 
-    deletePost: function(postId, username, res) {
+    deletePost: function(postId, username, res, js) {
         Post.findOne({_id: postId}, 'imageUrl')
         .exec((err, postResult) => {
             fs.unlink('./public/postImgs/' + postResult.imageUrl, (callback) => {
                 Post.deleteOne({_id: postId})
                 .then((a) => {
-                    res.redirect(true);
+                    if (js) {
+                        res.redirect(true);
+                    } else  {
+                        res.redirect('/catFeed');
+                    }
+                    
                 })
             });
 

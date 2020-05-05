@@ -152,9 +152,10 @@ const postController = {
 
     deletePost: function(req, res) {
         let username = helper.sanitize(req.session.user);
-        let postId = helper.sanitize(req.body.postId); 
+        let deletePostId = helper.sanitize(req.body.deletePostId); 
+        let js = (req.body.js != null);
 
-        helper.deletePost(postId, username, res);
+        helper.deletePost(deletePostId, username, res, js);
       
     }
 }

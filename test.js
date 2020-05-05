@@ -21,6 +21,6 @@ database.findMany(Comment, {}, {}, (result) => {
     console.log(result)
 }) */
 
-database.findMany(Comment, {}, {}, (result) => {
+database.findMany(Post, {}, {}, (result) => {
     console.log(result)
 })
