@@ -52,7 +52,7 @@ const helper = {
         })
       },
 
-    insertComment: function(postId, comment, req, res) {
+    insertComment: function(postId, comment, req, res, js) {
         database.insertOne(Comment, comment, function(insertedComment){
             console.log("ID:" + postId);
             
@@ -76,7 +76,12 @@ const helper = {
                     //Session
 
                 };
-                res.render('partials/commentItem.hbs', details);
+                if (js) {
+                    res.render('partials/commentItem.hbs', details);
+                } else {
+                    res.redirect('/post/' + postId);
+                }
+                
                }) 
         });
     },

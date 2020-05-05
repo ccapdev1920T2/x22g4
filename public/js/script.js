@@ -35,8 +35,9 @@ $(document).ready(function(){
         $("#signup-forms")[0].reset();
     } catch (err) {}
     
-    $('#sign-up-btn').submit((e) => {
+    $('#signup-forms').submit((e) => {
         e.preventDefault();
+        console.log('jkfld;sajfkldsajfkl;dsajfklsd;j')
 
         if (!usernameIsValid()) {
             return;
@@ -184,24 +185,17 @@ $(document).ready(function(){
         //only executes when not in post page
     }
 
-    $('#comment-submit-btn').click(function() {
-        //TODO: check if logged in
-        let username = 'default';
-        let text = $('#comment').val();
-        let postId = $('#postId').text();
+    $('#comment-form').submit(function(e) {
+        e.preventDefault();
 
-        if(text.trim() == '') {
-            $('#comment').css('background-color', 'pink');
-            return;
-        }
-
-        $('#comment').css('background-color', 'white');
-        $('#comment').val("");
+        let comment = $('#comment').val();
+        let commentPostId = $('#commentPostId').val();
+        console.log('is clicked')
 
         $.ajax({
             url: "/addComment",
-            type: "PUT",
-            data: {username: username, postId: postId, text: text}
+            type: "GET",
+            data: {commentPostId: commentPostId, comment: comment, js: true}
           }).done((data) => {
             $('#comments-container').append(data);
           }).fail((e) => {

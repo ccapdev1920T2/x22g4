@@ -77,18 +77,19 @@ const postController = {
     },
 
     addComment: function(req, res) {
-        //TODO: session username
         let author = helper.sanitize(req.session.user);
-        let text = helper.sanitize(req.body.text);
-        let postId = helper.sanitize(req.body.postId);
-
+        let text = helper.sanitize(req.query.comment);
+        let postId = helper.sanitize(req.query.commentPostId);
+        let js = (req.query.js != null);
+        
+        
         let newComment = new Comment({
             parentPostId: postId,
             author: author,
             text: text
         });
 
-        helper.insertComment(postId, newComment, req, res);
+        helper.insertComment(postId, newComment, req, res, js);
     },
 
     deleteComment: function(req, res) {

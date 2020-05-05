@@ -40,19 +40,17 @@
             <div class="col">
             <div class="card">
                 <div class="card-body">
-
+                    <!--TODO: fix CSS-->
                     <div class="row h-100">
-                        
-                        <div class="col-10">
-                            <input class="text-submission" type="text" id="comment" name="comment" placeholder="Comment" style="width: 100%;">
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-danger" id="comment-submit-btn" name="comment-submit-btn">Submit</button>
-                        </div>
-                        <div>
-                            
-                        </div>
-                        
+                        <form id="comment-form" name="comment-form" method="GET" action="/addComment">
+                            <div class="col-10">
+                                <input class="text-submission" type="text" id="comment" name="comment" placeholder="Comment" style="width: 100%;" required>
+                                <textarea id="commentPostId" name="commentPostId" readonly="readonly" style="display: none;">{{_id}}</textarea>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-danger" id="comment-submit-btn" name="comment-submit-btn">Submit</button>
+                            </div>
+                        </form>     
                     </div>
                     <hr style="margin-top: 1em; margin-bottom: 1em;">
                     <div id="comments-container">
