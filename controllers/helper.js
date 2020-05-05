@@ -86,7 +86,7 @@ const helper = {
         });
     },
 
-    deleteComment(commentId, postId, res) {
+    deleteComment(commentId, postId, res, js) {
         Comment.deleteOne({_id: commentId})
         .then((data) => {
             Post.updateOne({_id: postId}, {$inc: {numberOfComments: -1}, $pull: {comments: commentId}})
@@ -104,7 +104,12 @@ const helper = {
                     
                     Post.updateOne({_id: postId}, {latestComment: latestComment, latestCommentAuthor: latestCommentAuthor})
                     .then((data) => {
-                        res.send(true);
+                        if (js) {
+                            res.send(true);
+                        } else {
+                            res.redirect('/post/' + postId);
+                        }
+                        
                     })
                 })
             })

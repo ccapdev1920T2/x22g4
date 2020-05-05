@@ -6,10 +6,9 @@
     </div>
     {{#if userOwnsComment}}
     <div class="p-2">
-        <form id="deleteCommentForm" name="deleteCommentForm" method="GET">
+        <form id="deleteCommentForm" name="deleteCommentForm" method="GET" action="/deleteComment">
             <button id="delete-comment-btn" name="delete-comment-btn" class="btn btn-outline-danger">Delete</button>
-            <textarea readonly="readonly" id="deleteCommentId" name="deleteCommentId" style="display: none;">{{_id}}</textarea>
-            <textarea readonly="readonly" id="deleteCommentPostParentId" name="deleteCommentPostParentId" style="display: none;">{{postParentId}}</textarea>
+            <textarea readonly="readonly" id="commentId" name="commentId" style="display: none;">{{_id}}</textarea>
         </form>
     </div>
     {{/if}}

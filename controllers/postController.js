@@ -44,6 +44,7 @@ const postController = {
                         _id: result.comments[i]._id,
                         author: result.comments[i].author,
                         text: result.comments[i].text,
+                        parentPostId: result.comments[i].parentPostId,
                         userOwnsComment: userOwnsComment
                     }
                     comments.push(comment);
@@ -93,10 +94,16 @@ const postController = {
     },
 
     deleteComment: function(req, res) {
-        let commentId = helper.sanitize(req.body.commentId);
-        let postId = helper.sanitize(req.body.postId);
+        let commentId = helper.sanitize(req.query.commentId);
+        let postId = helper.sanitize(req.query.postId);
+        let js = (req.query.js != null);
 
-        helper.deleteComment(commentId, postId, res);
+        Comment.findOne({_id: commentId})
+        .exec((err, commentResult) => {
+            helper.deleteComment(commentId, commentResult.parentPostId, res, js);
+        })
+
+        
     },
 
     openEdit: function(req, res) {

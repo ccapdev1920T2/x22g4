@@ -207,16 +207,16 @@ $(document).ready(function(){
     $('#comments-container').on('click', '#delete-comment-btn', function(e) {
         e.preventDefault();
         var $t = $(this);
-        var commentId = $(this).parent().find('p:nth-child(2)').val();
-        let postId = $(this).parent().find('p:nth-child(3)').val();
+        var commentId = $(this).parent().find('textarea:nth-child(2)').val();
+        let postId = $('#postId').text();
 
         $(this).prop('disabled', true);
         $.ajax({
             url: "/deleteComment",
             type: "GET",
-            data: {commentId: commentId, postId: postId}
+            data: {commentId: commentId, postId: postId, js: true}
         }).done((data) => {
-            $t.parent().parent().remove();
+            $t.parent().parent().parent().remove();
         }).fail((e) => {
 
         })
