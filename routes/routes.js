@@ -141,7 +141,7 @@ app.get('/profile/:username', userProfileController.getUserProfile);
 app.get('/openChangeAvatar', userProfileController.openChangeAvatar);
 app.post('/profile/:username', avatarUpload, userProfileController.submitAvatar);
 app.get('/editProfileDescription', userProfileController.editProfileDescription);
-app.put('/submitEditProfileDescription', userProfileController.submitEditProfileDescription);
+app.get('/submitEditProfileDescription', userProfileController.submitEditProfileDescription);
 
 
 app.get('/catFeed/top', catFeedController.getCatFeedTop);

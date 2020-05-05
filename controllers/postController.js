@@ -20,7 +20,7 @@ const postController = {
         let author = helper.sanitize(req.session.user);
         let text = helper.sanitize(req.query.comment);
         let postId = helper.sanitize(req.query.commentPostId);
-        let addCommentJs = (req.query.js != null);
+        let addCommentJs = (req.query.addCommentJs != null);
         
 
         let newComment = new Comment({
@@ -35,7 +35,7 @@ const postController = {
     deleteComment: function(req, res) {
         let commentId = helper.sanitize(req.query.commentId);
         let postId = helper.sanitize(req.query.postId);
-        let deleteCommentJs = (req.query.js != null);
+        let deleteCommentJs = (req.query.deleteCommentJs != null);
 
         Comment.findOne({_id: commentId})
         .exec((err, commentResult) => {
@@ -45,10 +45,10 @@ const postController = {
         
     },
 
-    openEdit: function(req, res, js) {
+    openEdit: function(req, res) {
         let postTitle = helper.sanitize(req.query.postTitle);
         let caption = helper.sanitize(req.query.caption);
-        let openEditJs = (req.query.js != null);
+        let openEditJs = (req.query.openEditJs != null);
 
         if (openEditJs) {
             let details = {
@@ -83,29 +83,29 @@ const postController = {
     likePost: function(req, res) {
         let username = helper.sanitize(req.session.user);
         let postId = helper.sanitize(req.query.meowtPostId);
-        let js = (req.query.js != null);
+        let likePostJs = (req.query.likePostJs != null);
 
         console.log("like: " + postId);
 
-        helper.likePost(postId, username, res, js);
+        helper.likePost(postId, username, res, likePostJs);
     },
 
     unlikePost: function(req, res) {
         let username = helper.sanitize(req.session.user);
         let postId = helper.sanitize(req.query.meowtPostId);
-        let js = (req.query.js != null);
+        let unlikePostJs = (req.query.unlikePostJs != null);
 
         console.log("like: " + postId);
 
-        helper.unlikePost(postId, username, res, js);
+        helper.unlikePost(postId, username, res, unlikePostJs);
     },
 
     deletePost: function(req, res) {
         let username = helper.sanitize(req.session.user);
         let deletePostId = helper.sanitize(req.body.deletePostId); 
-        let js = (req.body.js != null);
+        let deletePostJs = (req.body.deletePostJs != null);
 
-        helper.deletePost(deletePostId, username, res, js);
+        helper.deletePost(deletePostId, username, res, deletePostJs);
       
     }
 }

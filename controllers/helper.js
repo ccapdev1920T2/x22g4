@@ -45,10 +45,14 @@ const helper = {
         return newName + extension;
     },
 
-    updateDescription: function (username, description, res) {
+    updateDescription: function (username, description, res, submitEditProfileDescriptionJs) {
         User.updateOne({username: username}, {description: description})
         .then((a) => {
-            res.send(true);
+            if (submitEditProfileDescriptionJs) {
+                res.send(true);
+            } else {
+                res.redirect('/profile/' + username);
+            }
         })
       },
 

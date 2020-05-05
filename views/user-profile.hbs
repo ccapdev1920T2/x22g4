@@ -29,7 +29,18 @@
             <p class="profile-mini-header center"><i class="fas fa-address-card"></i> About Me</p>
             <p id="your-desc" name="your-desc">{{description}}</p>
             {{#if userOwnsProfile}}
-                <button type="button" class="btn btn-danger" name="edit-description" id="edit-description">Edit Description</button>
+                {{#if openEditProfileDescription}}
+                    <div id='edit-description-forms'>  
+                        <form id="submitEditProfileDescriptionForm" name="submitEditProfileDescriptionForm" method="GET" action="submitEditProfileDescription">
+                            <textarea class='text-submission' id='descriptionEditForm' name='descriptionEditForm' placeholder='Edit Description' style='width: 100%; max-width: 100%;' rows='2'>{{description}}</textarea>
+                            <button type='submit' class='btn btn-danger' name='edit-description-submit' id='edit-description-submit'>Save</button>
+                        </form>
+                    </div>
+                {{else}}
+                    <form id="openEditProfileDescriptionForm" name="openEditProfileDescriptionForm" method="GET" action="/editProfileDescription">
+                        <button type="submit" class="btn btn-danger" name="edit-description" id="edit-description">Edit Description</button>
+                    </form>
+                {{/if}}
             {{/if}}
         </div>
     </div>

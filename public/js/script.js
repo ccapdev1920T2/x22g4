@@ -192,7 +192,7 @@ $(document).ready(function(){
         let commentPostId = $('#commentPostId').val();
         $('#comment-submit-btn').prop('disabled', true);
 
-        $.get('/addComment', {commentPostId: commentPostId, comment: comment, js: true}, (data, status) => {
+        $.get('/addComment', {commentPostId: commentPostId, comment: comment, addCommentJs: true}, (data, status) => {
             $('#comment').val('');
             $('#comments-container').append(data);
             $('#comment-submit-btn').prop('disabled', false);
@@ -214,7 +214,7 @@ $(document).ready(function(){
         $.ajax({
             url: "/deleteComment",
             type: "GET",
-            data: {commentId: commentId, postId: postId, js: true}
+            data: {commentId: commentId, postId: postId, deleteCommentJs: true}
         }).done((data) => {
             $t.parent().parent().parent().remove();
         }).fail((e) => {
@@ -233,7 +233,7 @@ $(document).ready(function(){
 
         let postTitle = $('#postTitle').text();
         let caption = $('#caption').text();
-        $.get('/openEdit', {postTitle: postTitle, caption: caption, js: true}, (data) => {
+        $.get('/openEdit', {postTitle: postTitle, caption: caption, openEditJs: true}, (data) => {
             $(this).replaceWith(data)
         })
     })
@@ -296,7 +296,7 @@ $(document).ready(function(){
         $.ajax({
             url: "/likePost",
             type: "GET",
-            data: {meowtPostId: meowtPostId, js: true}
+            data: {meowtPostId: meowtPostId, likePostJs: true}
           }).done((e) => {
             $('#unlike-btn').prop('disabled', false);
           }).fail((e) => {
@@ -327,7 +327,7 @@ $(document).ready(function(){
         $.ajax({
             url: "/unlikePost",
             type: "GET",
-            data: {meowtPostId: meowtPostId, js: true}
+            data: {meowtPostId: meowtPostId, unlikePostJs: true}
           }).done((e) => {
             $('#like-btn').prop('disabled', false);
           }).fail((e) => {
@@ -346,7 +346,7 @@ $(document).ready(function(){
         $.ajax({
             url: '/deletePost',
             type: 'POST',
-            data: {deletePostId: deletePostId, js: true}
+            data: {deletePostId: deletePostId, deletePostJs: true}
           }).done((e) => {
             window.location.replace("/catFeed");
           }).fail((e) => {
@@ -355,39 +355,38 @@ $(document).ready(function(){
           
     }) 
 
-    $('.col-md-8').on('click', "#edit-description", () => {
-        let description = $('#your-desc').text();
-        
-        $.get('/editProfileDescription', {description: description}, (data) => {
-            $('#edit-description').replaceWith(data);
-        })
-    })
-
     //=========================================================================================
     // Edit Profile Logic
     //=========================================================================================
 
-    $('#edit-description-submit').click(() => {
-        let description = $('#descriptionEditForm').val();
+    $('.col-md-8').on('click', "#edit-description", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
-        //login simulation
-        let username = 'default';
+        let description = $('#your-desc').text();
+        
+        $.get('/editProfileDescription', {description: description, editProfileDescriptionJs: true}, (data) => {
+            $('#edit-description').replaceWith(data);
+        })
+    })
+
+    $('#edit-description-submit').click((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        let descriptionEditForm = $('#descriptionEditForm').val();
 
         $.ajax({
             url: '/submitEditProfileDescription',
-            type: 'PUT',
-            data: {description: description, username: username}
+            type: 'GET',
+            data: {descriptionEditForm: descriptionEditForm, submitEditProfileDescriptionJs: true}
           }).done((a) => {
             $('#edit-description-forms').replaceWith(
                 "<button type='button' class='btn btn-danger' name='edit-description' id='edit-description'>Edit Description</button>"
             );
 
-            $('#your-desc').text(description);
+            $('#your-desc').text(descriptionEditForm);
           })
-
-       
-
-        
     })
 
     $('#change-avatar').click((e) => {

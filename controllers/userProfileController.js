@@ -6,32 +6,39 @@ const userProfileController = {
 
     getUserProfile: function(req, res) {
         let username = helper.sanitize(req.params.username);
-        invokeUser(username, req, res, false, "");
+        invokeUser(username, req, res, false, false, "");
     },
 
     editProfileDescription: function(req, res) {
         let description = helper.sanitize(req.query.description);
-        let details = {
-            description: description,
-            //Session
-            active_session: (req.session.user && req.cookies.user_sid), 
-            active_user: req.session.user,
-            current_user: (req.session.user == req.params.username),
-            //Session
+        let editProfileDescriptionJs = (req.query.editProfileDescriptionJs != null);
+
+        if (editProfileDescriptionJs) {
+            let details = {
+                description: description,
+                //Session
+                active_session: (req.session.user && req.cookies.user_sid), 
+                active_user: req.session.user,
+                current_user: (req.session.user == req.params.username),
+                //Session
+            }
+            res.render('partials/edit-desc.hbs', details);
+        } else {
+            invokeUser(req.session.user, req, res, false, true, '');
         }
-        res.render('partials/edit-desc.hbs', details);
+        
     },
 
     submitEditProfileDescription: function(req, res) {
-        let description = helper.sanitize(req.body.description);
-    
+        let descriptionEditForm = helper.sanitize(req.query.descriptionEditForm);
         let username = req.session.user;
+        let submitEditProfileDescriptionJs = (req.query.submitEditProfileDescriptionJs != null);
 
-        helper.updateDescription(username, description, res);
+        helper.updateDescription(username, descriptionEditForm, res, submitEditProfileDescriptionJs);
     },
 
     openChangeAvatar: function(req, res) {
-        invokeUser(req.session.user, req, res, true);
+        invokeUser(req.session.user, req, res, true, false, '');
     },
 
     submitAvatar: function(req, res) {
@@ -41,7 +48,8 @@ const userProfileController = {
         }
 
         if (req.file.size >  (1048576 * 2)) {
-            invokeUser(req.session.user, req, res, false, 'File should not be bigger than 2MB')
+            invokeUser(req.session.user, req, res, false, false, 'File should not be bigger than 2MB');
+            return;
         }
 
         const username = req.session.user;
@@ -56,7 +64,7 @@ const userProfileController = {
 
 module.exports = userProfileController;
 
-function invokeUser(query, req, res, openChangeAvatar, avatarErrorMessage) {
+function invokeUser(query, req, res, openChangeAvatar, openEditProfileDescription, avatarErrorMessage) {
     
     var projection = "username description avatar";
     //login simulation
@@ -79,6 +87,7 @@ function invokeUser(query, req, res, openChangeAvatar, avatarErrorMessage) {
             avatar: result.avatar,
             userOwnsProfile: userOwnsProfile,
             openChangeAvatar: openChangeAvatar,
+            openEditProfileDescription: openEditProfileDescription,
             avatarErrorMessage: avatarErrorMessage
         };
         res.render('user-profile', details);
