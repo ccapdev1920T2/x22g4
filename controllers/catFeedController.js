@@ -10,13 +10,13 @@ const catFeedController = {
     getCatFeedTop: function(req, res) {
         let sort = {numberOfMeowts: -1};
 
-        getCatFeed(req, res, sort);
+        getCatFeed(req, res, sort, '');
     },
 
     getCatFeedRecent: function(req, res) {
         let sort = {date: -1};
 
-        getCatFeed(req, res, sort)
+        getCatFeed(req, res, sort, '');
     },
 
     postCatFeed: function(req, res) {
@@ -24,6 +24,13 @@ const catFeedController = {
             console.log('did not get image.');
             return;
         }
+
+        if (req.file.size > (1048576 * 4)) {
+            getCatFeed(req, res, {date: -1}, 'Image should not be larger than 4MB.');
+            return;
+        }
+
+        console.log(req.file.size);
 
         const defaultUser = req.session.user; 
         const postTitle = helper.sanitize(req.body.postTitle);
@@ -44,7 +51,7 @@ const catFeedController = {
 }
 
 
-function getCatFeed(req, res, sort) {
+function getCatFeed(req, res, sort, msg) {
     var details;
 
    Post.find({})
@@ -96,7 +103,7 @@ function getCatFeed(req, res, sort) {
                 });
                 */
             } else {
-                res.render('cat-feed', { posts: results, catfeed_active: true,
+                res.render('cat-feed', { posts: results, catfeed_active: true, message: msg,
 
                     //Session
                     active_session: (req.session.user && req.cookies.user_sid), 
