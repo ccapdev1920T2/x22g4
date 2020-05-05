@@ -138,7 +138,8 @@ app.get('/donate', function(req, res){
 })
 
 app.get('/profile/:username', userProfileController.getUserProfile);
-app.put('/profile/:username', avatarUpload, userProfileController.submitAvatar);
+app.get('/openChangeAvatar', userProfileController.openChangeAvatar);
+app.post('/profile/:username', avatarUpload, userProfileController.submitAvatar);
 app.get('/editProfileDescription', userProfileController.editProfileDescription);
 app.put('/submitEditProfileDescription', userProfileController.submitEditProfileDescription);
 

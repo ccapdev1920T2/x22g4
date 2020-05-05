@@ -32,7 +32,7 @@ const helper = {
                     break;
             }
 
-            res.send(true)
+            res.redirect('/profile/' + username);
         })
     },
 

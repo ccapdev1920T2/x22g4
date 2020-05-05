@@ -6,7 +6,21 @@
             {{#if userOwnsProfile}}
                 <br>
                 <br>
-                <button type="button" class="btn btn-danger" name="change-avatar" id="change-avatar">Change Avatar</button>
+                {{#if openChangeAvatar}}
+                    <div id='edit-avatar' class='col-md-4'> 
+                        <form id='edit-avatar-form' name='edit-avatar-form' enctype='multipart/form-data' method="POST" action="/profile/{{username}}">
+                            <input type='file' id='edit-avatar-file' name='edit-avatar-file' accept='image/*' required/>
+                            <button type='submit' class='btn btn-danger' id='submit-avatar-btn'>Submit</button>
+                            <p id='avatarError' name='avatarError'>{{avatarErrorMessage}}</p>
+                            <br><br>
+                        </form>  
+                    </div>
+                {{else}}
+                    <form id="changeAvatarForm" name="changeAvatarForm" method="GET" action="/openChangeAvatar">
+                        <button type="submit" class="btn btn-danger" name="change-avatar" id="change-avatar">Change Avatar</button>
+                    </form>
+                {{/if}}
+                
             {{/if}}
         </div>
         <div id="userInfo" class="col-md-8 background-red">
