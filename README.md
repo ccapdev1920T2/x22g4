@@ -18,7 +18,7 @@ This web application requires internet to properly load BootstrapCDN.
 ```shell
 npm install
 ```
-> Add cat profiles and simulate log-in throught a default user
+> Add cat profiles and simulate log-in through a default user
 ```shell
 node addDefaults.js
 ```
@@ -33,9 +33,10 @@ node deletePosts.js
 * MongoDB - Cross-platform database program 
 
 ## Team
-* **Jacob Darvin** 
-* **Justin Jay Galura**
-* **Michele Gelvoleo**
+| <a href="github.com/darvvvin" target="_blank">**Jacob Darvin**</a> | <a href="github.com/G-Justin" target="_blank">**Justin Galura**</a> | <a href="github.com/waterproofloaf" target="_blank">**Michele Gelvoleo**</a> |
+| :---: |:---:| :---:|
+| [![Jacob Darvin](https://avatars3.githubusercontent.com/u/29309542?s=200)](github.com/darvvvin)    | [![Justin Galura](https://avatars3.githubusercontent.com/u/27716956?s=200)](github.com/G-Justin) | [![Michele Gelvoleo](https://avatars3.githubusercontent.com/u/60908989?s=200)](github.com/waterproofloaf)  |
+| <a href="http://github.com/darvvvin" target="_blank">`github.com/darvvvin`</a> | <a href="http://github.com/G-Justin" target="_blank">`github.com/G-Justin`</a> | <a href="http://github.com/waterproofloaf" target="_blank">`github.com/waterproofloaf`</a> |
 
 ## Acknowledgments
 We would like to thank Sir Arren Antioquia for helping us build this project and suggesting ways on how we can improve it. 
