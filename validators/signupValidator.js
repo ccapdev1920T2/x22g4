@@ -24,7 +24,6 @@ const signupValidator = {
 
             check('password')
             .custom((value, {req}) => {
-                console.log(value);
                 console.log(req.body.confirmPassword);
                 if (value !== req.body.confirmPassword) {
                     throw new Error('Passwords do not match!')

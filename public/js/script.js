@@ -5,14 +5,11 @@ $(document).ready(function(){
     // Login Logic
     //=========================================================================================
 
-    $("#login-btn").click(function() {
+    /*$("#login-btn").submit((e) => {
+        e.preventDefault();
+
         let username = $('#loginUsername').val();
         let password = $('#loginPassword').val();
-
-        if (!loginFormsAreComplete()) {
-            alert("Required fields!");
-            return;
-        }
 
         $.ajax({
             url: '/login',
@@ -28,29 +25,7 @@ $(document).ready(function(){
         }).fail((e) => {
             
         })
-    });
-
-    function loginFormsAreComplete() {
-        var isComplete = true;
-    
-        var loginUserNameForm = document.getElementById("loginUsername");
-        var loginPasswordForm = document.getElementById("loginPassword");
-        
-        loginUserNameForm.style.backgroundColor = "white";
-        loginPasswordForm.style.backgroundColor = "white";
-    
-        if (loginUserNameForm.value == "") {
-            isComplete = false;
-            loginUserNameForm.style.backgroundColor = "pink";
-        }
-    
-        if(loginPasswordForm.value == "") {
-            isComplete = false;
-            loginPasswordForm.style.backgroundColor = "pink";
-        }
-    
-        return isComplete;
-    }
+    }); */
 
     //=========================================================================================
     // Sign Up Logic
@@ -188,6 +163,7 @@ $(document).ready(function(){
     }
 
     $('#post-forms').submit(function(e) {
+        e.preventDefault();
         var file = document.getElementById("file");
         if (file.files[0].size >  (1048576 * 4)) {
             message.innerText = "Image should not be bigger than 4MB";

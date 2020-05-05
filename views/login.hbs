@@ -19,17 +19,17 @@
             <br>
             <p style="color: #d34b3b; font-weight: bold;"> {{message}} </p>
             {{/if}}
-            <form class="entry-forms" id="login-forms" method="post">
+            <form class="entry-forms" id="login-forms" method="POST">
                 <div class="form-group">
                     <label for="userName">User Name</label>
-                    <input type="text" name="loginUsername" id="loginUsername" class="form-control" placeholder="Enter User Name">
+                    <input type="text" name="loginUsername" id="loginUsername" class="form-control" placeholder="Enter User Name" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="loginPassword" id="loginPassword" class="form-control" placeholder="Enter Password">
+                    <input type="password" name="loginPassword" id="loginPassword" class="form-control" placeholder="Enter Password" required>
                 </div>
-                <button id="login-btn" type="button" class="btn btn-outline-danger"><i class="far fa-paper-plane"></i><b> S U B M I T</b></button>
-                <p id="login-error"></p>
+                <button id="login-btn" type="submit" class="btn btn-outline-danger"><i class="far fa-paper-plane"></i><b> S U B M I T</b></button>
+                <p id="login-error">{{loginErrorMessage}}</p>
             </form>
 
         </div>
