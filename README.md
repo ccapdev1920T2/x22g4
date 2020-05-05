@@ -16,24 +16,34 @@ This web application requires internet to properly load BootstrapCDN.
 - This project uses Express, Handlebars, and MongoDB so it is recommended to make sure you have Node.JS installed and then conduct the following steps:
 > Navigate to the project folder and open cmd
 ```shell
-npm init
+npm install
 ```
-> Use defaults
+> Run the application
 ```shell
-npm install express --save
-npm install hbs --save
-npm install mongodb --save
+node index.js
 ```
 
-## Running the Tests
+#### Notes
+> Use this code to delete posts:
+```shell
+node deletePosts.js
+```
+> Use this code to clear exisiting user profiles:
+```shell
+node clearUsers.js
+```
 
 ## Built With
 * Bootstrap - Open-source CSS framework
+* MongoDB - Cross-platform database program
+* NodeJS - JavaScript runtime environment 
 
 ## Team
-* **Jacob Darvin** 
-* **Justin Jay Galura**
-* **Michele Gelvoleo**
+| <a href="github.com/Darvvvin" target="_blank">**Jacob Darvin**</a> | <a href="github.com/G-Justin" target="_blank">**Justin Jay Galura**</a> | <a href="github.com/waterproofloaf" target="_blank">**Michele Gelvoleo**</a> |
+| :---: |:---:| :---:|
+| [![Jacob Darvin](https://avatars1.githubusercontent.com/u/29309542?v=3&s=200)](github.com/Darvvvin)    | [![Justin Jay Galura](https://avatars1.githubusercontent.com/u/27716956?v=3&s=200)](github.com/G-Justin) | [![Michele Gelvoleo](https://avatars1.githubusercontent.com/u/60908989?v=3&s=200)](github.com/waterproofloaf)  |
+| <a href="github.com/Darvvvin" target="_blank">`github.com/darvvvin`</a> | <a href="github.com/G-Justin" target="_blank">`github.com/G-Justin`</a> | <a href="github.com/waterproofloaf" target="_blank">`github.com/waterproofloaf`</a> |
+
 
 ## Acknowledgments
 We would like to thank Sir Arren Antioquia for helping us build this project and suggesting ways on how we can improve it. 
