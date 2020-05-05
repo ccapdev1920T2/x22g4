@@ -187,35 +187,33 @@ $(document).ready(function(){
 
     $('#comment-form').submit(function(e) {
         e.preventDefault();
-
+        e.stopImmediatePropagation()
         let comment = $('#comment').val();
         let commentPostId = $('#commentPostId').val();
-        console.log('is clicked')
+        $('#comment-submit-btn').prop('disabled', true);
 
-        $.ajax({
-            url: "/addComment",
-            type: "GET",
-            data: {commentPostId: commentPostId, comment: comment, js: true}
-          }).done((data) => {
+        $.get('/addComment', {commentPostId: commentPostId, comment: comment, js: true}, (data, status) => {
+            $('#comment').val('');
             $('#comments-container').append(data);
-          }).fail((e) => {
-            
-          })
+            $('#comment-submit-btn').prop('disabled', false);
+        });
+
     })
 
     //=========================================================================================
     // Delete Comment Logic
     //=========================================================================================
 
-    $('#comments-container').on('click', '#delete-comment-btn', function() {
+    $('#comments-container').on('click', '#delete-comment-btn', function(e) {
+        e.preventDefault();
         var $t = $(this);
-        var commentId = $(this).parent().find('p:nth-child(2)').text();
-        let postId = $('#postId').text();
+        var commentId = $(this).parent().find('p:nth-child(2)').val();
+        let postId = $(this).parent().find('p:nth-child(3)').val();
 
         $(this).prop('disabled', true);
         $.ajax({
             url: "/deleteComment",
-            type: "PUT",
+            type: "GET",
             data: {commentId: commentId, postId: postId}
         }).done((data) => {
             $t.parent().parent().remove();
