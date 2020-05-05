@@ -18,6 +18,10 @@ This web application requires internet to properly load BootstrapCDN.
 ```shell
 npm install
 ```
+> Run this file in cmd to add the cats' details in the database
+```shell
+node addDefaults.js
+```
 > Run the application
 ```shell
 node index.js
