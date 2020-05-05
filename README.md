@@ -39,10 +39,10 @@ node clearUsers.js
 * NodeJS - JavaScript runtime environment 
 
 ## Team
-| <a href="github.com/Darvvvin" target="_blank">**Jacob Darvin**</a> | <a href="github.com/G-Justin" target="_blank">**Justin Jay Galura**</a> | <a href="github.com/waterproofloaf" target="_blank">**Michele Gelvoleo**</a> |
+| <a href="https://github.com/Darvvvin" target="_blank">**Jacob Darvin**</a> | <a href="https://github.com/G-Justin" target="_blank">**Justin Jay Galura**</a> | <a href="https://github.com/waterproofloaf" target="_blank">**Michele Gelvoleo**</a> |
 | :---: |:---:| :---:|
-| [![Jacob Darvin](https://avatars1.githubusercontent.com/u/29309542?v=3&s=200)](github.com/Darvvvin)    | [![Justin Jay Galura](https://avatars1.githubusercontent.com/u/27716956?v=3&s=200)](github.com/G-Justin) | [![Michele Gelvoleo](https://avatars1.githubusercontent.com/u/60908989?v=3&s=200)](github.com/waterproofloaf)  |
-| <a href="github.com/Darvvvin" target="_blank">`github.com/darvvvin`</a> | <a href="github.com/G-Justin" target="_blank">`github.com/G-Justin`</a> | <a href="github.com/waterproofloaf" target="_blank">`github.com/waterproofloaf`</a> |
+| [![Jacob Darvin](https://avatars1.githubusercontent.com/u/29309542?v=3&s=200)](https://github.com/Darvvvin)    | [![Justin Jay Galura](https://avatars1.githubusercontent.com/u/27716956?v=3&s=200)](https://github.com/G-Justin) | [![Michele Gelvoleo](https://avatars1.githubusercontent.com/u/60908989?v=3&s=200)](https://github.com/waterproofloaf)  |
+| <a href="https://github.com/Darvvvin" target="_blank">`github.com/darvvvin`</a> | <a href="https://github.com/G-Justin" target="_blank">`github.com/G-Justin`</a> | <a href="https://github.com/waterproofloaf" target="_blank">`github.com/waterproofloaf`</a> |
 
 
 ## Acknowledgments
