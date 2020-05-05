@@ -129,12 +129,17 @@ const helper = {
         })
     },
 
-    updatePost: function(postId, newTitle, newCaption, res) {
+    updatePost: function(postId, newTitle, newCaption, res, saveEditJs) {
         let date = Date.now();
 
         Post.updateOne({_id: postId}, {postTitle: newTitle, caption: newCaption, date: date})
         .then((a) => {
-            res.send(true);
+            if (saveEditJs) {
+                res.send(true);
+            } else {
+                res.redirect('/post/' + postId);
+            }
+            
         })
     },
 

@@ -15,7 +15,22 @@
                             <a href="/profile/{{author}}"><h5 style="color: black;">by {{author}}</h5></a>
                             <p id="caption" name="caption" class="card-text" style="margin-bottom: 0.2em;">{{caption}}</p>
                             {{#if userOwnsPost}}
-                                <button type="button" class="btn btn-danger" name="edit-post-btn" id="edit-post-btn">Edit Post</button> 
+                                {{#if editPostOpen}}
+                                    <div id='edit-prompt'>  
+                                        <form id='editPromptForm' name="editPromptForm" method="GET" action="/saveEdit">
+                                            <textarea class='text-submission' id='postTitleEditForm' name='postTitleEditForm' placeholder='Edit Title (REQUIRED)' style='width: 100%; max-width: 100%;' rows='1' required pattern="\S+" title="Please leave out any extra spaces"> {{postTitle}}</textarea>
+                                            <textarea class='text-submission' id='captionEditForm' name='captionEditForm' placeholder='Edit Caption' style='width: 100%; max-width: 100%;' rows='2'>{{caption}}</textarea>
+                                            <textarea id="saveEditPOstId" name="saveEditPostId" readonly="readonly" style="display: none;">{{_id}}</textarea> 
+                                            <button type='submit' class='btn btn-danger' name='edit-post-submit' id='edit-post-submit'>Save</button>
+                                        </form>
+                                        
+                                    </div>
+                                {{else}}
+                                    <form id="editPostButtonForm" name="editPostButtonForm" method="GET" action="/openEdit">
+                                        <button type="submit" class="btn btn-danger" name="edit-post-btn" id="edit-post-btn">Edit Post</button> 
+                                        <textarea id="openEditPostId" name="openEditPostId" readonly="readonly" style="display: none;">{{_id}}</textarea> 
+                                    </form>
+                                {{/if}}
                                 <form id="deletePostForm" name="deletePostForm" method="POST" action="/deletePost">
                                     <button type="submit" class="btn btn-outline-danger" name="delete-post-btn" id="delete-post-btn" style="float: right;">Delete Post</button>
                                     <textarea id="deletePostId" name="deletePostId" readonly="readonly" style="display: none;">{{_id}}</textarea> 
@@ -56,7 +71,7 @@
                     <div class="row h-100">
                         <form id="comment-form" name="comment-form" method="GET" action="/addComment">
                             <div class="col-10">
-                                <input class="text-submission" type="text" id="comment" name="comment" placeholder="Comment" style="width: 100%;" required>
+                                <input class="text-submission" type="text" id="comment" name="comment" placeholder="Comment" style="width: 100%;" required pattern=".*\S+.*">
                                 <textarea id="commentPostId" name="commentPostId" readonly="readonly" style="display: none;">{{_id}}</textarea>
                             </div>
                             <div class="col-2">

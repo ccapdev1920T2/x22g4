@@ -227,20 +227,26 @@ $(document).ready(function(){
     // Edit Post Logic
     //=========================================================================================
 
-    $('.card-body').on('click', '#edit-post-btn', function() {
+    $('.card-body').on('click', '#edit-post-btn', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
         let postTitle = $('#postTitle').text();
         let caption = $('#caption').text();
-        $.get('/openEdit', {postTitle: postTitle, caption: caption}, (data) => {
+        $.get('/openEdit', {postTitle: postTitle, caption: caption, js: true}, (data) => {
             $(this).replaceWith(data)
         })
     })
 
-    $('#edit-post-submit').click(function() {
-        let postId = $('#postId').text();
-        let postTitle = $('#postTitleEditForm').val();
-        let caption = $('#captionEditForm').val();
+    $('#edit-post-submit').click(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
-        if (postTitle.trim() == '') {
+        let postId = $('#postId').text();
+        let postTitleEditForm = $('#postTitleEditForm').val();
+        let captionEditForm = $('#captionEditForm').val();
+
+        if (postTitleEditForm.trim() == '') {
             return;
         }
 
@@ -250,11 +256,11 @@ $(document).ready(function(){
 
         $.ajax({
             url: "/saveEdit",
-            type: "PUT",
-            data: {postId: postId, postTitle: postTitle, caption: caption}
+            type: "GET",
+            data: {saveEditPostId: postId, postTitleEditForm: postTitleEditForm, captionEditForm: captionEditForm, saveEditJs: true}
           }).done((e) => {
-            $('#postTitle').text(postTitle);
-            $('#caption').text(caption);
+            $('#postTitle').text(postTitleEditForm);
+            $('#caption').text(captionEditForm);
             $('#date small').text('Last updated just then')
           }).fail((e) => {
             
