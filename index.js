@@ -8,7 +8,11 @@ const routes = require('./routes/routes.js');
 const database = require('./models/database.js');
 
 const app = express();
-const port = 3000;
+
+let port = process.env.PORT;
+if(port == null || port == "") {
+	port = 3000;
+}
 
 app.set('view engine', 'hbs');
 
