@@ -1,18 +1,16 @@
 <script> document.title = "{{username}} | Catvas"  </script>
 <div class="container-cat">
     <div class="row">
-        <div id='divAvatar' class="col-md-4">
-            <img src="/avatars/{{avatar}}" width="400px">
+        <div id='divAvatar' class="col-md-3">
+            <img src="/avatars/{{avatar}}" class="card" width="400px" height="400px" style="object-fit: cover;">
             {{#if userOwnsProfile}}
-                <br>
                 <br>
                 {{#if openChangeAvatar}}
                     <div id='edit-avatar' class='col-md-4'> 
                         <form id='edit-avatar-form' name='edit-avatar-form' enctype='multipart/form-data' method="POST" action="/profile/{{username}}">
                             <input type='file' id='edit-avatar-file' name='edit-avatar-file' accept='image/*' required/>
-                            <button type='submit' class='btn btn-danger' id='submit-avatar-btn'>Submit</button>
+                            <button type='submit' class='btn btn-danger mb-3' id='submit-avatar-btn'>Submit</button>
                             <p id='avatarError' name='avatarError'>{{avatarErrorMessage}}</p>
-                            <br><br>
                         </form>  
                     </div>
                 {{else}}
@@ -23,8 +21,8 @@
                 
             {{/if}}
         </div>
-        <div id="userInfo" class="col-md-8 background-red">
-            <p class="center" id="cat-name-profile">HEY, I am {{username}}!</p>
+        <div id="userInfo" class="col-md-9 background-red">
+            <p class="center" id="cat-name-profile">{{username}}</p>
             <hr>
             <p class="profile-mini-header center"><i class="fas fa-address-card"></i> About Me</p>
             <p id="your-desc" name="your-desc">{{description}}</p>

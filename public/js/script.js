@@ -389,7 +389,7 @@ $(document).ready(function(){
     // Edit Profile Logic
     //=========================================================================================
 
-    $('.col-md-8').on('click', "#edit-description", (e) => {
+    $('.col-md-9').on('click', "#edit-description", (e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
 
