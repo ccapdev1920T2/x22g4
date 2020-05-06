@@ -35,10 +35,13 @@ $(document).ready(function(){
         $("#signup-forms")[0].reset();
     } catch (err) {}
     
-    $('#signup-forms').submit((e) => {
+    $('#sign-up-btn').click((e) => {
         e.preventDefault();
-        console.log('jkfld;sajfkldsajfkl;dsajfklsd;j')
-
+        
+        if (!formsAreComplete()) {
+            $('#signup-error').text('Please fill out required forms!');
+            return;
+        }
         if (!usernameIsValid()) {
             return;
         }
@@ -55,9 +58,36 @@ $(document).ready(function(){
             return;
         }
         
-        entryForms.submit();
-
+        $("#signup-forms").submit();
     })
+
+    function formsAreComplete() {
+
+        var isComplete = true;
+    
+        var userNameForm = document.getElementById("username");
+        var emailAddressForm = document.getElementById("email");
+        var passwordForm = document.getElementById("password");
+        var confirmPasswordForm = document.getElementById("confirmPassword");
+    
+        if (userNameForm.value == "") {
+            isComplete = false;
+        }
+    
+        if(emailAddressForm.value == "") {
+            isComplete = false;
+        }
+    
+        if(passwordForm.value == "") {
+            isComplete = false;
+        }
+    
+        if(confirmPasswordForm.value == "") {
+            isComplete = false;
+        }
+    
+        return isComplete;
+    }
 
     function usernameIsValid() {
         var username = $('#username').val();
@@ -164,7 +194,7 @@ $(document).ready(function(){
     }
 
     $('#post-forms').submit(function(e) {
-
+        alert('test')
         var file = document.getElementById("file");
         if (file.files[0].size >  (1048576 * 4)) {
             message.innerText = "Image should not be bigger than 4MB";
