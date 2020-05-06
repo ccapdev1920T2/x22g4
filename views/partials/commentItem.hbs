@@ -14,6 +14,7 @@
      <div class="p-2">
          {{#if openEditComment}}
             <!--Put the input text with submit here-->
+              <textarea class='text-submission' id='captionEditForm' name='captionEditForm' placeholder='Edit Comment' style='width: 100%; max-width: 100%;' rows='2'>{{comment}}</textarea>
         {{else}}
         <form id="editCommentForm" name="editCommentForm" method="GET" action="/editComment">
             <button id="edit-comment-btn" name="edit-comment-btn" class="btn btn-outline-danger">Edit</button>
