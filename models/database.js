@@ -7,7 +7,7 @@ const Comment = require('./comment.js');
 
 const MongoClient = require('mongodb').MongoClient;
 
-const url = 'mongodb+srv://jacob:Wuhz121456!@cluster0-agjd9.mongodb.net/test?retryWrites=true&w=majority';
+const url = 'mongodb+srv://jacob:jacob@cluster0-agjd9.mongodb.net/test?retryWrites=true&w=majority';
 
 MongoClient.connect(url, function(err, client){
     if(err) {
