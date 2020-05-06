@@ -13,6 +13,11 @@ p {
   user-select: none;
 }
 
+.comment-class {
+    width: 100% !important;
+    display: flex;
+}
+
 .divider {
     width: 20px;
 }

@@ -41,12 +41,12 @@
                                 
                                     {{#if userLiked}}
                                         <form id="unlikeForm" name="unlikeForm" method="GET" action="/unlikePost">
-                                            <button id='unlike-btn' type='submit' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>
+                                            <button id='unlike-btn' type='submit' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> Un-Meowt </button>
                                             <textarea id="meowtPostId" name="meowtPostId" readonly="readonly" style="display: none;">{{_id}}</textarea>
                                         </form>
                                     {{else}}
                                         <form id="likeForm" name="likeForm" method="GET" action="/likePost">
-                                            <button id="like-btn" type="submit" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> </button>
+                                            <button id="like-btn" type="submit" class="btn btn-outline-danger"> <i class="fas fa-heart"></i> Meowt </button>
                                             <textarea id="meowtPostId" name="meowtPostId" readonly="readonly" style="display: none;">{{_id}}</textarea>
                                         </form>
                                     {{/if}}
@@ -68,9 +68,10 @@
             <div class="card">
                 <div class="card-body">
                     <!--TODO: fix CSS-->
-                    <div class="row h-100">
-                        <form id="comment-form" name="comment-form" method="GET" action="/addComment">
-                            <div class="col-10">
+
+                    <div class="row h-100 no-gutters">
+                        <form id="comment-form" name="comment-form" class="comment-class" method="GET" action="/addComment">
+                            <div class="col-10 pr-0">
                                 <input class="text-submission" type="text" id="comment" name="comment" placeholder="Comment" style="width: 100%;" required pattern=".*\S+.*">
                                 <textarea id="commentPostId" name="commentPostId" readonly="readonly" style="display: none;">{{_id}}</textarea>
                             </div>
@@ -79,6 +80,7 @@
                             </div>
                         </form>     
                     </div>
+
                     <hr style="margin-top: 1em; margin-bottom: 1em;">
                     <div id="comments-container">
                         {{#each comments}}

@@ -283,7 +283,7 @@ $(document).ready(function(){
 
         $('#likeForm').replaceWith(
             "<form id='unlikeForm' name='unlikeForm' method='GET' action='/unlikePost'>" +
-                "<button id='unlike-btn' type='submit' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> </button>" +
+                "<button id='unlike-btn' type='submit' class='btn btn-danger'> <i class='fas fa-heart-broken'></i> Un-Meowt </button>" +
             "</form>"
         );
 
@@ -315,7 +315,7 @@ $(document).ready(function(){
 
         $('#unlikeForm').replaceWith(
             "<form id='likeForm' name='likeForm' method='GET' action='/likePost'>" +
-                "<button id='like-btn' type='submit' class='btn btn-outline-danger'> <i class='fas fa-heart'></i> </button>" +
+                "<button id='like-btn' type='submit' class='btn btn-outline-danger'> <i class='fas fa-heart'></i> Meowt </button>" +
             "</form>"
         );
         $('#like-btn').prop('disabled', true);
