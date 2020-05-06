@@ -26,17 +26,13 @@
                 </div>
                 <!-- Submission Box -->
             </form>
-
-            <div class="dropdown mb-3">
-              <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort by
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/catFeed">Date</a>
-                <a class="dropdown-item" href="/catFeed/top">Highest Rated</a>
-              </div>
-            </div>
-
+                <div class="dropdownc mb-3">
+                  <button class="btn btn-danger dropbtnc">Sort by ▾</button>
+                  <div class="dropdownc-content">
+                  <a href="/catFeed">Date</a>
+                  <a href="/catFeed/top">Highest Rated</a>
+                  </div>
+                </div>
             <hr><br>
             <!-- Posts -->
             {{#each posts}} {{> postItem}} {{/each}}
