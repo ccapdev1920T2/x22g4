@@ -8,7 +8,6 @@ const session = require('express-session');
 const User = require("../models/user.js");
 const helper = require('./helper.js');
 
-const { validationResult } = require('express-validator');
 
 const loginController = {
 
@@ -23,6 +22,15 @@ const loginController = {
     postLogin: function(req, res) {
       var username = helper.sanitize(req.body.loginUsername);
       var password = helper.sanitize(req.body.loginPassword);
+
+      if (username.trim() == '' || password == '') {
+        res.render('login', {
+          title: 'Login | Catvas',
+          login_active: true,
+          loginErrorMessage: 'Required fields!'
+        });
+        return;
+      }
       
       database.findOne(User, {username: username}, {}, function(user) {
           if(user) {

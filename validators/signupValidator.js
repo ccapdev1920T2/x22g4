@@ -7,7 +7,7 @@ const signupValidator = {
     signupValidation: function() {
         var validation = [
 
-            check('username').notEmpty().withMessage('Invalid username!')
+            check('username').notEmpty().withMessage('Username required!')
             .matches(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,16}$/).withMessage('Invalid username!'),
 
             check('username')
@@ -19,19 +19,18 @@ const signupValidator = {
                 })
             }),
 
-            check('password')
+            check('password').notEmpty().withMessage('Password required!')
             .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/).withMessage('Invalid password'),
 
             check('password')
             .custom((value, {req}) => {
-                console.log(req.body.confirmPassword);
                 if (value !== req.body.confirmPassword) {
                     throw new Error('Passwords do not match!')
                 }
                 return true;
             }),
 
-            check('email', 'Invalid email!').isEmail()
+            check('email').notEmpty().withMessage('Email required!').isEmail().withMessage('Invalid email!')
         ];
 
         return validation;
