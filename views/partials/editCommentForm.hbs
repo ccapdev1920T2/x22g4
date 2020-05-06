@@ -1,0 +1,6 @@
+<form id="submitEditCommentForm" name="submitEditCommentForm" method="GET" action="/submitEditComment">
+    <textarea class='text-submission' id='newText' name='newText' placeholder='Edit Comment (REQUIRED)' style='width: 100%; max-width: 100%;' rows='1' required>{{text}}</textarea>
+    <button id="submit-edit-comment-btn" name="submit-edit-comment-btn" class="btn btn-danger">Save</button>
+    <textarea readonly="readonly" id="commentId" name="commentId" style="display: none;">{{_id}}</textarea>
+   <textarea readonly="readonly" id="commentParentPostId" name="commentParentPostId" style="display: none;">{{parentPostId}}</textarea>
+</form>

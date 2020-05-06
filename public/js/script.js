@@ -254,6 +254,42 @@ $(document).ready(function(){
     })
 
     //=========================================================================================
+    // Edit Comment Logic
+    //=========================================================================================
+
+    $('#comments-container').on('click', '#edit-comment-btn', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        var commentId = $(this).parent().find('textarea:nth-child(2)').val();
+        var commentText = $(this).parent().find('textarea:nth-child(3)').val();
+
+        $.get('/openEditComment', {commentId: commentId, commentText: commentText, openCommentEditJs: true}, (data) => {
+            $(this).parent().replaceWith(data);
+            
+        })
+    })
+
+    $('#comments-container').on('click', '#submit-edit-comment-btn', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        var commentId = $(this).parent().find('textarea:nth-child(3)').val();
+        var newText = $(this).parent().find('textarea:nth-child(1)').val();
+        let commentParentPostId = $('#postId').text();
+
+        if (newText.trim() == '') {
+            return;
+        }
+        $(this).parent().parent().parent().find('div:nth-child(1)').find('p:nth-child(2)').text(newText);
+        $.get('/submitEditComment', {commentId: commentId, newText: newText, commentParentPostId: commentParentPostId, submitEditCommentJs: true}, (data) => {
+            $(this).parent().replaceWith(data);
+            
+            
+        })
+    })
+
+    //=========================================================================================
     // Edit Post Logic
     //=========================================================================================
 

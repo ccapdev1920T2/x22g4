@@ -90,7 +90,46 @@ const helper = {
         });
     },
 
-    deleteComment(commentId, postId, res, js) {
+    editComment: function(commentId, postId, text, req, res, js) {
+        Comment.updateOne({_id: commentId}, {text: text})
+        .then((result) => {
+            Post.findOne({_id: postId})
+            .populate('comments')
+            .exec((err, postResult) => {
+                let latestComment = '';
+                let latestCommentAuthor = '';
+
+                if (postResult.comments !== undefined && postResult.comments.length > 0) {
+                    latestComment = postResult.comments[postResult.comments.length - 1].text;
+                    latestCommentAuthor = postResult.comments[postResult.comments.length - 1].author;
+                }
+                
+                Post.updateOne({_id: postId}, {latestComment: latestComment, latestCommentAuthor: latestCommentAuthor})
+                .then((data) => {
+
+                    if (js) {
+                        let details = {
+                            //Session
+                            active_session: (req.session.user && req.cookies.user_sid), 
+                            active_user: req.session.user,
+                            current_user: (req.session.user == req.params.username),
+                            //Session
+        
+                            _id: commentId,
+                            text: text,
+                        }
+        
+                        res.render('partials/editCommentButton.hbs', details);
+                    } else {
+                        res.redirect('/post/' + postId);
+                    }
+
+                })
+            })  
+        })
+    },
+
+    deleteComment: function(commentId, postId, res, js) {
         Comment.deleteOne({_id: commentId})
         .then((data) => {
             Post.updateOne({_id: postId}, {$inc: {numberOfComments: -1}, $pull: {comments: commentId}})

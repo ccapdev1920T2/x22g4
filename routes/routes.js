@@ -151,6 +151,8 @@ app.post('/catFeed', upload, catFeedController.postCatFeed);
 app.get('/post/:_id', postController.getPost);
 app.get('/addComment', postController.addComment);
 app.get('/deleteComment', postController.deleteComment);
+app.get('/openEditComment', postController.openEditComment);
+app.get('/submitEditComment', postController.submitEditComment);
 app.get('/openEdit', postController.openEdit);
 app.get('/saveEdit', postController.saveEdit);
 app.get('/likePost', postController.likePost);

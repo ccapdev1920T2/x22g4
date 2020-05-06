@@ -7,10 +7,7 @@ const User = require('../models/user.js');
 const postController = {
     
     getPost: function(req, res) {
-        if(!(req.session.user && req.cookies.user_sid)) {
-            res.redirect('/login');
-            return;
-        }
+        
         let _id = helper.sanitize(req.params._id);
 
         invokePost(_id, res, req, false);
@@ -45,6 +42,49 @@ const postController = {
         
     },
 
+    openEditComment: function(req, res) {
+        console.log('called')
+        let commentId = helper.sanitize(req.query.commentId);
+        let commentText = helper.sanitize(req.query.commentText);
+        let openCommentEditJs = (req.query.openCommentEditJs != null);
+       
+        Comment.findOne({_id: commentId})
+        .exec((err, commentResult) => {
+            if (openCommentEditJs) {
+                let details = {
+                    _id: commentId,
+                    text: commentResult.text,
+                    //Session
+                    active_session: (req.session.user && req.cookies.user_sid), 
+                    active_user: req.session.user,
+                    current_user: (req.session.user == req.params.username),
+                    //Session
+                }
+                res.render('partials/editCommentForm.hbs', details);
+            } else {
+                Comment.findOne({_id: commentId})
+                .exec((err, result) => {
+                    
+                    let postId = result.parentPostId;
+    
+                    invokePost(postId, res, req, false, commentId);
+                })
+            }
+        })
+        
+    },
+
+    submitEditComment: function(req, res) {
+        let commentId = helper.sanitize(req.query.commentId);
+        let newText = helper.sanitize(req.query.newText);
+        let commentParentPostId = helper.sanitize(req.query.commentParentPostId);
+        let submitEditCommentJs = (req.query.submitEditCommentJs != null);
+
+        helper.editComment(commentId, commentParentPostId, newText, req, res, submitEditCommentJs);
+
+
+    },
+
     openEdit: function(req, res) {
         let postTitle = helper.sanitize(req.query.postTitle);
         let caption = helper.sanitize(req.query.caption);
@@ -62,10 +102,6 @@ const postController = {
             };
             res.render('partials/editPost.hbs', details)
         } else {
-            if(!(req.session.user && req.cookies.user_sid)) {
-                res.redirect('/login');
-                return;
-            }
             invokePost(req.query.openEditPostId, res, req, true);
         }
         
@@ -113,7 +149,12 @@ const postController = {
 module.exports = postController;
 
 
-function invokePost(_id, res, req, editPostOpen) {
+function invokePost(_id, res, req, editPostOpen, commentIdToEdit) {
+    if(!(req.session.user && req.cookies.user_sid)) {
+        res.redirect('/login');
+        return;
+    }
+    
     Post.findOne({ _id: _id })
         .populate('comments')
         .lean()
@@ -137,12 +178,14 @@ function invokePost(_id, res, req, editPostOpen) {
                 result.date = helper.formatDate(result.date);
                 for (let i = 0; i < result.comments.length; i++) {
                     let userOwnsComment = result.comments[i].author == username;
+                    let openEditComment = result.comments[i]._id == commentIdToEdit;
                     let comment = {
                         _id: result.comments[i]._id,
                         author: result.comments[i].author,
                         text: result.comments[i].text,
                         parentPostId: result.comments[i].parentPostId,
-                        userOwnsComment: userOwnsComment
+                        userOwnsComment: userOwnsComment,
+                        openEditComment: openEditComment
                     };
                     comments.push(comment);
                 }
@@ -163,7 +206,7 @@ function invokePost(_id, res, req, editPostOpen) {
                     userOwnsPost: userOwnsPost,
                     userLiked: userLiked,
                     editPostOpen: editPostOpen,
-                    title: result.postTitle + '| Catvas'
+                    title: result.postTitle + ' | Catvas'
                 };
                 res.render('post', details);
             });

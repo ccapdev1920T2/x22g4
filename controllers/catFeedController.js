@@ -103,7 +103,7 @@ function getCatFeed(req, res, sort, msg) {
                 });
                 */
             } else {
-                res.render('cat-feed', { posts: results, catfeed_active: true, message: msg,
+                res.render('cat-feed', { posts: results, catfeed_active: true, message: msg, title: 'Cat Feed | Catvas',
 
                     //Session
                     active_session: (req.session.user && req.cookies.user_sid), 

@@ -1,7 +1,10 @@
 <div id="commentItem" name="commentItem" class="d-flex">
     <div class="mr-auto p-2">
-        <p class="card-text">
-            <a href="/profile/{{author}}" style="color:black"><b>{{author}}</b></a> {{text}}
+        <span class="card-text">
+            <a href="/profile/{{author}}" style="color:black"><b>{{author}}</b></a> 
+        </span>
+        <p class="card-text" style="display: inline-block;">
+            {{text}}
         </p>
     </div>
     {{#if userOwnsComment}}
@@ -13,13 +16,18 @@
     </div>
      <div class="p-2">
          {{#if openEditComment}}
-            <!--Put the input text with submit here-->
-              <textarea class='text-submission' id='captionEditForm' name='captionEditForm' placeholder='Edit Comment' style='width: 100%; max-width: 100%;' rows='2'>{{comment}}</textarea>
+            <form id="submitEditCommentForm" name="submitEditCommentForm" method="GET" action="/submitEditComment">
+                <textarea class='text-submission' id='newText' name='newText' placeholder='Edit Comment' style='width: 100%; max-width: 100%;' rows='1' required>{{text}}</textarea>
+                <button id="submit-edit-comment-btn" name="submit-edit-comment-btn" class="btn btn-danger">Save</button>
+                <textarea readonly="readonly" id="commentId" name="commentId" style="display: none;">{{_id}}</textarea>
+                <textarea readonly="readonly" id="commentParentPostId" name="commentParentPostId" style="display: none;">{{parentPostId}}</textarea>
+            </form>
         {{else}}
-        <form id="editCommentForm" name="editCommentForm" method="GET" action="/editComment">
-            <button id="edit-comment-btn" name="edit-comment-btn" class="btn btn-outline-danger">Edit</button>
-            <textarea readonly="readonly" id="commentId" name="commentId" style="display: none;">{{_id}}</textarea>
-        </form>
+            <form id="editCommentForm" name="editCommentForm" method="GET" action="/openEditComment">
+                <button id="edit-comment-btn" name="edit-comment-btn" class="btn btn-outline-danger">Edit</button>
+                <textarea readonly="readonly" id="commentId" name="commentId" style="display: none;">{{_id}}</textarea>
+                <textarea readonly="readonly" id="commentText" name="commentText" style="display: none;">{{text}}</textarea>
+            </form>
         {{/if}}
     </div>
     {{/if}}
