@@ -5,12 +5,25 @@ const Cat = require('./cat.js');
 const Post = require('./post.js');
 const Comment = require('./comment.js');
 
-const url = 'mongodb://localhost:27017/catvas';
+const MongoClient = require('mongodb').MongoClient;
+
+const url = 'mongodb+srv://jacob:Wuhz121456!@cluster0-agjd9.mongodb.net/test?retryWrites=true&w=majority';
+
+MongoClient.connect(url, function(err, client){
+    if(err) {
+        console.log("error during connection to atlas\n", err);
+    } else {
+        console.log('connected');
+    }
+
+})
 
 const options = {
     useUnifiedTopology: true,
     useNewUrlParser: true
 };
+
+
 
 const database = {
 
