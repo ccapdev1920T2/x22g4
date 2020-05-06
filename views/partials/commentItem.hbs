@@ -11,5 +11,11 @@
             <textarea readonly="readonly" id="commentId" name="commentId" style="display: none;">{{_id}}</textarea>
         </form>
     </div>
+     <div class="p-2">
+        <form id="editCommentForm" name="editCommentForm" method="GET" action="/editComment">
+            <button id="edit-comment-btn" name="edit-comment-btn" class="btn btn-outline-danger">Edit</button>
+            <textarea readonly="readonly" id="commentId" name="commentId" style="display: none;">{{_id}}</textarea>
+        </form>
+    </div>
     {{/if}}
 </div>
