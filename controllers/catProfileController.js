@@ -27,7 +27,13 @@ const catProfileController = {
                 pusaThoughts: result.pusaThoughts,
                 notableQuotes: result.notableQuotes,
                 adoptionStatus: result.adoptionStatus,
-                location: result.location
+                location: result.location,
+
+                //Session
+                active_session: (req.session.user && req.cookies.user_sid), 
+                active_user: req.session.user,
+
+                adopt_active = true,
             };
 
             res.render('cat-profile', details);
