@@ -1,7 +1,7 @@
 <script> document.title = "{{username}} | Catvas"  </script>
 <div class="container-cat">
     <div class="row">
-        <div id='divAvatar' class="col-md-3">
+        <div id='divAvatar' class="col-md-4">
             <img src="/avatars/{{avatar}}" class="card" width="400px" height="400px" style="object-fit: cover;">
             {{#if userOwnsProfile}}
                 <br>
@@ -21,7 +21,7 @@
                 
             {{/if}}
         </div>
-        <div id="userInfo" class="col-md-9 background-red">
+        <div id="userInfo" class="col-md-8 background-red">
             <p class="center" id="cat-name-profile">{{username}}</p>
             <hr>
             <p class="profile-mini-header center"><i class="fas fa-address-card"></i> About Me</p>
