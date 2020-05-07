@@ -194,7 +194,7 @@ $(document).ready(function(){
     }
 
     $('#post-forms').submit(function(e) {
-        alert('test')
+        
         var file = document.getElementById("file");
         if (file.files[0].size >  (1048576 * 4)) {
             message.innerText = "Image should not be bigger than 4MB";
