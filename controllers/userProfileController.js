@@ -43,7 +43,7 @@ const userProfileController = {
 
     submitAvatar: function(req, res) {
         if (!(req.file)) {
-            console.log('did not get image.');
+            invokeUser(req.session.user, req, res, false, false, 'Image required!');
             return;
         }
 

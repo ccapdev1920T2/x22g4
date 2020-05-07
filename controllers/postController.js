@@ -18,8 +18,12 @@ const postController = {
         let text = helper.sanitize(req.query.comment);
         let postId = helper.sanitize(req.query.commentPostId);
         let addCommentJs = (req.query.addCommentJs != null);
-        
 
+        if (text.trim() == '' || postId == '') {
+            res.redirect('back');
+            return;
+        }
+        
         let newComment = new Comment({
             parentPostId: postId,
             author: author,
@@ -80,6 +84,16 @@ const postController = {
         let commentParentPostId = helper.sanitize(req.query.commentParentPostId);
         let submitEditCommentJs = (req.query.submitEditCommentJs != null);
 
+        if (commentId == '' || newText == '' || commentParentPostId == '')  {
+            res.redirect('back');
+            return;
+        }
+
+        if (newText == "") {
+            res.redirect('/post/' + commentParentPostId);
+            return;
+        }
+
         helper.editComment(commentId, commentParentPostId, newText, req, res, submitEditCommentJs);
 
 
@@ -112,6 +126,11 @@ const postController = {
         let postTitleEditForm = helper.sanitize(req.query.postTitleEditForm);
         let captionEditForm = helper.sanitize(req.query.captionEditForm);
         let saveEditJs = (req.query.saveEditJs != null);
+
+        if (saveEditPostId == '' || postTitleEditForm == '') {
+            res.redirect('back');
+            return;
+        }
 
         helper.updatePost(saveEditPostId, postTitleEditForm, captionEditForm, res, saveEditJs);
     },

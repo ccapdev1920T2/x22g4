@@ -4,7 +4,6 @@ const helper = require("./helper.js");
 const fs = require('fs');
 const multer = require('multer');
 
-
 const catFeedController = {
 
     getCatFeedTop: function(req, res) {
@@ -21,7 +20,7 @@ const catFeedController = {
 
     postCatFeed: function(req, res) {
         if (!(req.file)) {
-            console.log('did not get image.');
+            getCatFeed(req, res, {date: -1}, 'Image required!');
             return;
         }
 
@@ -30,11 +29,14 @@ const catFeedController = {
             return;
         }
 
-        console.log(req.file.size);
-
         const defaultUser = req.session.user; 
         const postTitle = helper.sanitize(req.body.postTitle);
         const caption = helper.sanitize(req.body.caption);
+
+        if (postTitle.trim() == '') {
+            getCatFeed(req, res, {date: -1}, 'Title required!');
+            return;
+        }
     
         var post = new Post({
             author: defaultUser,
