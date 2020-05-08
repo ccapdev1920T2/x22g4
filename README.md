@@ -18,7 +18,7 @@ This web application requires internet to properly load BootstrapCDN.
 ```shell
 npm install
 ```
-> Run this file in cmd to add the cats' details in the database
+> Additionally if needed, you may use this code to fill in the cats database with dummy data:
 ```shell
 node addDefaults.js
 ```
